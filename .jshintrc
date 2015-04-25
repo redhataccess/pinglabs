@@ -1,0 +1,20 @@
+{
+    "globals": {
+        "define": false,
+        "require": false,
+        "console": false
+    },
+    "browser": true,
+    "esnext": true,
+    "curly": true,
+    "eqeqeq": true,
+    "es3": false,
+    "freeze": true,
+    "funcscope": false,
+    "latedef": false,
+    "noarg": true,
+    "quotmark": "single",
+    "unused": false,
+    "undef": true,
+    "shadow": "inner"
+}
