@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: ['src/**/*.js', '!src/require.config.js'],
-                tasks: ['bowerRequirejs', 'copy:src-to-dist', 'lint', 'babel'],
+                tasks: ['build:dev'],
                 options: {
                     spawn: false,
                     atBegin: true,
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
             },
             html: {
                 files: ['src/**/*.html'],
-                tasks: ['bowerRequirejs', 'copy:src-to-dist', 'lint', 'babel'],
+                tasks: ['build:dev'],
                 options: {
                     spawn: false,
                 },
