@@ -23,6 +23,7 @@ HACKING
 
 This game uses the following packages:
 
+ - [PhaserJS][phaser] as overall game framework (WebGL, gamepads, physics, etc)
  - [Babel][babel] for transpiling es6 into es5 (AMD modules)
  - [RequireJS][requirejs] for runtime AMD module loading
  - [Bower][bower] for client-side JS package management
@@ -43,3 +44,4 @@ To perform a dev build:
 [npm]: https://www.npmjs.com/
 [grunt]: http://gruntjs.com/
 [gbrjs]: https://www.npmjs.com/package/grunt-bower-requirejs
+[phaser]: http://phaser.io/
