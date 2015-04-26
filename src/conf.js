@@ -12,16 +12,17 @@ export const STARTING_LIVES = 2;
  *  Puck and paddle settings  *
  ******************************/
 
-// puck velocity magnitude increases by this much every time it hits something
-export const PUCK_ACCELERATION = 4;
+// the magnitude of the puck's velocity increases by this much every time it
+// hits something
+export const PUCK_ACCELERATION = 12;
 
-export const INITIAL_PUCK_VELOCITY_MAG      = 200;
-export const MAX_PUCK_VELOCITY_MAG          = 600;
-export const PADDLE_PLACEMENT_WORLD_PADDING = 0;
-export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300;
+export const INITIAL_PUCK_VELOCITY_MAG      = 200; // initial magnitude of puck velocity
+export const MAX_PUCK_VELOCITY_MAG          = 600; // max puck velocity magnitude
+export const PADDLE_PLACEMENT_WORLD_PADDING = 0;   // pixels between paddles and wall
+export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300; // velocity given to paddle by user's keypress
 
 // the percentage of paddle velocity that is added to puck velocity on hit
-export const PADDLE_PUCK_FRICTION = 0.30;
+export const PADDLE_PUCK_FRICTION = 0.36;
 
 /***********************
  *  Background colors  *
