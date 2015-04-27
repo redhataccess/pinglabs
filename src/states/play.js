@@ -14,9 +14,9 @@ let cursors;
 function check_out_of_bounds(game, puck) {
     if (puck.body.position.y < game.world.bounds.top) {
         return 'n';
-    } else if (puck.body.position.y + puck.height > game.world.bounds.bottom) {
+    } else if (puck.body.position.y + puck.body.height > game.world.bounds.bottom) {
         return 's';
-    } else if (puck.body.position.x + puck.width > game.world.bounds.right) {
+    } else if (puck.body.position.x + puck.body.width > game.world.bounds.right) {
         return 'e';
     } else if (puck.body.position.x < game.world.bounds.left) {
         return 'w';
@@ -62,6 +62,7 @@ export default class play_state extends state {
         reset_puck(puck);
 
         puck.name = 'PUCK';
+        puck.body.setSize(20, 20, puck.height/2 - 10, puck.width/2 - 10);
         pad_n.name = 'PADDLE_N';
         pad_s.name = 'PADDLE_S';
         pad_e.name = 'PADDLE_E';
