@@ -12,12 +12,12 @@ export default class score_state extends state {
     }
     create(game) {
         this.score_text = game.add.bitmapText(SCORE_POSITION.x, SCORE_POSITION.y, TEXT_FONT , '', TEXT_SIZE);
+        let timer = game.time.create(true);
+        timer.add(3500, go_to_title_state, game);
+        timer.start();
     }
 
     update(game) {
         this.score_text.setText(`  ${scores.players.n}\n\n${scores.players.w}   ${scores.players.e}\n\n  ${scores.players.s}`);
-        let timer = game.time.create(true);
-        timer.add(3500, go_to_title_state, game);
-        timer.start();
     }
 }

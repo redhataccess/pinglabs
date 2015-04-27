@@ -37,8 +37,7 @@ export let BG_COLOR_CURRENT         = tinycolor( BG_COLOR_BASE.toString() );
  *  Title screen  *
  ******************/
 
-export const TITLE_FADE_IN = 128; // ms
-export const TITLE_FADE_OUT = 128; // ms
+export const TITLE_POSITION = { x: 80, y: 100 };
 
 /******************************************
  *  Color tweening, colors and durations  *
