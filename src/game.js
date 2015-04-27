@@ -15,7 +15,7 @@ function init() {
     );
     // game.state.add('boot');
     game.state.add('preload', preload_state);
-    // game.state.add('title', title_state);
+    game.state.add('title', title_state);
     game.state.add('play', play_state);
     game.state.add('score', score_state);
     game.state.start('preload');

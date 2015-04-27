@@ -1,7 +1,10 @@
-import Phaser from 'Phaser';
-import scores from 'scores';
+import * as scores from 'scores';
 import { SCORE_POSITION, TEXT_FONT, TEXT_SIZE } from 'conf';
 import state from 'states/state';
+
+function go_to_title_state() {
+    this.state.start('title');
+}
 
 export default class score_state extends state {
     constructor() {
@@ -12,6 +15,9 @@ export default class score_state extends state {
     }
 
     update(game) {
-        this.score_text.setText(`  ${scores.n}\n\n${scores.w}   ${scores.e}\n\n  ${scores.s}`);
+        this.score_text.setText(`  ${scores.players.n}\n\n${scores.players.w}   ${scores.players.e}\n\n  ${scores.players.s}`);
+        let timer = game.time.create(true);
+        timer.add(3500, go_to_title_state, game);
+        timer.start();
     }
 }

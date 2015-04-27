@@ -146,6 +146,7 @@ module.exports = function(grunt) {
         t.push('copy:src-to-dist');
         t.push('babel');
         if (target !== 'dev') {
+            grunt.config.set('requirejs.compile.options.optimize', 'uglify2');
             t.push('requirejs');
         }
         return grunt.task.run(t);

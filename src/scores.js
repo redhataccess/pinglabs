@@ -1,10 +1,14 @@
-import * as conf from 'conf';
+import { STARTING_LIVES } from 'conf';
 
-let scores = {
-    n: conf.STARTING_LIVES,
-    s: conf.STARTING_LIVES,
-    e: conf.STARTING_LIVES,
-    w: conf.STARTING_LIVES
-};
+var players = {};
 
-export default scores;
+function reset() {
+    players.n = STARTING_LIVES;
+    players.s = STARTING_LIVES;
+    players.e = STARTING_LIVES;
+    players.w = STARTING_LIVES;
+}
+
+reset();
+
+export { players, reset };

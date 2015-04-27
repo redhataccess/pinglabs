@@ -2,7 +2,7 @@ import Phaser from 'Phaser';
 import { pick } from 'lodash';
 import * as conf from 'conf';
 import SOUNDS from 'sounds';
-import scores from 'scores';
+import * as scores from 'scores';
 
 function hit_puck(puck, paddle) {
     console.log(`COLLISION: ${puck.name} (${puck.body.velocity.x.toFixed(2)}, ${puck.body.velocity.y.toFixed(2)}), ${paddle.name} (${puck.body.velocity.x.toFixed(2)}, ${puck.body.velocity.y.toFixed(2)})`);
@@ -41,11 +41,11 @@ function hit_puck(puck, paddle) {
 function hit_world(puck, side) {
     console.log(`COLLISION: ${puck.name} (${puck.body.velocity.x.toFixed()}, ${puck.body.velocity.y.toFixed()}), ${side.toUpperCase()} WALL`);
 
-    scores[side]--;
+    scores.players[side]--;
 
-    console.log(`SCORE: ${side} player loses a point, now at ${scores[side]}`);
+    console.log(`SCORE: ${side} player loses a point, now at ${scores.players[side]}`);
 
-    if (scores[side] === 0) {
+    if (scores.players[side] === 0) {
         puck.game.state.start('score');
     } else {
 

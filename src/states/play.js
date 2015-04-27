@@ -2,6 +2,7 @@ import Phaser from 'Phaser';
 import * as conf from 'conf';
 import state from 'states/state';
 import { hit_world, hit_puck, reset_puck } from 'collision';
+import * as scores from 'scores';
 
 let puck;
 let pad_n;
@@ -43,6 +44,8 @@ export default class play_state extends state {
     }
     create(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        scores.reset();
 
         puck = game.add.sprite( game.world.centerX, game.world.centerY, 'puck');
 

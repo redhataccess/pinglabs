@@ -15,8 +15,8 @@ export default class preload_state extends state {
     create(game) {
         SOUNDS.PUCK_HIT_PADDLE = game.add.audio('puck-hit-paddle');
         SOUNDS.PUCK_HIT_PADDLE.allowMultiple = true;
-
         SOUNDS.PUCK_OOB = game.add.audio('puck-oob');
-        game.state.start('play');
+
+        game.state.start('title');
     }
 }
