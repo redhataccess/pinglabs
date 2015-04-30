@@ -1,8 +1,10 @@
 import Phaser from 'Phaser';
-import * as conf from 'conf';
 import state from 'states/state';
 import { hit_world, hit_puck, reset_puck } from 'collision';
+import input from 'input';
+import * as conf from 'conf';
 import * as scores from 'scores';
+import * as move from 'commands/move-paddle';
 
 let puck;
 let pad_n;
@@ -53,6 +55,14 @@ export default class play_state extends state {
         pad_s = game.add.sprite( game.world.centerX, game.world.height - conf.PADDLE_PLACEMENT_WORLD_PADDING - 20, 'paddle-green');
         pad_e = game.add.sprite( game.world.width - conf.PADDLE_PLACEMENT_WORLD_PADDING, game.world.centerY, 'paddle-yellow');
         pad_w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
+
+        pad_n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
+        let blur_x_filter = game.add.filter('BlurX');
+        let blur_y_filter = game.add.filter('BlurY');
+
+        pad_n.children[0].filters = [blur_x_filter, blur_y_filter];
+        pad_n.filters = [blur_x_filter, blur_y_filter];
+
 
         pad_w.angle = 90;
         pad_e.angle = 90;
@@ -110,6 +120,26 @@ export default class play_state extends state {
         let oob = check_out_of_bounds(game, puck);
         if (oob) {
             hit_world(puck, oob);
+        }
+
+        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < 0.0) {
+            move.left.execute(pad_n);
+            move.left.execute(pad_s);
+        }
+        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.0) {
+            move.right.execute(pad_n);
+            move.right.execute(pad_s);
+        }
+        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.0) {
+            move.up.execute(pad_e);
+            move.up.execute(pad_w);
+        }
+        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.0) {
+            move.down.execute(pad_e);
+            move.down.execute(pad_w);
+        }
+        if (input.gamepads.pad1.justReleased(Phaser.Gamepad.XBOX360_A)) {
+            console.log('a just released');
         }
 
         if (cursors.left.isDown) {

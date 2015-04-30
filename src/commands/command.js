@@ -1,9 +1,9 @@
 import * as log from 'log';
 
-class Command {
+class command {
 
-    constructor() {
-        this.name = 'Command';
+    constructor(name='') {
+        this.name = name + '_command';
     }
 
     execute () { log.noimpl_method(this.name, 'execute'); }
@@ -14,4 +14,4 @@ class Command {
 
 }
 
-export default Command;
+export default command;

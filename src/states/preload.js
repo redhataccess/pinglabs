@@ -1,11 +1,13 @@
 import state from 'states/state';
 import SOUNDS from 'sounds';
+import input from 'input';
 
 export default class preload_state extends state {
     constructor() {
         super('preload');
     }
     preload(game) {
+        window.game = game;
         game.load.image('puck', 'assets/sprites/puck.png');
         game.load.image('paddle', 'assets/sprites/paddle.png');
         game.load.image('paddle-red', 'assets/sprites/paddle-red.png');
@@ -15,11 +17,19 @@ export default class preload_state extends state {
         game.load.audio('puck-hit-paddle', 'assets/sounds/puck-hit-paddle.ogg');
         game.load.audio('puck-oob', 'assets/sounds/puck-oob.mp3');
         game.load.bitmapFont('carrier_command', 'assets/fonts/carrier_command.png', 'assets/fonts/carrier_command.xml');
+
+        game.load.script('filterX', 'https://cdn.rawgit.com/photonstorm/phaser/master/filters/BlurX.js');
+        game.load.script('filterY', 'https://cdn.rawgit.com/photonstorm/phaser/master/filters/BlurY.js');
     }
     create(game) {
+
+        // init sounds
         SOUNDS.PUCK_HIT_PADDLE = game.add.audio('puck-hit-paddle');
         SOUNDS.PUCK_HIT_PADDLE.allowMultiple = true;
         SOUNDS.PUCK_OOB = game.add.audio('puck-oob');
+
+        // init gamepads
+        input.init(game);
 
         game.state.start('title');
     }

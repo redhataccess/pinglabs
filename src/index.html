@@ -5,8 +5,26 @@
         <meta name="viewport" content="width=device-width">
         <title>PING LABS</title>
         <style type="text/css" media="screen">
-            body { background: black; color: white; font-family: monospace; padding: 0; margin: 0; }
-            canvas { border: 15px solid rgb(64, 64, 64); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); };
+            body {
+                background  : black;
+                color       : white;
+                font-family : monospace;
+                padding     : 0;
+                margin      : 0;
+                overflow    : hidden;
+            }
+            canvas {
+                border       : 5000px solid rgb(64, 64, 64);
+                position     : absolute;
+                top          : 50%;
+                left         : 50%;
+                transform    : translate(-50%, -50%);
+                border-color :
+                    rgba(91, 148, 255, 0.4)
+                    rgba(232, 235, 115, 0.4)
+                    rgba(40, 197, 67, 0.4)
+                    rgba(247, 10, 34, 0.4);
+            };
         </style>
     </head>
     <body>

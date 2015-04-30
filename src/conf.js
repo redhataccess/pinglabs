@@ -18,11 +18,16 @@ export const PUCK_ACCELERATION = 12;
 
 export const INITIAL_PUCK_VELOCITY_MAG      = 200; // initial magnitude of puck velocity
 export const MAX_PUCK_VELOCITY_MAG          = 600; // max puck velocity magnitude
-export const PADDLE_PLACEMENT_WORLD_PADDING = 0;   // pixels between paddles and wall
+export const PADDLE_PLACEMENT_WORLD_PADDING = 8;   // pixels between paddles and wall
 export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300; // velocity given to paddle by user's keypress
 
 // the percentage of paddle velocity that is added to puck velocity on hit
 export const PADDLE_PUCK_FRICTION = 0.36;
+
+// the paddle's sprite has a glow, but the puck shouldn't bounce off the glow.
+// this setting determines the width of the glow, so the actual physical body
+// of the paddle is correct.
+export const PADDLE_SPRITE_BODY_PADDING = 15; 
 
 /***********************
  *  Background colors  *
