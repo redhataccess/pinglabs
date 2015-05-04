@@ -1,3 +1,4 @@
+import Phaser from 'Phaser';
 
 let gamepads = {};
 
@@ -11,8 +12,28 @@ function init(game) {
     }
 }
 
+function moving_left(pad) {
+    return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < 0.0;
+}
+function moving_right(pad) {
+    return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.0;
+}
+function moving_up(pad) {
+    return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.0;
+}
+function moving_down(pad) {
+    return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.0;
+}
+
 // function reset(game) {
 //     game.input.gamepad.reset();
 // }
 
-export default { init, gamepads };
+export default {
+    init,
+    gamepads,
+    moving_left,
+    moving_right,
+    moving_up,
+    moving_down
+};

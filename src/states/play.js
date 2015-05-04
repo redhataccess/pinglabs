@@ -7,10 +7,10 @@ import * as scores from 'scores';
 import * as move from 'commands/move-paddle';
 
 let puck;
-let pad_n;
-let pad_s;
-let pad_e;
-let pad_w;
+let paddle_n;
+let paddle_s;
+let paddle_e;
+let paddle_w;
 let cursors;
 
 function check_out_of_bounds(game, puck) {
@@ -51,49 +51,49 @@ export default class play_state extends state {
 
         puck = game.add.sprite( game.world.centerX, game.world.centerY, 'puck');
 
-        pad_n = game.add.sprite( game.world.centerX, conf.PADDLE_PLACEMENT_WORLD_PADDING, 'paddle-blue');
-        pad_s = game.add.sprite( game.world.centerX, game.world.height - conf.PADDLE_PLACEMENT_WORLD_PADDING - 20, 'paddle-green');
-        pad_e = game.add.sprite( game.world.width - conf.PADDLE_PLACEMENT_WORLD_PADDING, game.world.centerY, 'paddle-yellow');
-        pad_w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
+        paddle_n = game.add.sprite( game.world.centerX, conf.PADDLE_PLACEMENT_WORLD_PADDING, 'paddle-blue');
+        paddle_s = game.add.sprite( game.world.centerX, game.world.height - conf.PADDLE_PLACEMENT_WORLD_PADDING - 20, 'paddle-green');
+        paddle_e = game.add.sprite( game.world.width - conf.PADDLE_PLACEMENT_WORLD_PADDING, game.world.centerY, 'paddle-yellow');
+        paddle_w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
 
-        pad_n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
+        paddle_n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
         let blur_x_filter = game.add.filter('BlurX');
         let blur_y_filter = game.add.filter('BlurY');
 
-        pad_n.children[0].filters = [blur_x_filter, blur_y_filter];
-        pad_n.filters = [blur_x_filter, blur_y_filter];
+        paddle_n.children[0].filters = [blur_x_filter, blur_y_filter];
+        paddle_n.filters = [blur_x_filter, blur_y_filter];
 
 
-        pad_w.angle = 90;
-        pad_e.angle = 90;
+        paddle_w.angle = 90;
+        paddle_e.angle = 90;
 
-        game.physics.enable([puck, pad_n, pad_s, pad_e, pad_w], Phaser.Physics.ARCADE);
+        game.physics.enable([puck, paddle_n, paddle_s, paddle_e, paddle_w], Phaser.Physics.ARCADE);
 
         reset_puck(puck);
 
         puck.name = 'PUCK';
         puck.body.setSize(20, 20, puck.height/2 - 10, puck.width/2 - 10);
-        pad_n.name = 'PADDLE_N';
-        pad_s.name = 'PADDLE_S';
-        pad_e.name = 'PADDLE_E';
-        pad_w.name = 'PADDLE_W';
-        pad_n.body.immovable = true;
-        pad_s.body.immovable = true;
-        pad_e.body.immovable = true;
-        pad_w.body.immovable = true;
-        pad_n.body.collideWorldBounds = true;
-        pad_s.body.collideWorldBounds = true;
-        pad_e.body.collideWorldBounds = true;
-        pad_w.body.collideWorldBounds = true;
-        set_body_to_sprite_size(pad_n);
-        set_body_to_sprite_size(pad_s);
-        set_body_to_sprite_size(pad_e, true);
-        set_body_to_sprite_size(pad_w, true);
+        paddle_n.name = 'PADDLE_N';
+        paddle_s.name = 'PADDLE_S';
+        paddle_e.name = 'PADDLE_E';
+        paddle_w.name = 'PADDLE_W';
+        paddle_n.body.immovable = true;
+        paddle_s.body.immovable = true;
+        paddle_e.body.immovable = true;
+        paddle_w.body.immovable = true;
+        paddle_n.body.collideWorldBounds = true;
+        paddle_s.body.collideWorldBounds = true;
+        paddle_e.body.collideWorldBounds = true;
+        paddle_w.body.collideWorldBounds = true;
+        set_body_to_sprite_size(paddle_n);
+        set_body_to_sprite_size(paddle_s);
+        set_body_to_sprite_size(paddle_e, true);
+        set_body_to_sprite_size(paddle_w, true);
 
         // not sure why this offset is needed, but it lines up the hitboxes with
         // the sprites.
-        pad_w.body.offset.x = -20;
-        pad_e.body.offset.x = -20;
+        paddle_w.body.offset.x = -20;
+        paddle_e.body.offset.x = -20;
 
         // pad_n.body.offset.y = +20;
         // pad_s.body.offset.y = +20;
@@ -108,12 +108,12 @@ export default class play_state extends state {
     }
     update(game) {
 
-        game.physics.arcade.collide(puck, [pad_n, pad_s, pad_e, pad_w], hit_puck, null, this);
+        game.physics.arcade.collide(puck, [paddle_n, paddle_s, paddle_e, paddle_w], hit_puck, null, this);
 
-        pad_n.body.velocity.setMagnitude(0);
-        pad_s.body.velocity.setMagnitude(0);
-        pad_e.body.velocity.setMagnitude(0);
-        pad_w.body.velocity.setMagnitude(0);
+        paddle_n.body.velocity.setMagnitude(0);
+        paddle_s.body.velocity.setMagnitude(0);
+        paddle_e.body.velocity.setMagnitude(0);
+        paddle_w.body.velocity.setMagnitude(0);
 
         update_bg_color(game);
 
@@ -122,42 +122,19 @@ export default class play_state extends state {
             hit_world(puck, oob);
         }
 
-        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < 0.0) {
-            move.left.execute(pad_n);
-            move.left.execute(pad_s);
-        }
-        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.0) {
-            move.right.execute(pad_n);
-            move.right.execute(pad_s);
-        }
-        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < 0.0) {
-            move.up.execute(pad_e);
-            move.up.execute(pad_w);
-        }
-        if (input.gamepads.pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.0) {
-            move.down.execute(pad_e);
-            move.down.execute(pad_w);
-        }
-        if (input.gamepads.pad1.justReleased(Phaser.Gamepad.XBOX360_A)) {
-            console.log('a just released');
-        }
+        // map input to movement commands
 
-        if (cursors.left.isDown) {
-            pad_n.body.velocity.x = -conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-            pad_s.body.velocity.x = -conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-        }
-        if (cursors.right.isDown) {
-            pad_n.body.velocity.x = conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-            pad_s.body.velocity.x = conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-        }
-        if (cursors.down.isDown) {
-            pad_e.body.velocity.y = conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-            pad_w.body.velocity.y = conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-        }
-        if (cursors.up.isDown) {
-            pad_e.body.velocity.y = -conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-            pad_w.body.velocity.y = -conf.PADDLE_VELOCITY_FROM_KEYPRESS;
-        }
+        if (input.moving_up('pad1'))    { move.up.execute(paddle_w); }
+        if (input.moving_down('pad1'))  { move.down.execute(paddle_w); }
+
+        if (input.moving_up('pad2'))    { move.up.execute(paddle_e); }
+        if (input.moving_down('pad2'))  { move.down.execute(paddle_e); }
+
+        if (input.moving_left('pad3'))  { move.left.execute(paddle_n); }
+        if (input.moving_right('pad3')) { move.right.execute(paddle_n); }
+
+        if (input.moving_left('pad4'))  { move.left.execute(paddle_s); }
+        if (input.moving_right('pad4')) { move.right.execute(paddle_s); }
     }
     // render() {
     //     game.debug.body(puck);
