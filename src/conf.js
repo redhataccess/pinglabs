@@ -14,7 +14,7 @@ export const STARTING_LIVES = 2;
 
 // the magnitude of the puck's velocity increases by this much every time it
 // hits something
-export const PUCK_ACCELERATION = 12;
+export const PUCK_ACCELERATION = 32;
 
 export const INITIAL_PUCK_VELOCITY_MAG      = 200; // initial magnitude of puck velocity
 export const MAX_PUCK_VELOCITY_MAG          = 600; // max puck velocity magnitude
