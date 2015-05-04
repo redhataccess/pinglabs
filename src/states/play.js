@@ -57,11 +57,11 @@ export default class play_state extends state {
         paddle_w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
 
         paddle_n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
-        let blur_x_filter = game.add.filter('BlurX');
-        let blur_y_filter = game.add.filter('BlurY');
+        // let blur_x_filter = game.add.filter('BlurX');
+        // let blur_y_filter = game.add.filter('BlurY');
 
-        paddle_n.children[0].filters = [blur_x_filter, blur_y_filter];
-        paddle_n.filters = [blur_x_filter, blur_y_filter];
+        // paddle_n.children[0].filters = [blur_x_filter, blur_y_filter];
+        // paddle_n.filters = [blur_x_filter, blur_y_filter];
 
 
         paddle_w.angle = 90;
