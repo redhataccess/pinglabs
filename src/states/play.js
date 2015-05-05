@@ -27,8 +27,8 @@ function check_out_of_bounds(game, puck) {
     }
 }
 
-function set_body_to_sprite_size(sprite, rotate) {
-    if (rotate) {
+function set_body_to_sprite_size(sprite, rotate90) {
+    if (rotate90) {
         sprite.body.setSize(sprite.height, sprite.width);
     } else {
         sprite.body.setSize(sprite.width, sprite.height);
