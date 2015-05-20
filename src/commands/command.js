@@ -10,8 +10,6 @@ class command {
 
     undo () { log.noimpl_method(this.name, 'undo'); }
 
-    destroy () { /* this probably isn't needed, no memory allocs ;) */ }
-
 }
 
 export default command;
