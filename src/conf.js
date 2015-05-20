@@ -1,6 +1,7 @@
 import * as tinycolor from 'tinycolor';
 
 export const NAME = 'pinglabs';
+export let DEBUG = false;
 
 /*********************
  *  Player settings  *
@@ -16,10 +17,10 @@ export const STARTING_LIVES = 2;
 // hits something
 export const PUCK_ACCELERATION = 32;
 
-export const INITIAL_PUCK_VELOCITY_MAG      = 200; // initial magnitude of puck velocity
-export const MAX_PUCK_VELOCITY_MAG          = 600; // max puck velocity magnitude
-export const PADDLE_PLACEMENT_WORLD_PADDING = 8;   // pixels between paddles and wall
-export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300; // velocity given to paddle by user's keypress
+export const INITIAL_PUCK_VELOCITY_MAG      = 200;  // initial magnitude of puck velocity
+export const MAX_PUCK_VELOCITY_MAG          = 1000; // max puck velocity magnitude
+export const PADDLE_PLACEMENT_WORLD_PADDING = 8;    // pixels between paddles and wall
+export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300;  // velocity given to paddle by user's keypress
 
 // the percentage of paddle velocity that is added to puck velocity on hit
 export const PADDLE_PUCK_FRICTION = 0.36;
