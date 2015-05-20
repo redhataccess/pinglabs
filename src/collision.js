@@ -1,16 +1,19 @@
 import Phaser from 'Phaser';
-import { pick } from 'lodash';
+import { pick, without, first } from 'lodash';
 import * as conf from 'conf';
 import SOUNDS from 'sounds';
 import * as scores from 'scores';
+import * as puck_history from 'puck-history';
 
 function hit_puck(puck, paddle) {
     console.log(`COLLISION: ${puck.name} (${puck.body.velocity.x.toFixed(2)}, ${puck.body.velocity.y.toFixed(2)}), ${paddle.name} (${puck.body.velocity.x.toFixed(2)}, ${puck.body.velocity.y.toFixed(2)})`);
 
     SOUNDS.PUCK_HIT_PADDLE.play();
 
+    puck_history.push(paddle.name);
+
     // save the puck's current velocity magnitude
-    var puck_vel_mag = puck.body.velocity.getMagnitude();
+    let puck_vel_mag = puck.body.velocity.getMagnitude();
 
     // add a fraction of the paddle's velocity to the puck (for angle shots)
     puck.body.velocity.add(
@@ -41,9 +44,19 @@ function hit_puck(puck, paddle) {
 function hit_world(puck, side) {
     console.log(`COLLISION: ${puck.name} (${puck.body.velocity.x.toFixed()}, ${puck.body.velocity.y.toFixed()}), ${side.toUpperCase()} WALL`);
 
-    scores.players[side]--;
+    let scoring_player = puck_history.scoring_player(side);
 
-    console.log(`SCORE: ${side} player loses a point, now at ${scores.players[side]}`);
+    puck_history.reset();
+
+    scores.players[side].sub_lives(1);
+
+    // give the scoring player points only if a player actually scored.  this
+    // covers the case where the puck went from its starting position (center
+    // of screen) to a goal without any players hitting it, or only glancing
+    // off the side of the the scored-on player's paddle.
+    if (scoring_player) {
+        scores.players[scoring_player].add_score(1);
+    }
 
     if (scores.players[side] === 0) {
         puck.game.state.start('score');

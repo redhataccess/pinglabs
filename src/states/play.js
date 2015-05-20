@@ -61,7 +61,7 @@ export default class play_state extends state {
     create(game) {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        scores.reset();
+        scores.reset_all();
 
         puck = game.add.sprite( game.world.centerX, game.world.centerY, 'puck');
 
@@ -87,10 +87,10 @@ export default class play_state extends state {
 
         puck.name = 'PUCK';
         puck.body.setSize(20, 20, puck.height/2 - 10, puck.width/2 - 10);
-        paddles.n.name = 'PADDLE_N';
-        paddles.s.name = 'PADDLE_S';
-        paddles.e.name = 'PADDLE_E';
-        paddles.w.name = 'PADDLE_W';
+        paddles.n.name = 'n';
+        paddles.s.name = 's';
+        paddles.e.name = 'e';
+        paddles.w.name = 'w';
         paddles.n.body.immovable = true;
         paddles.s.body.immovable = true;
         paddles.e.body.immovable = true;

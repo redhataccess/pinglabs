@@ -1,7 +1,16 @@
+@font-face{ 
+    font-family: 'Silkscreen';
+    src: url('assets/fonts/silkscreen_normal/slkscr-webfont.eot');
+    src: url('assets/fonts/silkscreen_normal/slkscr-webfont.eot?iefix') format('eot'),
+         url('assets/fonts/silkscreen_normal/slkscr-webfont.woff') format('woff'),
+         url('assets/fonts/silkscreen_normal/slkscr-webfont.ttf') format('truetype'),
+         url('assets/fonts/silkscreen_normal/slkscr-webfont.svg#webfont') format('svg');
+}
+
 body {
     background  : black;
     color       : white;
-    font-family : monospace;
+    font-family : Silkscreen, monospace;
     padding     : 0;
     margin      : 0;
     overflow    : hidden;
@@ -22,40 +31,94 @@ canvas {
 }
 
 .player-status {
-    border   : 1px dashed white;
     position : absolute;
     width    : 600px;
     z-index  : 200;
 }
+.player-status > * {
+    width  : 80px;
+    height : 80px;
+    float  : left;
+}
+
+.player-status .press-start {
+    font-size  : 1.4em;
+    text-align : center;
+}
+
+.player-status .score,
+.player-status .lives {
+    font-size  : 2.9em;
+    text-align : right;
+}
 #player-n-status {
     top       : 0;
-    height    : 40px;
+    height    : 80px;
     width     : 600px;
     left      : 50%;
     transform : translateX(-50%);
 }
 #player-s-status {
     bottom    : 0;
-    height    : 40px;
+    height    : 80px;
     width     : 600px;
     left      : 50%;
     transform : translateX(-50%);
 }
 #player-e-status {
     right     : 0;
-    width     : 40px;
+    width     : 80px;
     height    : 600px;
     top       : 50%;
     transform : translateY(-50%);
 }
 #player-w-status {
     left      : 0;
-    width     : 40px;
+    width     : 80px;
     height    : 600px;
     top       : 50%;
     transform : translateY(-50%);
 }
+#player-n-status > *,
+#player-s-status > * {
+    margin-left: 40px;
+}
+#player-e-status > *,
+#player-w-status > * {
+    margin-top: 40px;
+
+}
 
 .hide {
     visibility: hidden;
+}
+
+/* From:
+ * http://stackoverflow.com/questions/23985018/simple-css-animation-loop-fading-in-out-loading-text
+ */
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+.animate-flicker {
+   -webkit-animation : flickerAnimation 2.71828s infinite;
+      -moz-animation : flickerAnimation 2.71828s infinite;
+        -o-animation : flickerAnimation 2.71828s infinite;
+           animation : flickerAnimation 2.71828s infinite;
 }

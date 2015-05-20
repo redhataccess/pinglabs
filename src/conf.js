@@ -7,7 +7,8 @@ export let DEBUG = false;
  *  Player settings  *
  *********************/
 
-export const STARTING_LIVES = 2;
+export const STARTING_LIVES = 10;
+export const STARTING_SCORE = 0;
 
 /******************************
  *  Puck and paddle settings  *
