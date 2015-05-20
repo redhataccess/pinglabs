@@ -2,15 +2,13 @@ import Phaser from 'Phaser';
 import state from 'states/state';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import input from 'input';
+import players from 'players';
 import * as conf from 'conf';
 import * as scores from 'scores';
 import * as move from 'commands/move-paddle';
 
 let puck;
-let paddle_n;
-let paddle_s;
-let paddle_e;
-let paddle_w;
+let paddles = {};
 let cursors;
 
 function check_out_of_bounds(game, puck) {
@@ -39,6 +37,22 @@ function update_bg_color(game) {
     game.stage.backgroundColor = conf.BG_COLOR_CURRENT.toHexString();
 }
 
+function play_if_start_pressed(player) {
+    if (!players[player].playing && input.start_pressed(players[player].pad)) {
+        players[player].start.execute();
+    }
+}
+
+function move_if_playing(player) {
+    if (players[player].playing) {
+        if (input[players[player].neg](players[player].pad)) {
+            move[players[player].neg].execute(paddles[player]);
+        }
+        if (input[players[player].pos](players[player].pad)) {
+            move[players[player].pos].execute(paddles[player]);
+        }
+    }
+}
 
 export default class play_state extends state {
     constructor() {
@@ -51,12 +65,12 @@ export default class play_state extends state {
 
         puck = game.add.sprite( game.world.centerX, game.world.centerY, 'puck');
 
-        paddle_n = game.add.sprite( game.world.centerX, conf.PADDLE_PLACEMENT_WORLD_PADDING, 'paddle-blue');
-        paddle_s = game.add.sprite( game.world.centerX, game.world.height - conf.PADDLE_PLACEMENT_WORLD_PADDING - 20, 'paddle-green');
-        paddle_e = game.add.sprite( game.world.width - conf.PADDLE_PLACEMENT_WORLD_PADDING, game.world.centerY, 'paddle-yellow');
-        paddle_w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
+        paddles.n = game.add.sprite( game.world.centerX, conf.PADDLE_PLACEMENT_WORLD_PADDING, 'paddle-blue');
+        paddles.s = game.add.sprite( game.world.centerX, game.world.height - conf.PADDLE_PLACEMENT_WORLD_PADDING - 20, 'paddle-green');
+        paddles.e = game.add.sprite( game.world.width - conf.PADDLE_PLACEMENT_WORLD_PADDING, game.world.centerY, 'paddle-yellow');
+        paddles.w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
 
-        paddle_n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
+        paddles.n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
         // let blur_x_filter = game.add.filter('BlurX');
         // let blur_y_filter = game.add.filter('BlurY');
 
@@ -64,36 +78,36 @@ export default class play_state extends state {
         // paddle_n.filters = [blur_x_filter, blur_y_filter];
 
 
-        paddle_w.angle = 90;
-        paddle_e.angle = 90;
+        paddles.w.angle = 90;
+        paddles.e.angle = 90;
 
-        game.physics.enable([puck, paddle_n, paddle_s, paddle_e, paddle_w], Phaser.Physics.ARCADE);
+        game.physics.enable([puck, paddles.n, paddles.s, paddles.e, paddles.w], Phaser.Physics.ARCADE);
 
         reset_puck(puck);
 
         puck.name = 'PUCK';
         puck.body.setSize(20, 20, puck.height/2 - 10, puck.width/2 - 10);
-        paddle_n.name = 'PADDLE_N';
-        paddle_s.name = 'PADDLE_S';
-        paddle_e.name = 'PADDLE_E';
-        paddle_w.name = 'PADDLE_W';
-        paddle_n.body.immovable = true;
-        paddle_s.body.immovable = true;
-        paddle_e.body.immovable = true;
-        paddle_w.body.immovable = true;
-        paddle_n.body.collideWorldBounds = true;
-        paddle_s.body.collideWorldBounds = true;
-        paddle_e.body.collideWorldBounds = true;
-        paddle_w.body.collideWorldBounds = true;
-        set_body_to_sprite_size(paddle_n);
-        set_body_to_sprite_size(paddle_s);
-        set_body_to_sprite_size(paddle_e, true);
-        set_body_to_sprite_size(paddle_w, true);
+        paddles.n.name = 'PADDLE_N';
+        paddles.s.name = 'PADDLE_S';
+        paddles.e.name = 'PADDLE_E';
+        paddles.w.name = 'PADDLE_W';
+        paddles.n.body.immovable = true;
+        paddles.s.body.immovable = true;
+        paddles.e.body.immovable = true;
+        paddles.w.body.immovable = true;
+        paddles.n.body.collideWorldBounds = true;
+        paddles.s.body.collideWorldBounds = true;
+        paddles.e.body.collideWorldBounds = true;
+        paddles.w.body.collideWorldBounds = true;
+        set_body_to_sprite_size(paddles.n);
+        set_body_to_sprite_size(paddles.s);
+        set_body_to_sprite_size(paddles.e, true);
+        set_body_to_sprite_size(paddles.w, true);
 
         // not sure why this offset is needed, but it lines up the hitboxes with
         // the sprites.
-        paddle_w.body.offset.x = -20;
-        paddle_e.body.offset.x = -20;
+        paddles.w.body.offset.x = -20;
+        paddles.e.body.offset.x = -20;
 
         // pad_n.body.offset.y = +20;
         // pad_s.body.offset.y = +20;
@@ -108,12 +122,12 @@ export default class play_state extends state {
     }
     update(game) {
 
-        game.physics.arcade.collide(puck, [paddle_n, paddle_s, paddle_e, paddle_w], hit_puck, null, this);
+        game.physics.arcade.collide(puck, [paddles.n, paddles.s, paddles.e, paddles.w], hit_puck, null, this);
 
-        paddle_n.body.velocity.setMagnitude(0);
-        paddle_s.body.velocity.setMagnitude(0);
-        paddle_e.body.velocity.setMagnitude(0);
-        paddle_w.body.velocity.setMagnitude(0);
+        paddles.n.body.velocity.setMagnitude(0);
+        paddles.s.body.velocity.setMagnitude(0);
+        paddles.e.body.velocity.setMagnitude(0);
+        paddles.w.body.velocity.setMagnitude(0);
 
         update_bg_color(game);
 
@@ -122,25 +136,28 @@ export default class play_state extends state {
             hit_world(puck, oob);
         }
 
+        // check for players pressing start to join the game
+
+        play_if_start_pressed('n');
+        play_if_start_pressed('s');
+        play_if_start_pressed('e');
+        play_if_start_pressed('w');
+
         // map input to movement commands
 
-        if (input.moving_up('pad1'))    { move.up.execute(paddle_w); }
-        if (input.moving_down('pad1'))  { move.down.execute(paddle_w); }
-
-        if (input.moving_up('pad2'))    { move.up.execute(paddle_e); }
-        if (input.moving_down('pad2'))  { move.down.execute(paddle_e); }
-
-        if (input.moving_left('pad3'))  { move.left.execute(paddle_n); }
-        if (input.moving_right('pad3')) { move.right.execute(paddle_n); }
-
-        if (input.moving_left('pad4'))  { move.left.execute(paddle_s); }
-        if (input.moving_right('pad4')) { move.right.execute(paddle_s); }
+        move_if_playing('n');
+        move_if_playing('s');
+        move_if_playing('e');
+        move_if_playing('w');
     }
-    // render() {
-    //     game.debug.body(puck);
-    //     game.debug.body(pad_n);
-    //     game.debug.body(pad_s);
-    //     game.debug.body(pad_e);
-    //     game.debug.body(pad_w);
-    // }
+
+    render(game) {
+        if (conf.DEBUG) {
+            game.debug.body(puck);
+            game.debug.body(paddles.n);
+            game.debug.body(paddles.s);
+            game.debug.body(paddles.e);
+            game.debug.body(paddles.w);
+        }
+    }
 }
