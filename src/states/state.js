@@ -4,6 +4,6 @@ export default class state {
         this.name = name;
     }
     init() {
-        console.log(`STATE activated: ${this.name}`);
+        console.log(`STATE: activated '${this.name}'`);
     }
 }
