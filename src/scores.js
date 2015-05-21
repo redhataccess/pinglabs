@@ -9,6 +9,7 @@ class score {
         this.__player_name__    = player_name;
         this.__starting_score__ = starting_score;
         this.score              = starting_score;
+        this.el                 = document.querySelector(`#player-${this.__player_name__}-status`);
 
         this.__starting_lives__ = starting_lives;
         this.lives              = starting_lives;
@@ -46,6 +47,14 @@ class score {
     update_display() {
         this.__score_display__.execute(this.score);
         this.__lives_display__.execute(this.lives);
+    }
+
+    hide_display() {
+        this.el.classList.remove('playing');
+    }
+
+    show_display() {
+        this.el.classList.add('playing');
     }
 }
 

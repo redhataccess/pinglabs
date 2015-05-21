@@ -1,4 +1,4 @@
-@font-face{ 
+@font-face{
     font-family: 'Silkscreen';
     src: url('assets/fonts/silkscreen_normal/slkscr-webfont.eot');
     src: url('assets/fonts/silkscreen_normal/slkscr-webfont.eot?iefix') format('eot'),
@@ -17,17 +17,30 @@ body {
     height      : 100%;
 }
 canvas {
-    border       : 5000px solid rgb(64, 64, 64);
+    /* border       : 5000px solid rgb(64, 64, 64); */
     position     : absolute;
     top          : 50%;
     left         : 50%;
     z-index      : 100;
     transform    : translate(-50%, -50%);
-    border-color :
-        rgba(91, 148, 255, 0.4)
-        rgba(238, 243, 49, 0.4)
-        rgba(40, 197, 67, 0.4)
-        rgba(247, 10, 34, 0.4);
+    /* border-color : */
+    /*     rgba(91, 148, 255, 0.4) */
+    /*     rgba(238, 243, 49, 0.4) */
+    /*     rgba(40, 197, 67, 0.4) */
+    /*     rgba(247, 10, 34, 0.4); */
+
+    box-shadow:
+        0 0 1px 20px rgba(255, 0, 255, 0.4),
+        0 0 1px 24px black,
+        0 0 1px 36px rgba(255, 0, 255, 0.35),
+        0 0 1px 40px black,
+        0 0 1px 46px rgba(255, 0, 255, 0.3),
+        0 0 1px 50px black,
+        0 0 1px 54px rgba(255, 0, 255, 0.25),
+        0 0 1px 58px black,
+        0 0 1px 60px rgba(255, 0, 255, 0.2),
+        0 0 1px 64px black,
+        0 0 1px 65px rgba(255, 0, 255, 0.15);
 }
 
 .player-status {
@@ -36,21 +49,21 @@ canvas {
     z-index  : 200;
 }
 .player-status > * {
-    width    : 80px;
-    height   : 80px;
-    float    : left;
-    position : relative;
+    width      : 80px;
+    height     : 80px;
+    float      : left;
+    position   : relative;
+    text-align : center;
 }
 
 .player-status .press-start {
     font-size  : 1.4em;
-    text-align : center;
 }
 
 .player-status .score::before,
 .player-status .lives::before {
     position  : absolute;
-    top       : -1.4rem;
+    top       : -1.6rem;
     right     : 0;
     font-size : 1.4rem;
     opacity   : 0.5;
@@ -58,10 +71,17 @@ canvas {
 .player-status .score::before { content: 'SCORE'; }
 .player-status .lives::before { content: 'LIVES'; }
 
+.player-status.playing .score,
+.player-status.playing .lives {
+    display : block;
+}
+
 .player-status .score,
 .player-status .lives {
-    font-size  : 2.9em;
-    text-align : right;
+    font-size   : 2.9em;
+    text-align  : center;
+    line-height : 80px;
+    display     : none;
 }
 #player-n-status {
     top       : 0;
@@ -102,7 +122,7 @@ canvas {
 }
 
 .hide {
-    visibility: hidden;
+    display: none;
 }
 
 /* From:

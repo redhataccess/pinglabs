@@ -15,7 +15,7 @@ class player_lives_display extends command {
 
     execute(lives) {
         // display lives, or empty string when lives hits 0
-        this.el.innerHTML = lives || '';
+        this.el.innerHTML = lives;
     }
 
 }

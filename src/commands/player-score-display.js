@@ -16,6 +16,7 @@ class player_score_display extends command {
     execute(score) {
         this.el.innerHTML = score;
     }
+
 }
 
 export default player_score_display;
