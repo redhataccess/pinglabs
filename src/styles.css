@@ -30,17 +30,18 @@ canvas {
     /*     rgba(247, 10, 34, 0.4); */
 
     box-shadow:
-        0 0 1px 20px rgba(255, 0, 255, 0.4),
+        0 0 2px 0px  black,
+        0 0 1px 20px rgba(255, 255, 255, 0.3),
         0 0 1px 24px black,
-        0 0 1px 36px rgba(255, 0, 255, 0.35),
+        0 0 1px 36px rgba(255, 255, 255, 0.25),
         0 0 1px 40px black,
-        0 0 1px 46px rgba(255, 0, 255, 0.3),
+        0 0 1px 46px rgba(255, 255, 255, 0.2),
         0 0 1px 50px black,
-        0 0 1px 54px rgba(255, 0, 255, 0.25),
+        0 0 1px 54px rgba(255, 255, 255, 0.15),
         0 0 1px 58px black,
-        0 0 1px 60px rgba(255, 0, 255, 0.2),
+        0 0 1px 60px rgba(255, 255, 255, 0.1),
         0 0 1px 64px black,
-        0 0 1px 65px rgba(255, 0, 255, 0.15);
+        0 0 1px 65px rgba(255, 255, 255, 0.05);
 }
 
 .player-status {
@@ -52,8 +53,27 @@ canvas {
     width      : 80px;
     height     : 80px;
     float      : left;
-    position   : relative;
+    position   : absolute;
     text-align : center;
+    top        : 50%;
+    left       : 50%;
+    transform  : translate(-50%, -50%);
+}
+#player-n-status > .score,
+#player-s-status > .score {
+    left: calc(50% - 50px); /* -50 for extra horizontal 'padding' */
+}
+#player-e-status > .score,
+#player-w-status > .score {
+    top: calc(50% - 40px);
+}
+#player-n-status > .lives,
+#player-s-status > .lives {
+    left: calc(50% + 50px); /* +50 for extra horizontal 'padding' */
+}
+#player-e-status > .lives,
+#player-w-status > .lives {
+    top: calc(50% + 40px);
 }
 
 .player-status .press-start {
@@ -62,11 +82,13 @@ canvas {
 
 .player-status .score::before,
 .player-status .lives::before {
-    position  : absolute;
-    top       : -1.6rem;
-    right     : 0;
-    font-size : 1.4rem;
-    opacity   : 0.5;
+    position   : absolute;
+    width      : 100%;
+    text-align : center;
+    top        : -1.6rem;
+    right      : 0;
+    font-size  : 1.4rem;
+    opacity    : 0.6;
 }
 .player-status .score::before { content: 'SCORE'; }
 .player-status .lives::before { content: 'LIVES'; }
@@ -111,15 +133,11 @@ canvas {
     top       : 50%;
     transform : translateY(-50%);
 }
-#player-n-status > *,
-#player-s-status > * {
-    margin-left: 40px;
-}
-#player-e-status > *,
-#player-w-status > * {
-    margin-top: 40px;
 
-}
+#player-n-status { color: #5D9BFE; text-shadow: 0 0 3px #5D9BFE; }
+#player-s-status { color: #26BF4A; text-shadow: 0 0 3px #26BF4A; }
+#player-e-status { color: #E7E746; text-shadow: 0 0 3px #E7E746; }
+#player-w-status { color: #F72C2C; text-shadow: 0 0 3px #F72C2C; }
 
 .hide {
     display: none;
