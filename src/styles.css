@@ -85,7 +85,7 @@ canvas {
     position   : absolute;
     width      : 100%;
     text-align : center;
-    top        : -1.6rem;
+    top        : -2.0rem;
     right      : 0;
     font-size  : 1.4rem;
     opacity    : 0.6;
@@ -106,28 +106,28 @@ canvas {
     display     : none;
 }
 #player-n-status {
-    top       : 0;
+    bottom    : 90%;
     height    : 80px;
     width     : 600px;
     left      : 50%;
     transform : translateX(-50%);
 }
 #player-s-status {
-    bottom    : 0;
+    top       : 90%;
     height    : 80px;
     width     : 600px;
     left      : 50%;
     transform : translateX(-50%);
 }
 #player-e-status {
-    right     : 0;
+    left      : 90%;
     width     : 80px;
     height    : 600px;
     top       : 50%;
     transform : translateY(-50%);
 }
 #player-w-status {
-    left      : 0;
+    right     : 90%;
     width     : 80px;
     height    : 600px;
     top       : 50%;
