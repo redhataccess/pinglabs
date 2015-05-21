@@ -13,13 +13,13 @@ class player_start extends command {
     }
 
     execute() {
-        console.log(`PLAY START: player ${this.player.name}`);
+        console.log(`JOIN: player ${this.player.name} joined`);
         hide_press_start_prompt(this.player);
         this.player.playing = true;
     }
 
     undo() {
-        console.log(`PLAY STOP: player ${this.player.name}`);
+        console.log(`JOIN: player ${this.player.name} left`);
         show_press_start_prompt(this.player);
         this.player.playing = false;
     }

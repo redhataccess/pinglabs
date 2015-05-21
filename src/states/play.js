@@ -49,7 +49,8 @@ function play_if_start_pressed(player) {
 }
 
 function move_paddle(player) {
-    // move the player with gamepad if player is active.  else move with AI.
+    // move the player with gamepad if player is active.  else let AI decide
+    // how to move.
     if (players[player].playing) {
         if (input[players[player].neg](players[player].pad)) {
             move[players[player].neg].execute(paddles[player]);

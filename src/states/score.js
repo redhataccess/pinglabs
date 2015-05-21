@@ -18,6 +18,6 @@ export default class score_state extends state {
     }
 
     update(game) {
-        this.score_text.setText(`  ${scores.players.n}\n\n${scores.players.w}   ${scores.players.e}\n\n  ${scores.players.s}`);
+        this.score_text.setText(`  ${scores.n}\n\n${scores.w}   ${scores.e}\n\n  ${scores.s}`);
     }
 }

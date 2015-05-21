@@ -36,15 +36,27 @@ canvas {
     z-index  : 200;
 }
 .player-status > * {
-    width  : 80px;
-    height : 80px;
-    float  : left;
+    width    : 80px;
+    height   : 80px;
+    float    : left;
+    position : relative;
 }
 
 .player-status .press-start {
     font-size  : 1.4em;
     text-align : center;
 }
+
+.player-status .score::before,
+.player-status .lives::before {
+    position  : absolute;
+    top       : -1.4rem;
+    right     : 0;
+    font-size : 1.4rem;
+    opacity   : 0.5;
+}
+.player-status .score::before { content: 'SCORE'; }
+.player-status .lives::before { content: 'LIVES'; }
 
 .player-status .score,
 .player-status .lives {

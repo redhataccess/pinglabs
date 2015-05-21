@@ -2,6 +2,7 @@ import { invoke } from 'lodash';
 import { STARTING_LIVES, STARTING_SCORE } from 'conf';
 import score_display from 'commands/player-score-display';
 import lives_display from 'commands/player-lives-display';
+import players from 'players';
 
 class score {
     constructor(starting_score, starting_lives, player_name) {
@@ -31,6 +32,10 @@ class score {
     sub_lives(amount=1) {
         this.lives -= amount;
         this.update_display();
+        if (this.dead()) {
+            players[this.__player_name__].start.undo();
+            this.reset();
+        }
         console.log(`LIVES: ${this.__player_name__} player loses ${amount} lives, now at ${this.lives} lives`);
     }
 
@@ -41,23 +46,22 @@ class score {
     update_display() {
         this.__score_display__.execute(this.score);
         this.__lives_display__.execute(this.lives);
-        if (this.dead()) {
-            this.__lives_display__.undo();
-        }
     }
 }
 
-var players = {};
+var scores = {
+    n: new score( STARTING_SCORE, STARTING_LIVES, 'n' ),
+    s: new score( STARTING_SCORE, STARTING_LIVES, 's' ),
+    e: new score( STARTING_SCORE, STARTING_LIVES, 'e' ),
+    w: new score( STARTING_SCORE, STARTING_LIVES, 'w' )
+};
 
-players.n = new score( STARTING_SCORE, STARTING_LIVES, 'n' );
-players.s = new score( STARTING_SCORE, STARTING_LIVES, 's' );
-players.e = new score( STARTING_SCORE, STARTING_LIVES, 'e' );
-players.w = new score( STARTING_SCORE, STARTING_LIVES, 'w' );
+scores.reset_all = reset_all;
 
 function reset_all() {
-    invoke(players, 'reset');
+    invoke(scores, 'reset');
 }
 
 reset_all();
 
-export { players, reset_all };
+export default scores;

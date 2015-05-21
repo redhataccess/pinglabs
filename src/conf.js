@@ -7,7 +7,7 @@ export let DEBUG = false;
  *  Player settings  *
  *********************/
 
-export const STARTING_LIVES = 1;
+export const STARTING_LIVES = 4;
 export const STARTING_SCORE = 0;
 
 /******************************
@@ -19,7 +19,7 @@ export const STARTING_SCORE = 0;
 export const PUCK_ACCELERATION = 32;
 
 export const INITIAL_PUCK_VELOCITY_MAG      = 200;  // initial magnitude of puck velocity
-export const MAX_PUCK_VELOCITY_MAG          = 1000; // max puck velocity magnitude
+export const MAX_PUCK_VELOCITY_MAG          = 2000; // max puck velocity magnitude
 export const PADDLE_PLACEMENT_WORLD_PADDING = 8;    // pixels between paddles and wall
 export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300;  // velocity given to paddle by user's keypress
 

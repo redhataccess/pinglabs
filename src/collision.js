@@ -48,17 +48,17 @@ function hit_world(puck, side) {
 
     puck_history.reset();
 
-    scores.players[side].sub_lives(1);
+    scores[side].sub_lives(1);
 
     // give the scoring player points only if a player actually scored.  this
     // covers the case where the puck went from its starting position (center
     // of screen) to a goal without any players hitting it, or only glancing
     // off the side of the the scored-on player's paddle.
     if (scoring_player) {
-        scores.players[scoring_player].add_score(1);
+        scores[scoring_player].add_score(1);
     }
 
-    if (scores.players[side] === 0) {
+    if (scores[side] === 0) {
         puck.game.state.start('score');
     } else {
 
