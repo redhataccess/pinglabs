@@ -7,7 +7,7 @@ export let DEBUG = false;
  *  Player settings  *
  *********************/
 
-export const STARTING_LIVES = 10;
+export const STARTING_LIVES = 1;
 export const STARTING_SCORE = 0;
 
 /******************************
@@ -74,3 +74,9 @@ export const TEXT_STYLE = { font: TEXT_FONT, fill: TEXT_COLOR, align: TEXT_ALIGN
  ******************/
 
 export const SCORE_POSITION = { x: 100, y: 100 };
+
+/******************
+ *  AI Behaviors  *
+ ******************/
+
+export const AI_DISTANCE_IMPETUS = 20;

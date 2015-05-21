@@ -41,6 +41,9 @@ class score {
     update_display() {
         this.__score_display__.execute(this.score);
         this.__lives_display__.execute(this.lives);
+        if (this.dead()) {
+            this.__lives_display__.undo();
+        }
     }
 }
 

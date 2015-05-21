@@ -10,11 +10,11 @@ class player_score_display extends command {
     constructor(player_name) {
         super('player-score-display');
         this.player_name = player_name;
+        this.el = document.querySelector(`#player-${this.player_name}-status .score`);
     }
 
     execute(score) {
-        let el = document.querySelector(`#player-${this.player_name}-status .score`);
-        el.innerHTML = score;
+        this.el.innerHTML = score;
     }
 }
 

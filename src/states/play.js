@@ -14,13 +14,17 @@ let cursors;
 function check_out_of_bounds(game, puck) {
     if (puck.body.position.y < game.world.bounds.top) {
         return 'n';
-    } else if (puck.body.position.y + puck.body.height > game.world.bounds.bottom) {
+    }
+    else if (puck.body.position.y + puck.body.height > game.world.bounds.bottom) {
         return 's';
-    } else if (puck.body.position.x + puck.body.width > game.world.bounds.right) {
+    }
+    else if (puck.body.position.x + puck.body.width > game.world.bounds.right) {
         return 'e';
-    } else if (puck.body.position.x < game.world.bounds.left) {
+    }
+    else if (puck.body.position.x < game.world.bounds.left) {
         return 'w';
-    } else {
+    }
+    else {
         return;
     }
 }
@@ -28,7 +32,8 @@ function check_out_of_bounds(game, puck) {
 function set_body_to_sprite_size(sprite, rotate90) {
     if (rotate90) {
         sprite.body.setSize(sprite.height, sprite.width);
-    } else {
+    }
+    else {
         sprite.body.setSize(sprite.width, sprite.height);
     }
 }
@@ -43,13 +48,26 @@ function play_if_start_pressed(player) {
     }
 }
 
-function move_if_playing(player) {
+function move_paddle(player) {
+    // move the player with gamepad if player is active.  else move with AI.
     if (players[player].playing) {
         if (input[players[player].neg](players[player].pad)) {
             move[players[player].neg].execute(paddles[player]);
         }
         if (input[players[player].pos](players[player].pad)) {
             move[players[player].pos].execute(paddles[player]);
+        }
+    }
+    else {
+        // AI IS HERE!
+        // find the distance between the puck and the paddle, but only on the
+        // axis of movement
+        let r = puck.body.center[players[player].axis] - paddles[player].body.center[players[player].axis];
+        if (r > conf.AI_DISTANCE_IMPETUS) {
+            move[players[player].pos].execute(paddles[player]);
+        }
+        else if (r < -conf.AI_DISTANCE_IMPETUS) {
+            move[players[player].neg].execute(paddles[player]);
         }
     }
 }
@@ -71,12 +89,6 @@ export default class play_state extends state {
         paddles.w = game.add.sprite( conf.PADDLE_PLACEMENT_WORLD_PADDING + 20, game.world.centerY, 'paddle-red');
 
         paddles.n.addChild(game.make.sprite(0, 0, 'paddle-blue'));
-        // let blur_x_filter = game.add.filter('BlurX');
-        // let blur_y_filter = game.add.filter('BlurY');
-
-        // paddle_n.children[0].filters = [blur_x_filter, blur_y_filter];
-        // paddle_n.filters = [blur_x_filter, blur_y_filter];
-
 
         paddles.w.angle = 90;
         paddles.e.angle = 90;
@@ -115,7 +127,6 @@ export default class play_state extends state {
         // puck.body.collideWorldBounds = true;
         puck.body.bounce.setTo(1, 1);
 
-
         game.stage.backgroundColor = conf.BG_COLOR_CURRENT.toHexString();
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -145,10 +156,10 @@ export default class play_state extends state {
 
         // map input to movement commands
 
-        move_if_playing('n');
-        move_if_playing('s');
-        move_if_playing('e');
-        move_if_playing('w');
+        move_paddle('n');
+        move_paddle('s');
+        move_paddle('e');
+        move_paddle('w');
     }
 
     render(game) {

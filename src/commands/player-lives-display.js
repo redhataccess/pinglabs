@@ -10,11 +10,15 @@ class player_lives_display extends command {
     constructor(player_name) {
         super('player-lives-display');
         this.player_name = player_name;
+        this.el = document.querySelector(`#player-${this.player_name}-status .lives`);
     }
 
     execute(lives) {
-        let el = document.querySelector(`#player-${this.player_name}-status .lives`);
-        el.innerHTML = lives;
+        this.el.innerHTML = lives;
+    }
+
+    undo() {
+        this.el.innerHTML = '';
     }
 }
 
