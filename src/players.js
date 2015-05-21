@@ -1,6 +1,11 @@
 import Phaser from 'Phaser';
-import { partial } from 'lodash';
+import { partial, first } from 'lodash';
 import player_start from 'commands/player-start';
+
+
+// TODO TEMP
+import kickstarter_powerup from 'commands/kickstarter-powerup';
+// END TEMP
 
 let players = {
 };
@@ -12,14 +17,35 @@ let axes = {
 
 class player {
     constructor(name, pad, axis) {
-        let axis_dirs = axes[axis];
-        this.name    = name;
-        this.pad     = pad;
-        this.playing = false;
-        this.start   = new player_start(this);
-        this.axis    = axis;
-        this.pos     = axis_dirs.pos;
-        this.neg     = axis_dirs.neg;
+        let axis_dirs        = axes[axis];
+        this.name            = name;
+        this.pad             = pad;
+        this.playing         = false;
+        this.start           = new player_start(this);
+        this.axis            = axis;
+        this.pos             = axis_dirs.pos;
+        this.neg             = axis_dirs.neg;
+        this.springiness     = 1;
+        this.reset_default_powerups();
+    }
+
+    add_powerup(powerup) {
+        this.powerups.push(powerup);
+    }
+
+    rotate_powerups() {
+        this.powerups.push(this.powerups.shift());
+    }
+
+    execute_powerup() {
+        let powerup = this.powerups.shift();
+        if (powerup) {
+            powerup.execute();
+        }
+    }
+
+    reset_default_powerups() {
+        this.powerups = [ new kickstarter_powerup(this), new kickstarter_powerup(this), new kickstarter_powerup(this) ];
     }
 }
 

@@ -22,6 +22,7 @@ export const INITIAL_PUCK_VELOCITY_MAG      = 200;  // initial magnitude of puck
 export const MAX_PUCK_VELOCITY_MAG          = 2000; // max puck velocity magnitude
 export const PADDLE_PLACEMENT_WORLD_PADDING = 8;    // pixels between paddles and wall
 export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300;  // velocity given to paddle by user's keypress
+export const PADDLE_SPRINGINESS_DEFAULT     = 1;    // how much to multiply puck velocity on hit
 
 // the percentage of paddle velocity that is added to puck velocity on hit
 export const PADDLE_PUCK_FRICTION = 0.36;
@@ -80,3 +81,9 @@ export const SCORE_POSITION = { x: 100, y: 100 };
  ******************/
 
 export const AI_DISTANCE_IMPETUS = 20;
+
+/**************
+ *  Powerups  *
+ **************/
+
+export const KICKSTARTER_MULTIPLIER = 2;

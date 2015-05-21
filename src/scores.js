@@ -34,7 +34,9 @@ class score {
         this.lives -= amount;
         this.update_display();
         if (this.dead()) {
-            players[this.__player_name__].start.undo();
+            let player = players[this.__player_name__];
+            player.reset_default_powerups();
+            player.start.undo();
             this.reset();
         }
         console.log(`LIVES: ${this.__player_name__} player loses ${amount} lives, now at ${this.lives} lives`);

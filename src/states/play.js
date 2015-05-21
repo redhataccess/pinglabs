@@ -1,5 +1,6 @@
 import Phaser from 'Phaser';
 import state from 'states/state';
+import { map } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import input from 'input';
 import players from 'players';
@@ -10,6 +11,7 @@ import * as move from 'commands/move-paddle';
 let puck;
 let paddles = {};
 let cursors;
+let player_codes = ['n', 's', 'e', 'w'];
 
 function check_out_of_bounds(game, puck) {
     if (puck.body.position.y < game.world.bounds.top) {
@@ -45,6 +47,18 @@ function update_bg_color(game) {
 function play_if_start_pressed(player) {
     if (!players[player].playing && input.start_pressed(players[player].pad)) {
         players[player].start.execute();
+    }
+}
+
+function execute_powerup_if_b(player) {
+    if (input.b(players[player].pad)) {
+        players[player].execute_powerup();
+    }
+}
+
+function rotate_powerup_if_a(player) {
+    if (input.a(players[player].pad)) {
+        players[player].rotate_powerups();
     }
 }
 
@@ -150,17 +164,13 @@ export default class play_state extends state {
 
         // check for players pressing start to join the game
 
-        play_if_start_pressed('n');
-        play_if_start_pressed('s');
-        play_if_start_pressed('e');
-        play_if_start_pressed('w');
+        map(player_codes, play_if_start_pressed);
 
-        // map input to movement commands
+        // map input to commands
 
-        move_paddle('n');
-        move_paddle('s');
-        move_paddle('e');
-        move_paddle('w');
+        map(player_codes, move_paddle);
+        map(player_codes, execute_powerup_if_b);
+        map(player_codes, rotate_powerup_if_a);
     }
 
     render(game) {

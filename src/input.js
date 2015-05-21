@@ -43,6 +43,12 @@ function down(pad) {
 function start_pressed(pad) {
     return gamepads[pad].justPressed(Phaser.Gamepad.BUTTON_9);
 }
+function a(pad) {
+    return gamepads[pad].justPressed(Phaser.Gamepad.BUTTON_1);
+}
+function b(pad) {
+    return gamepads[pad].justPressed(Phaser.Gamepad.BUTTON_0);
+}
 
 export default {
     init,
@@ -52,5 +58,7 @@ export default {
     right,
     up,
     down,
+    a,
+    b,
     start_pressed
 };
