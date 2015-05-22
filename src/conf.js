@@ -1,6 +1,6 @@
 import * as tinycolor from 'tinycolor';
 
-export const NAME = 'pinglabs';
+export const NAME = 'phaser-canvas-wrapper';
 export let DEBUG = false;
 
 /*********************
