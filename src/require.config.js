@@ -10,10 +10,11 @@ requirejs.config({
         'lodash-amd': 'lib/lodash-amd/compat/main',
         Phaser: 'lib/phaser/build/phaser',
         phaser: 'lib/phaser/build/phaser',
-        tinycolor: 'lib/tinycolor/tinycolor'
+        tinycolor: 'lib/tinycolor/tinycolor',
+        paperclip: 'lib/paperclip/dist/paperclip.min'
     },
     shim: {
-
+        paperclip: { exports: 'paperclip' }
     },
     packages: [
 

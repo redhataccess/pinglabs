@@ -17,6 +17,7 @@ class player {
         this.pad         = pad;
         this.playing     = false;
         this.start       = new player_start(this);
+        this.score       = undefined;
         this.axis        = axis;
         this.pos         = axis_dirs.pos;
         this.neg         = axis_dirs.neg;
@@ -31,7 +32,10 @@ class player {
     }
 
     rotate_powerups() {
-        this.powerups.push(this.powerups.shift());
+        let p = this.powerups.shift();
+        if (p) {
+            this.powerups.push(p);
+        }
         console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
     }
 

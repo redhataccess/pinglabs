@@ -84,13 +84,22 @@ canvas {
 #player-w-status > .lives {
     top: calc(50% + 40px);
 }
+#player-n-status > .powerup,
+#player-s-status > .powerup {
+    left: calc(50% + 130px); /* +50 for extra horizontal 'padding' */
+}
+#player-e-status > .powerup,
+#player-w-status > .powerup {
+    top: calc(50% + 120px);
+}
 
 .player-status .press-start {
     font-size   : 1.4em;
 }
 
 .player-status .score::before,
-.player-status .lives::before {
+.player-status .lives::before,
+.player-status .powerup::before {
     position   : absolute;
     width      : 100%;
     text-align : center;
@@ -101,6 +110,7 @@ canvas {
 }
 .player-status .score::before { content: 'SCORE'; }
 .player-status .lives::before { content: 'LIVES'; }
+.player-status .powerup::before { content: 'SLAMS'; }
 
 .player-status.playing .score,
 .player-status.playing .lives {
@@ -108,7 +118,8 @@ canvas {
 }
 
 .player-status .score,
-.player-status .lives {
+.player-status .lives,
+.player-status .powerup {
     font-size   : 2.9em;
     text-align  : center;
     line-height : 80px;

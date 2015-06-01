@@ -20,8 +20,6 @@ class player_start extends command {
         let score_obj = require('scores')[this.player.name];
         console.log(`JOIN: player ${this.player.name} joined`);
         score_obj.reset();
-        score_obj.show_display();
-        hide_press_start_prompt(this.player);
         this.player.playing = true;
     }
 
@@ -33,21 +31,9 @@ class player_start extends command {
         let score_obj = require('scores')[this.player.name];
         console.log(`JOIN: player ${this.player.name} left`);
         score_obj.reset();
-        score_obj.hide_display();
-        show_press_start_prompt(this.player);
         this.player.playing = false;
     }
 
-}
-
-function hide_press_start_prompt(player) {
-    let el = document.querySelector(`#player-${player.name}-status .press-start`);
-    el.classList.add('hide');
-}
-
-function show_press_start_prompt(player) {
-    let el = document.querySelector(`#player-${player.name}-status .press-start`);
-    el.classList.remove('hide');
 }
 
 export default player_start;

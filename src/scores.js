@@ -1,7 +1,5 @@
 import { invoke } from 'lodash';
 import { STARTING_LIVES, STARTING_SCORE } from 'conf';
-import score_display from 'commands/player-score-display';
-import lives_display from 'commands/player-lives-display';
 import players from 'players';
 
 class score {
@@ -13,26 +11,20 @@ class score {
 
         this.__starting_lives__ = starting_lives;
         this.lives              = starting_lives;
-        this.__score_display__  = new score_display(this.__player_name__);
-        this.__lives_display__  = new lives_display(this.__player_name__);
-        this.update_display();
     }
 
     reset() {
         this.score = this.__starting_score__;
         this.lives = this.__starting_lives__;
-        this.update_display();
     }
 
     add_score(amount=1) {
         this.score += amount;
-        this.update_display();
         console.log(`SCORE: ${this.__player_name__} player gains ${this.amount} points, now at ${this.score}`);
     }
 
     sub_lives(amount=1) {
         this.lives -= amount;
-        this.update_display();
         if (this.dead()) {
             let player = players[this.__player_name__];
             player.reset_default_powerups();
@@ -46,18 +38,6 @@ class score {
         return this.lives <= 0;
     }
 
-    update_display() {
-        this.__score_display__.execute(this.score);
-        this.__lives_display__.execute(this.lives);
-    }
-
-    hide_display() {
-        this.el.classList.remove('playing');
-    }
-
-    show_display() {
-        this.el.classList.add('playing');
-    }
 }
 
 var scores = {
@@ -66,6 +46,11 @@ var scores = {
     e: new score( STARTING_SCORE, STARTING_LIVES, 'e' ),
     w: new score( STARTING_SCORE, STARTING_LIVES, 'w' )
 };
+
+players.n.score = scores.n;
+players.s.score = scores.s;
+players.e.score = scores.e;
+players.w.score = scores.w;
 
 scores.reset_all = reset_all;
 

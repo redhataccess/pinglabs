@@ -7,6 +7,7 @@ import players from 'players';
 import * as conf from 'conf';
 import * as scores from 'scores';
 import * as move from 'commands/move-paddle';
+import * as readout from 'readout';
 
 let puck;
 let paddles = {};
@@ -115,6 +116,9 @@ export default class play_state extends state {
         super('play');
     }
     create(game) {
+
+        readout.create(players);
+
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         scores.reset_all();
@@ -198,6 +202,10 @@ export default class play_state extends state {
         map(player_codes, move_paddle);
         map(player_codes, execute_powerup_if_b);
         map(player_codes, rotate_powerup_if_a);
+
+        // update the player status readout
+
+        readout.update();
     }
 
     render(game) {
