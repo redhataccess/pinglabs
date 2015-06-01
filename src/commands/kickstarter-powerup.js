@@ -3,7 +3,7 @@ import * as conf from 'conf';
 
 class kickstarter_powerup extends powerup {
     constructor(player) {
-        super('kickstarter-powerup');
+        super('kickstarter_powerup');
         this.player = player;
     }
 

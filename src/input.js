@@ -2,7 +2,12 @@ import Phaser from 'Phaser';
 import { each } from 'lodash';
 
 let gamepads = {};
-let frame_ms = 1000/60;
+let buttons_pressed = {
+    pad1: { a: false, b: false, start: false },
+    pad2: { a: false, b: false, start: false },
+    pad3: { a: false, b: false, start: false },
+    pad4: { a: false, b: false, start: false }
+};
 
 function init(game) {
     if (!game.input.gamepad.active) {
@@ -40,14 +45,30 @@ function up(pad) {
 function down(pad) {
     return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.0;
 }
+
+function pressed_once(pad, button_code, button_name) {
+
+    // was this button already down, last frame?
+    let already_pressed   = buttons_pressed[pad][button_name];
+
+    // is the button held down this frame?
+    let currently_pressed = gamepads[pad].isDown(Phaser.Gamepad[button_code]);
+
+    // update the button state so next frame we know whether the button was
+    // pressed this frame
+    buttons_pressed[pad][button_name] = currently_pressed;
+
+    return currently_pressed && !already_pressed;
+}
+
 function start_pressed(pad) {
-    return gamepads[pad].justPressed(Phaser.Gamepad.BUTTON_9);
+    return pressed_once(pad, 'BUTTON_9', 'start');
 }
 function a(pad) {
-    return gamepads[pad].justPressed(Phaser.Gamepad.BUTTON_1);
+    return pressed_once(pad, 'BUTTON_1', 'a');
 }
 function b(pad) {
-    return gamepads[pad].justPressed(Phaser.Gamepad.BUTTON_0);
+    return pressed_once(pad, 'BUTTON_0', 'b');
 }
 
 export default {
@@ -62,3 +83,5 @@ export default {
     b,
     start_pressed
 };
+
+

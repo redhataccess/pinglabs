@@ -1,8 +1,8 @@
 import command from 'commands/command';
 
 class powerup extends command {
-    constructor() {
-        super('powerup');
+    constructor(name='powerup') {
+        super(name);
     }
 
     execute(scale=1) {

@@ -1,5 +1,5 @@
 import Phaser from 'Phaser';
-import { partial, first } from 'lodash';
+import { partial, first, pluck } from 'lodash';
 import player_start from 'commands/player-start';
 
 
@@ -17,24 +17,27 @@ let axes = {
 
 class player {
     constructor(name, pad, axis) {
-        let axis_dirs        = axes[axis];
-        this.name            = name;
-        this.pad             = pad;
-        this.playing         = false;
-        this.start           = new player_start(this);
-        this.axis            = axis;
-        this.pos             = axis_dirs.pos;
-        this.neg             = axis_dirs.neg;
-        this.springiness     = 1;
+        let axis_dirs    = axes[axis];
+        this.name        = name;
+        this.pad         = pad;
+        this.playing     = false;
+        this.start       = new player_start(this);
+        this.axis        = axis;
+        this.pos         = axis_dirs.pos;
+        this.neg         = axis_dirs.neg;
+        this.springiness = 1;
+        this.powerups    = [];
         this.reset_default_powerups();
     }
 
     add_powerup(powerup) {
         this.powerups.push(powerup);
+        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
     }
 
     rotate_powerups() {
         this.powerups.push(this.powerups.shift());
+        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
     }
 
     execute_powerup() {
@@ -42,10 +45,13 @@ class player {
         if (powerup) {
             powerup.execute();
         }
+        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
     }
 
     reset_default_powerups() {
-        this.powerups = [ new kickstarter_powerup(this), new kickstarter_powerup(this), new kickstarter_powerup(this) ];
+        this.add_powerup(new kickstarter_powerup(this));
+        this.add_powerup(new kickstarter_powerup(this));
+        this.add_powerup(new kickstarter_powerup(this));
     }
 }
 
