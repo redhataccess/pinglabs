@@ -8,7 +8,7 @@ class kickstarter_powerup extends powerup {
     }
 
     execute(scale=1) {
-        this.player.springiness = conf.KICKSTARTER_MULTIPLIER;
+        this.player.springiness += conf.KICKSTARTER_MULTIPLIER;
     }
 
     undo() {

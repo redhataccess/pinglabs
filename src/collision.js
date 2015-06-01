@@ -6,8 +6,6 @@ import * as scores from 'scores';
 import players from 'players';
 import * as puck_history from 'puck-history';
 
-let next_multiplier = 1;
-
 function hit_puck(puck, paddle) {
     console.log(`COLLISION: ${puck.name} (${puck.body.velocity.x.toFixed(2)}, ${puck.body.velocity.y.toFixed(2)}), ${paddle.name} (${puck.body.velocity.x.toFixed(2)}, ${puck.body.velocity.y.toFixed(2)})`);
 
@@ -31,10 +29,8 @@ function hit_puck(puck, paddle) {
 
     // reset the puck's velocity's magnitude, plus a little oomph
     puck.body.velocity.setMagnitude(
-        (puck_vel_mag + conf.PUCK_ACCELERATION) * next_multiplier * vel_mul
+        (puck_vel_mag + conf.PUCK_ACCELERATION) * vel_mul
     );
-
-    next_multiplier = 1 / vel_mul;
 
     // lighten up the background a bit for fun :)
     let tween = puck.game.add.tween(conf.BG_COLOR_CURRENT)

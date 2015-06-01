@@ -1,14 +1,9 @@
 import Phaser from 'Phaser';
 import { partial, first, pluck } from 'lodash';
 import player_start from 'commands/player-start';
-
-
-// TODO TEMP
 import kickstarter_powerup from 'commands/kickstarter-powerup';
-// END TEMP
 
-let players = {
-};
+let players = {};
 
 let axes = {
     'x': { pos: 'right', neg: 'left' },

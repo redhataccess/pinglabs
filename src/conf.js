@@ -86,4 +86,4 @@ export const AI_DISTANCE_IMPETUS = 20;
  *  Powerups  *
  **************/
 
-export const KICKSTARTER_MULTIPLIER = 2;
+export const KICKSTARTER_MULTIPLIER = 1;
