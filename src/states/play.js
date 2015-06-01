@@ -1,6 +1,6 @@
 import Phaser from 'Phaser';
 import state from 'states/state';
-import { map } from 'lodash';
+import { map, any } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import input from 'input';
 import players from 'players';
@@ -50,6 +50,12 @@ function play_if_start_pressed(player) {
     }
 }
 
+function play_if_start_clicked(player) {
+    if (!players[player].playing) {
+        players[player].start.execute();
+    }
+}
+
 function execute_powerup_if_b(player) {
     if (input.b(players[player].pad)) {
         players[player].execute_powerup();
@@ -72,6 +78,14 @@ function move_paddle(player) {
         if (input[players[player].pos](players[player].pad)) {
             move[players[player].pos].execute(paddles[player]);
         }
+
+        if (cursors.left.isDown || cursors.up.isDown) {
+            move[players[player].neg].execute(paddles[player]);
+        }
+
+        if (cursors.right.isDown || cursors.down.isDown) {
+            move[players[player].pos].execute(paddles[player]);
+        }
     }
     else {
         // AI IS HERE!
@@ -84,6 +98,15 @@ function move_paddle(player) {
         else if (r < -conf.AI_DISTANCE_IMPETUS) {
             move[players[player].neg].execute(paddles[player]);
         }
+    }
+}
+
+function pressStartClickHandler() {
+    var playerPlaying = any(players, 'playing');
+
+    if (!playerPlaying) {
+        var player = this.getAttribute('data-player');
+        play_if_start_clicked(player);
     }
 }
 
@@ -145,6 +168,10 @@ export default class play_state extends state {
         game.stage.backgroundColor = conf.BG_COLOR_CURRENT.toHexString();
 
         cursors = game.input.keyboard.createCursorKeys();
+
+        [].forEach.call(document.querySelectorAll('.press-start'), function (element) {
+            element.addEventListener('click', pressStartClickHandler, false);
+        });
     }
     update(game) {
 
