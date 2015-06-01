@@ -8,9 +8,7 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     // Show timing of each grunt task at the end of build
-    if (grunt.option('timing')) {
-        require('time-grunt')(grunt);
-    }
+    require('time-grunt')(grunt);
 
     // Project configuration.
     grunt.initConfig({
@@ -131,6 +129,21 @@ module.exports = function(grunt) {
             },
         },
 
+        sync: {
+            main: {
+                files: [{
+                    cwd: 'src',
+                    src: [
+                        '**'
+                    ],
+                    dest: 'dist'
+                }],
+                pretend: false,
+                updateAndDelete: false,
+                verbose: true
+            }
+        },
+
         clean: ['dist'],
 
     });
@@ -142,9 +155,8 @@ module.exports = function(grunt) {
     grunt.registerTask('build', function (target) {
         var t = [];
         t.push('lint');
-        t.push('clean');
-        t.push('bowerRequirejs');
-        t.push('copy:src-to-dist');
+        // t.push('bowerRequirejs'); // this is now run from bower postinstall hook
+        t.push('sync');
         t.push('babel');
         if (target !== 'dev') {
             grunt.config.set('requirejs.compile.options.optimize', 'uglify2');
