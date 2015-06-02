@@ -1,7 +1,7 @@
 import Phaser from 'Phaser';
 import { partial, first, pluck } from 'lodash';
 import player_start from 'commands/player-start';
-import kickstarter_powerup from 'commands/kickstarter-powerup';
+import * as powerups from 'commands/powerups/all';
 
 let players = {};
 
@@ -48,9 +48,9 @@ class player {
     }
 
     reset_default_powerups() {
-        this.add_powerup(new kickstarter_powerup(this));
-        this.add_powerup(new kickstarter_powerup(this));
-        this.add_powerup(new kickstarter_powerup(this));
+        this.add_powerup(new powerups.kickstarter(this));
+        this.add_powerup(new powerups.kickstarter(this));
+        this.add_powerup(new powerups.kickstarter(this));
     }
 }
 
