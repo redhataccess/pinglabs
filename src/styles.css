@@ -59,38 +59,9 @@ canvas {
     z-index  : 200;
 }
 .player-status > * {
-    width      : 80px;
-    height     : 80px;
-    float      : left;
-    position   : absolute;
-    text-align : center;
-    top        : 50%;
-    left       : 50%;
-    transform  : translate(-50%, -50%);
-}
-#player-n-status > .score,
-#player-s-status > .score {
-    left: calc(50% - 50px); /* -50 for extra horizontal 'padding' */
-}
-#player-e-status > .score,
-#player-w-status > .score {
-    top: calc(50% - 40px);
-}
-#player-n-status > .lives,
-#player-s-status > .lives {
-    left: calc(50% + 50px); /* +50 for extra horizontal 'padding' */
-}
-#player-e-status > .lives,
-#player-w-status > .lives {
-    top: calc(50% + 40px);
-}
-#player-n-status > .powerup,
-#player-s-status > .powerup {
-    left: calc(50% + 130px); /* +50 for extra horizontal 'padding' */
-}
-#player-e-status > .powerup,
-#player-w-status > .powerup {
-    top: calc(50% + 120px);
+    width    : 80px;
+    height   : 80px;
+    position : relative;
 }
 
 .player-status .press-start {
@@ -108,8 +79,8 @@ canvas {
     font-size  : 1.4rem;
     opacity    : 0.6;
 }
-.player-status .score::before { content: 'SCORE'; }
-.player-status .lives::before { content: 'LIVES'; }
+.player-status .score::before   { content: 'SCORE'; }
+.player-status .lives::before   { content: 'LIVES'; }
 .player-status .powerup::before { content: 'SLAMS'; }
 
 .player-status.playing .score,
@@ -123,36 +94,46 @@ canvas {
     font-size   : 2.9em;
     text-align  : center;
     line-height : 80px;
-    display     : none;
 }
-#player-n-status {
-    top       : 20px; /* move the top one down a bit */
-    height    : 80px;
-    width     : 600px;
-    left      : 50%;
-    transform : translateX(-50%);
-}
+/* horizonal scorecards */
+#player-n-status,
 #player-s-status {
-    bottom    : 0;
+    /* self positioning */
     height    : 80px;
     width     : 600px;
     left      : 50%;
     transform : translateX(-50%);
+
+    /* child positioning */
+    text-align: center;
 }
-#player-e-status {
-    right     : 0;
-    width     : 80px;
-    height    : 600px;
-    top       : 50%;
-    transform : translateY(-50%);
-}
+/* veritcal scorecards */
+#player-e-status,
 #player-w-status {
-    left      : 0;
+    /* self positioning */
     width     : 80px;
-    height    : 600px;
     top       : 50%;
     transform : translateY(-50%);
+
+    /* child positioning */
+    vertical-align : middle;
+    display        : table-cell;
 }
+#player-n-status > *,
+#player-s-status > * {
+    display : inline-block;
+    margin  : 0;
+    padding : 0;
+}
+#player-e-status > *,
+#player-w-status > * {
+    float : left;
+}
+
+#player-n-status { top    : 20px; } /* move the top one down a bit */
+#player-s-status { bottom : 0; }
+#player-e-status { right  : 0; }
+#player-w-status { left   : 0; }
 
 #player-n-status { color: #5D9BFE; text-shadow: 0 0 3px #5D9BFE; }
 #player-s-status { color: #26BF4A; text-shadow: 0 0 3px #26BF4A; }
@@ -160,7 +141,7 @@ canvas {
 #player-w-status { color: #F72C2C; text-shadow: 0 0 3px #F72C2C; }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 /* From:
