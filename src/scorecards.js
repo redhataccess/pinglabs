@@ -1,8 +1,8 @@
 import * as pc from 'paperclip';
-import * as readout_template from 'text!templates/readout.html';
+import * as scorecard_template from 'text!templates/scorecards.html';
 import { toArray } from 'lodash';
 
-let template = pc.template(readout_template);
+let template = pc.template(scorecard_template);
 let view;
 
 function create(players) {
