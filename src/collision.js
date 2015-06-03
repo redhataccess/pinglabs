@@ -51,6 +51,7 @@ function hit_world(puck, side) {
     console.log(`COLLISION: ${puck.name} (${puck.body.velocity.x.toFixed()}, ${puck.body.velocity.y.toFixed()}), ${side.toUpperCase()} WALL`);
 
     let scoring_player = puck_history.scoring_player(side);
+    let new_bg_color = conf.BG_COLOR_PUCK_WORLD_HIT;
 
     puck_history.reset();
 
@@ -62,28 +63,24 @@ function hit_world(puck, side) {
     // off the side of the the scored-on player's paddle.
     if (scoring_player) {
         scores[scoring_player].add_score(1);
+        new_bg_color = conf[`BG_COLOR_PLAYER_${scoring_player.toUpperCase()}_SCORE`];
     }
 
-    if (scores[side] === 0) {
-        puck.game.state.start('score');
-    } else {
+    SOUNDS.PUCK_OOB.play();
 
-        SOUNDS.PUCK_OOB.play();
+    reset_puck(puck);
 
-        reset_puck(puck);
-
-        let tween = puck.game.add.tween(conf.BG_COLOR_CURRENT)
-        .to(
-            pick( conf.BG_COLOR_PUCK_WORLD_HIT, conf.COLOR_TWEEN_PROPS),
-            conf.BG_COLOR_PUCK_WORLD_HIT_IN,
-            Phaser.Easing.Linear.None
-        )
-        .to(
-            pick(conf.BG_COLOR_BASE, conf.COLOR_TWEEN_PROPS),
-            conf.BG_COLOR_PUCK_WORLD_HIT_OUT,
-            Phaser.Easing.Linear.None)
-            .start();
-    }
+    let tween = puck.game.add.tween(conf.BG_COLOR_CURRENT)
+    .to(
+        pick( new_bg_color, conf.COLOR_TWEEN_PROPS),
+        conf.BG_COLOR_PUCK_WORLD_HIT_IN,
+        Phaser.Easing.Linear.None
+    )
+    .to(
+        pick(conf.BG_COLOR_BASE, conf.COLOR_TWEEN_PROPS),
+        conf.BG_COLOR_PUCK_WORLD_HIT_OUT,
+        Phaser.Easing.Linear.None)
+        .start();
 }
 
 function reset_puck(puck) {

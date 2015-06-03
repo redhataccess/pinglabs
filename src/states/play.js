@@ -169,7 +169,7 @@ export default class play_state extends state {
         // puck.body.collideWorldBounds = true;
         puck.body.bounce.setTo(1, 1);
 
-        game.stage.backgroundColor = conf.BG_COLOR_CURRENT.toHexString();
+        update_bg_color(game);
 
         cursors = game.input.keyboard.createCursorKeys();
 

@@ -10,6 +10,11 @@ export let DEBUG = false;
 export const STARTING_LIVES = 4;
 export const STARTING_SCORE = 0;
 
+export let COLOR_PLAYER_N = tinycolor('#5D9BFE');
+export let COLOR_PLAYER_S = tinycolor('#26BF4A');
+export let COLOR_PLAYER_E = tinycolor('#E7E746');
+export let COLOR_PLAYER_W = tinycolor('#F72C2C');
+
 /******************************
  *  Puck and paddle settings  *
  ******************************/
@@ -38,8 +43,13 @@ export const PADDLE_SPRITE_BODY_PADDING = 15;
 
 export let BG_COLOR_BASE            = tinycolor('#000');
 export let BG_COLOR_PUCK_PADDLE_HIT = tinycolor('#333');
-export let BG_COLOR_PUCK_WORLD_HIT  = tinycolor('#a00');
+export let BG_COLOR_PUCK_WORLD_HIT  = tinycolor('#aaa');
 export let BG_COLOR_CURRENT         = tinycolor( BG_COLOR_BASE.toString() );
+
+export let BG_COLOR_PLAYER_N_SCORE = COLOR_PLAYER_N.darken(20);
+export let BG_COLOR_PLAYER_S_SCORE = COLOR_PLAYER_S.darken(20);
+export let BG_COLOR_PLAYER_E_SCORE = COLOR_PLAYER_E.darken(20);
+export let BG_COLOR_PLAYER_W_SCORE = COLOR_PLAYER_W.darken(20);
 
 /******************
  *  Title screen  *
@@ -54,7 +64,7 @@ export const TITLE_POSITION = { x: 80, y: 100 };
 export const COLOR_TWEEN_PROPS = ['_r', '_g', '_b'];
 
 export const BG_COLOR_PUCK_WORLD_HIT_IN   = 64;
-export const BG_COLOR_PUCK_WORLD_HIT_OUT  = 768;
+export const BG_COLOR_PUCK_WORLD_HIT_OUT  = 1024;
 
 export const BG_COLOR_PUCK_PADDLE_HIT_IN  = 64;
 export const BG_COLOR_PUCK_PADDLE_HIT_OUT = 128;
