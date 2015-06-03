@@ -1,9 +1,9 @@
-Ping Labs
-=========
-
-A 0-4 player game for the Labs booth at Red Hat Summit.
+Ping Access Labs Challenge
+==========================
 
 ![screenshot](https://raw.githubusercontent.com/redhataccess/pinglabs/master/src/assets/icons/readme-screenshot.png)
+
+A 0-4 player game for the Labs booth at Red Hat Summit.
 
 INSTALL
 -------
@@ -13,7 +13,7 @@ INSTALL
     git clone git@github.com:redhataccess/pinglabs.git
     cd pinglabs
     npm install && bower install
-    grunt build
+    grunt build:dev
     grunt connect
 
 Navigate to [localhost:9001](http://localhost:9001/).
@@ -31,7 +31,7 @@ This game uses the following packages:
  - [grunt][grunt] for build tasks
  - [grunt-bower-requirejs][gbrjs] for adding bower packages to RequireJS config
 
-Most of the above setup was created for [DiMo][dimo].
+Most of the above setup was created for [DiMo][dimo] and re-used here.
 
 To perform a dev build:
 
