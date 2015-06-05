@@ -1,6 +1,6 @@
 import Phaser from 'Phaser';
 import state from 'states/state';
-import { map, any } from 'lodash';
+import { map, any, invoke } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import input from 'input';
 import players from 'players';
@@ -106,11 +106,9 @@ function move_paddle(player) {
     }
 }
 
-function pressStartClickHandler() {
-    var playerPlaying = any(players, 'playing');
-
-    if (!playerPlaying) {
-        var player = this.getAttribute('data-player');
+function press_start_click_handler() {
+    if (!any(players, 'playing')) {
+        let player = this.getAttribute('data-player');
         play_if_start_clicked(player);
     }
 }
@@ -178,9 +176,8 @@ export default class play_state extends state {
 
         cursors = game.input.keyboard.createCursorKeys();
 
-        [].forEach.call(document.querySelectorAll('.press-start'), function (element) {
-            element.addEventListener('click', pressStartClickHandler, false);
-        });
+        let press_start_elements = document.querySelectorAll('.press-start');
+        invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);
     }
     update(game) {
 
