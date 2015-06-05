@@ -1,5 +1,5 @@
 import Phaser from 'Phaser';
-import { partial, first, pluck, omit } from 'lodash';
+import { partial, first, pluck, omit, without, sample, keys } from 'lodash';
 import player_start from 'commands/player-start';
 import * as powerups from 'commands/powerups/all';
 
@@ -23,7 +23,6 @@ class player {
         this.pos         = axis_dirs.pos;
         this.neg         = axis_dirs.neg;
         this.springiness = 1;
-        this.powerups    = [];
         this.reset_default_powerups();
     }
 
@@ -48,10 +47,20 @@ class player {
         console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
     }
 
+    add_random_powerup() {
+        // get a random powerup name from the powerups object (remove babel's __esModule property)
+        let pow_name = sample(without(keys(powerups), '__esModule'));
+        this.add_powerup(new powerups[pow_name]( omit(players, this), this ));
+    }
+
     reset_default_powerups() {
-        this.add_powerup(new powerups.shellshock( omit(players, this), this ));
-        this.add_powerup(new powerups.kickstarter( omit(players, this), this ));
-        this.add_powerup(new powerups.shellshock( omit(players, this), this ));
+        this.powerups = [];
+        this.add_random_powerup();
+        this.add_random_powerup();
+        this.add_random_powerup();
+        // this.add_powerup(new powerups.shellshock( omit(players, this), this ));
+        // this.add_powerup(new powerups.kickstarter( omit(players, this), this ));
+        // this.add_powerup(new powerups.kickstarter( omit(players, this), this ));
     }
 }
 

@@ -24,9 +24,12 @@ class score {
     }
 
     sub_lives(amount=1) {
+        let player = players[this.__player_name__];
+
         this.lives -= amount;
+        player.add_random_powerup();
+
         if (this.dead()) {
-            let player = players[this.__player_name__];
             player.reset_default_powerups();
             player.start.undo();
             this.reset();
