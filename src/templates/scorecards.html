@@ -2,14 +2,15 @@
 <!-- Create a scorecard for each player -->
 <repeat each="{{ players }}" as="player">
 
-<!-- This is a paperclip template, and paperclip has slightly unusual template
-syntax.  But it's FAST AS FUDGE! -->
-
 <div id="player-{{ player.name }}-status" class="player-status {{ player.playing ? 'playing' : '' }}">
     <div class="press-start {{ player.playing ? 'hide' : '' }} animate-flicker" data-player="{{ player.name }}">PRESS START</div>
     <div class="score {{ player.playing ? '' : 'hide' }}">{{ player.score.score }}</div>
     <div class="lives {{ player.playing ? '' : 'hide' }}">{{ player.score.lives }}</div>
-    <div class="powerup {{ player.playing ? '' : 'hide' }}">{{ player.powerups.length }}</div>
+    <div class="powerup {{ player.playing ? '' : 'hide' }}">
+        <repeat each="{{ player.powerups }}" as="powerup">
+        <span>{{ powerup.shortname }}</span>
+        </repeat>
+    </div>
 </div>
 
 </repeat>

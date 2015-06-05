@@ -1,5 +1,5 @@
 import Phaser from 'Phaser';
-import { partial, first, pluck } from 'lodash';
+import { partial, first, pluck, omit } from 'lodash';
 import player_start from 'commands/player-start';
 import * as powerups from 'commands/powerups/all';
 
@@ -19,6 +19,7 @@ class player {
         this.start       = new player_start(this);
         this.score       = undefined;
         this.axis        = axis;
+        this.cursed_move = 1; // movement multiplier; can be used for evil
         this.pos         = axis_dirs.pos;
         this.neg         = axis_dirs.neg;
         this.springiness = 1;
@@ -48,9 +49,9 @@ class player {
     }
 
     reset_default_powerups() {
-        this.add_powerup(new powerups.kickstarter(this));
-        this.add_powerup(new powerups.kickstarter(this));
-        this.add_powerup(new powerups.kickstarter(this));
+        this.add_powerup(new powerups.shellshock( omit(players, this), this ));
+        this.add_powerup(new powerups.kickstarter( omit(players, this), this ));
+        this.add_powerup(new powerups.shellshock( omit(players, this), this ));
     }
 }
 

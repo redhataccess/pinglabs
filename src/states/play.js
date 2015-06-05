@@ -72,32 +72,36 @@ function rotate_powerup_if_a(player) {
 function move_paddle(player) {
     // move the player with gamepad if player is active.  else let AI decide
     // how to move.
-    if (players[player].playing) {
-        if (input[players[player].neg](players[player].pad)) {
-            move[players[player].neg].execute(paddles[player]);
+
+    let pl = players[player];
+    let pad = paddles[player];
+
+    if (pl.playing) {
+        if (input[pl.neg](pl.pad)) {
+            move[pl.neg].execute(pl, pad);
         }
-        if (input[players[player].pos](players[player].pad)) {
-            move[players[player].pos].execute(paddles[player]);
+        if (input[pl.pos](pl.pad)) {
+            move[pl.pos].execute(pl, pad);
         }
 
         if (cursors.left.isDown || cursors.up.isDown) {
-            move[players[player].neg].execute(paddles[player]);
+            move[pl.neg].execute(pl, pad);
         }
 
         if (cursors.right.isDown || cursors.down.isDown) {
-            move[players[player].pos].execute(paddles[player]);
+            move[pl.pos].execute(pl, pad);
         }
     }
     else {
         // AI IS HERE!
         // find the distance between the puck and the paddle, but only on the
         // axis of movement
-        let r = puck.body.center[players[player].axis] - paddles[player].body.center[players[player].axis];
+        let r = puck.body.center[pl.axis] - pad.body.center[pl.axis];
         if (r > conf.AI_DISTANCE_IMPETUS) {
-            move[players[player].pos].execute(paddles[player]);
+            move[pl.pos].execute(pl, pad);
         }
         else if (r < -conf.AI_DISTANCE_IMPETUS) {
-            move[players[player].neg].execute(paddles[player]);
+            move[pl.neg].execute(pl, pad);
         }
     }
 }

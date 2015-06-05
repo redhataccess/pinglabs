@@ -21,9 +21,9 @@ export let COLOR_PLAYER_W = tinycolor('#F72C2C');
 
 // the magnitude of the puck's velocity increases by this much every time it
 // hits something
-export const PUCK_ACCELERATION = 32;
+export const PUCK_ACCELERATION = 36;
 
-export const INITIAL_PUCK_VELOCITY_MAG      = 200;  // initial magnitude of puck velocity
+export const INITIAL_PUCK_VELOCITY_MAG      = 160;  // initial magnitude of puck velocity
 export const MAX_PUCK_VELOCITY_MAG          = 2000; // max puck velocity magnitude
 export const PADDLE_PLACEMENT_WORLD_PADDING = 8;    // pixels between paddles and wall
 export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300;  // velocity given to paddle by user's keypress
@@ -97,3 +97,6 @@ export const AI_DISTANCE_IMPETUS = 20;
  **************/
 
 export const KICKSTARTER_MULTIPLIER = 1;
+export const CURSED_VALUE           = -1;
+export const UNCURSED_VALUE         = 1;
+export const CURSED_DURATION        = 1000; // ms

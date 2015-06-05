@@ -14,7 +14,9 @@ requirejs.config({
         paperclip: 'lib/paperclip/dist/paperclip.min'
     },
     shim: {
-        paperclip: { exports: 'paperclip' }
+        paperclip: {
+            exports: 'paperclip'
+        }
     },
     packages: [
 

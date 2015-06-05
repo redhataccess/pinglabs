@@ -1,18 +1,27 @@
+import { each, partial, set, delay, bind } from 'lodash';
 import powerup from 'commands/powerup';
 import * as conf from 'conf';
 
+const _ = partial.placeholder;
+
 class shellshock_powerup extends powerup {
-    constructor(player) {
-        super('shellshock_powerup');
-        this.player = player;
+    constructor(players, player) {
+        super('shellshock_powerup', 'flip');
+        this.players = players;
+        this.player  = player;
     }
 
-    execute(scale=1) {
-        this.player.springiness += conf.KICKSTARTER_MULTIPLIER;
+    execute() {
+        // curse all players
+        each( this.players, partial( set, _, 'cursed_move', conf.CURSED_VALUE ) );
+        // uncurse the player who cast shellshock :)
+        this.player.cursed_move = conf.UNCURSED_VALUE;
+        delay(bind(this.undo, this), conf.CURSED_DURATION);
     }
 
     undo() {
-        this.player.springiness = conf.PADDLE_SPRINGINESS_DEFAULT;
+        // uncurse all players
+        each( this.players, partial( set, _, 'cursed_move', conf.UNCURSED_VALUE ) );
     }
 
 }

@@ -9,8 +9,8 @@ class move_paddle_command extends command {
         this.speed  = speed;
     }
 
-    execute (paddle, factor=1) {
-        paddle.body.velocity[this.axis] += this.speed * factor;
+    execute (pl, paddle, factor=1) {
+        paddle.body.velocity[this.axis] += this.speed * pl.cursed_move * factor;
     }
 
 }

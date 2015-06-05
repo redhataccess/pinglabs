@@ -2,8 +2,8 @@ import powerup from 'commands/powerup';
 import * as conf from 'conf';
 
 class kickstarter_powerup extends powerup {
-    constructor(player) {
-        super('kickstarter_powerup');
+    constructor(players, player) {
+        super('kickstarter_powerup', 'kick');
         this.player = player;
     }
 

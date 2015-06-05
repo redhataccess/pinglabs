@@ -81,11 +81,20 @@ canvas {
 }
 .player-status .score::before   { content: 'SCORE'; }
 .player-status .lives::before   { content: 'LIVES'; }
-.player-status .powerup::before { content: 'SLAMS'; }
+.player-status .powerup::before { content: 'POWER'; }
 
 .player-status.playing .score,
 .player-status.playing .lives {
     display : block;
+}
+
+.player-status .powerup span:first-child {
+    border: 1px solid purple;
+}
+.player-status .powerup span {
+    display: block;
+    font-size: 1.6rem;
+    line-height: 1;
 }
 
 .player-status .score,
