@@ -23,6 +23,7 @@ export let COLOR_PLAYER_W = tinycolor('#F72C2C');
 // hits something
 export const PUCK_ACCELERATION = 36;
 
+export const PUCK_RESET_MOVEMENT_DELAY      = 1000; // ms
 export const INITIAL_PUCK_VELOCITY_MAG      = 160;  // initial magnitude of puck velocity
 export const MAX_PUCK_VELOCITY_MAG          = 2000; // max puck velocity magnitude
 export const PADDLE_PLACEMENT_WORLD_PADDING = 8;    // pixels between paddles and wall

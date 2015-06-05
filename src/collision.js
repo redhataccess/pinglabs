@@ -1,5 +1,5 @@
 import Phaser from 'Phaser';
-import { pick, without, first } from 'lodash';
+import { pick, without, first, partial, delay } from 'lodash';
 import * as conf from 'conf';
 import SOUNDS from 'sounds';
 import * as scores from 'scores';
@@ -84,8 +84,19 @@ function hit_world(puck, side) {
 }
 
 function reset_puck(puck) {
-    puck.body.position.set(puck.game.world.centerX - puck.width/2, puck.game.world.centerY - puck.height/2);
 
+    // stop the puck from moving completely
+    puck.body.velocity.setTo(0, 0);
+    puck.body.velocity.setMagnitude(0);
+
+    // put it in the center of the screen
+    puck.body.position.set(puck.game.world.centerX - puck.body.width/2, puck.game.world.centerY - puck.body.height/2);
+
+    // after a short delay, give it motion again
+    delay(partial(puck_initial_motion, puck), conf.PUCK_RESET_MOVEMENT_DELAY);
+}
+
+function puck_initial_motion(puck) {
     //  This gets it moving
     puck.body.velocity.setTo( Math.random() - 0.5, Math.random() - 0.5);
     puck.body.velocity.setMagnitude(conf.INITIAL_PUCK_VELOCITY_MAG);

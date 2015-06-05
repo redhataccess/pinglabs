@@ -141,10 +141,11 @@ export default class play_state extends state {
 
         game.physics.enable([puck, paddles.n, paddles.s, paddles.e, paddles.w], Phaser.Physics.ARCADE);
 
-        reset_puck(puck);
-
         puck.name = 'PUCK';
         puck.body.setSize(20, 20, puck.height/2 - 10, puck.width/2 - 10);
+
+        reset_puck(puck);
+
         paddles.n.name = 'n';
         paddles.s.name = 's';
         paddles.e.name = 'e';
