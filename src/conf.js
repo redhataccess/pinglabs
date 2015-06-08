@@ -91,7 +91,8 @@ export const SCORE_POSITION = { x: 100, y: 100 };
  *  AI Behaviors  *
  ******************/
 
-export const AI_DISTANCE_IMPETUS = 10;
+// from 0 to 1, how lax the AI is in pursuing the puck
+export const AI_LAZINESS = 0.5;
 
 /**************
  *  Powerups  *

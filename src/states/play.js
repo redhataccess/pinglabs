@@ -97,18 +97,12 @@ function move_paddle(player) {
         // AI IS HERE!
         // find the distance between the puck and the paddle, but only on the
         // axis of movement
-        let on_axis    = pl.axis;
-        let off_axis   = pl.axis === 'x' ? 'y' : 'x';
+        let on_axis        = pl.axis;
+        let on_axis_d      = puck.body.center[on_axis]  - pad.body.center[on_axis];
+        let motive_surface = Math.max(pad.body.height, pad.body.width) / (1/conf.AI_LAZINESS);
+        let move_speed     = Math.min(1, Math.abs(on_axis_d / motive_surface));
 
-        let on_axis_d  = puck.body.center[on_axis]  - pad.body.center[on_axis];
-        let off_axis_d = puck.body.center[off_axis] - pad.body.center[off_axis];
-
-        if (on_axis_d > conf.AI_DISTANCE_IMPETUS) {
-            move[pl.pos].execute(pl, pad);
-        }
-        else if (on_axis_d < -conf.AI_DISTANCE_IMPETUS) {
-            move[pl.neg].execute(pl, pad);
-        }
+        move[on_axis_d > 0 ? pl.pos : pl.neg].execute(pl, pad, move_speed);
     }
 }
 
