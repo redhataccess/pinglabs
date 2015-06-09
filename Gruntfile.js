@@ -42,6 +42,7 @@ module.exports = function(grunt) {
                         '**/*.js',
                         '!require.config.js',
                         '!lib/**/*',
+                        '!leaderboard/**/*'
                     ],
                     dest: 'dist/',
                 }]
