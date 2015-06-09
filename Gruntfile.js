@@ -3,12 +3,19 @@
 module.exports = function(grunt) {
 
     var MINJS = ~~grunt.option('minjs');
+    var leaderboardProdUrl;
 
     // Automatically load grunt tasks
     require('load-grunt-tasks')(grunt);
 
     // Show timing of each grunt task at the end of build
     require('time-grunt')(grunt);
+
+    try {
+        leaderboardProdUrl = require('./prod-config').leaderboardUrl;
+    } catch (e) {
+        leaderboardProdUrl = '/leaderboard/leaders.json';
+    }
 
     // Project configuration.
     grunt.initConfig({
@@ -147,6 +154,17 @@ module.exports = function(grunt) {
 
         clean: ['dist'],
 
+        replace: {
+            leaderboard_url: {
+                src: 'src/leaderboard/leaderboard.js',
+                dest: 'dist/leaderboard/leaderboard.js',
+                replacements: [{
+                    from: '/leaderboard/leaders.json',
+                    to: leaderboardProdUrl
+                }]
+            }
+        }
+
     });
 
     // Default task(s).
@@ -159,6 +177,7 @@ module.exports = function(grunt) {
         // t.push('bowerRequirejs'); // this is now run from bower postinstall hook
         t.push('sync');
         t.push('babel');
+        t.push('replace');
         if (target !== 'dev') {
             grunt.config.set('requirejs.compile.options.optimize', 'uglify2');
             t.push('requirejs');
