@@ -50,7 +50,7 @@ class player {
     add_random_powerup() {
         // get a random powerup name from the powerups object (remove babel's __esModule property)
         let pow_name = sample(without(keys(powerups), '__esModule'));
-        this.add_powerup(new powerups[pow_name]( omit(players, this), this ));
+        this.add_powerup(new powerups[pow_name]( omit(players, this), this));
     }
 
     reset_default_powerups() {
@@ -58,9 +58,6 @@ class player {
         this.add_random_powerup();
         this.add_random_powerup();
         this.add_random_powerup();
-        // this.add_powerup(new powerups.shellshock( omit(players, this), this ));
-        // this.add_powerup(new powerups.kickstarter( omit(players, this), this ));
-        // this.add_powerup(new powerups.kickstarter( omit(players, this), this ));
     }
 }
 

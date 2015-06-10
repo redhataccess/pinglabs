@@ -2,6 +2,7 @@ import Phaser from 'Phaser';
 import { each } from 'lodash';
 
 let gamepads = {};
+let cursors;
 let buttons_pressed = {
     pad1: { a: false, b: false, start: false },
     pad2: { a: false, b: false, start: false },
@@ -10,6 +11,7 @@ let buttons_pressed = {
 };
 
 function init(game) {
+    cursors = game.input.keyboard.createCursorKeys();
     if (!game.input.gamepad.active) {
         game.input.gamepad.start();
         gamepads.pad1 = game.input.gamepad.pad1;
@@ -46,6 +48,19 @@ function down(pad) {
     return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.0;
 }
 
+function left_kb() {
+    return cursors.left.isDown;
+}
+function right_kb() {
+    return cursors.right.isDown;
+}
+function down_kb() {
+    return cursors.down.isDown;
+}
+function up_kb() {
+    return cursors.up.isDown;
+}
+
 function pressed_once(pad, button_code, button_name) {
 
     // was this button already down, last frame?
@@ -79,6 +94,10 @@ export default {
     right,
     up,
     down,
+    left_kb,
+    right_kb,
+    up_kb,
+    down_kb,
     a,
     b,
     start_pressed

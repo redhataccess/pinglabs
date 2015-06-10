@@ -6,7 +6,7 @@ const _ = partial.placeholder;
 
 class shellshock_powerup extends powerup {
     constructor(players, player) {
-        super('shellshock_powerup', 'flip');
+        super('shellshock_powerup', 'hack');
         this.players = players;
         this.player  = player;
     }

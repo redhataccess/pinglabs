@@ -11,7 +11,6 @@ import * as scorecards from 'scorecards';
 
 let puck;
 let paddles = {};
-let cursors;
 let player_codes = ['n', 's', 'e', 'w'];
 
 function check_out_of_bounds(game, puck) {
@@ -77,6 +76,7 @@ function move_paddle(player) {
     let pad = paddles[player];
 
     if (pl.playing) {
+        // handle gamepad controls
         if (input[pl.neg](pl.pad)) {
             move[pl.neg].execute(pl, pad);
         }
@@ -84,11 +84,12 @@ function move_paddle(player) {
             move[pl.pos].execute(pl, pad);
         }
 
-        if (cursors.left.isDown || cursors.up.isDown) {
+        // handle keyboard controls
+        if (input.left_kb() || input.up_kb()) {
             move[pl.neg].execute(pl, pad);
         }
 
-        if (cursors.right.isDown || cursors.down.isDown) {
+        if (input.right_kb() || input.down_kb()) {
             move[pl.pos].execute(pl, pad);
         }
     }
@@ -126,6 +127,14 @@ export default class play_state extends state {
         scores.reset_all();
 
         puck = game.add.sprite( game.world.centerX, game.world.centerY, 'puck');
+
+        // dangit, players need references to puck, to pass into powerups that affect the puck
+        // I shoulda just made everything globa, for a game this size. :)
+        players.n.puck = puck;
+        players.s.puck = puck;
+        players.e.puck = puck;
+        players.w.puck = puck;
+        // end of dangit
 
         paddles.n = game.add.sprite( game.world.centerX, conf.PADDLE_PLACEMENT_WORLD_PADDING, 'paddle-blue');
         paddles.s = game.add.sprite( game.world.centerX, game.world.height - conf.PADDLE_PLACEMENT_WORLD_PADDING - 20, 'paddle-green');
@@ -173,8 +182,6 @@ export default class play_state extends state {
         puck.body.bounce.setTo(1, 1);
 
         update_bg_color(game);
-
-        cursors = game.input.keyboard.createCursorKeys();
 
         let press_start_elements = document.querySelectorAll('.press-start');
         invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);
