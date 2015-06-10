@@ -2,6 +2,7 @@ import Phaser from 'Phaser';
 import { partial, first, pluck, omit, without, sample, keys } from 'lodash';
 import player_start from 'commands/player-start';
 import * as powerups from 'commands/powerups/all';
+import * as conf from 'conf';
 
 let players = {};
 
@@ -14,6 +15,7 @@ class player {
     constructor(name, pad, axis) {
         let axis_dirs    = axes[axis];
         this.name        = name;
+        this.color       = conf[`COLOR_PLAYER_${this.name.toUpperCase()}`].toString();
         this.pad         = pad;
         this.playing     = false;
         this.start       = new player_start(this);
