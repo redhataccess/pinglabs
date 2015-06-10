@@ -18,6 +18,8 @@ INSTALL
 
 Navigate to [localhost:9001](http://localhost:9001/).
 
+To view the leaderboard, navigat to [localhost:9001/leaderboard](http://localhost:9001/leaderboard).
+
 HACKING
 -------
 

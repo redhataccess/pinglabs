@@ -3,7 +3,7 @@
 requirejs.config({
     baseUrl: '.',
     paths: {
-        lodash: 'lib/lodash-amd/compat/main',
+        lodash: 'lib/lodash/lodash',
         text: 'lib/requirejs-text/text',
         requirejs: 'lib/requirejs/require',
         'requirejs-text': 'lib/requirejs-text/text',
@@ -11,7 +11,9 @@ requirejs.config({
         Phaser: 'lib/phaser/build/phaser',
         phaser: 'lib/phaser/build/phaser',
         tinycolor: 'lib/tinycolor/tinycolor',
-        paperclip: 'lib/paperclip/dist/paperclip.min'
+        paperclip: 'lib/paperclip/dist/paperclip.min',
+        'angularjs-ordinal-filter': 'lib/angularjs-ordinal-filter/ordinal-browser',
+        angular: 'lib/angular/angular'
     },
     shim: {
         paperclip: {
