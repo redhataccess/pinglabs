@@ -20,6 +20,22 @@ class score {
 
     add_score(amount=1) {
         this.score += amount;
+
+        var event = new CustomEvent('score', {
+            'detail': {
+                player: {
+                    mwc: {
+                        ping: {
+                            hiscore: this.score,
+                            color: players[this.__player_name__].color
+                        }
+                    }
+                }
+            }
+        });
+
+        document.dispatchEvent(event);
+
         console.log(`SCORE: ${this.__player_name__} player gains ${this.amount} points, now at ${this.score}`);
     }
 

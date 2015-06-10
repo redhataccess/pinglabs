@@ -156,8 +156,16 @@ module.exports = function(grunt) {
 
         replace: {
             leaderboard_url: {
-                src: 'src/leaderboard/leaderboard.js',
+                src: 'dist/leaderboard/leaderboard.js',
                 dest: 'dist/leaderboard/leaderboard.js',
+                replacements: [{
+                    from: '/leaderboard/leaders.json',
+                    to: leaderboardProdUrl
+                }]
+            },
+            play_url: {
+                src: 'dist/states/play.js',
+                dest: 'dist/states/play.js',
                 replacements: [{
                     from: '/leaderboard/leaders.json',
                     to: leaderboardProdUrl
