@@ -4,8 +4,8 @@
 
 <div id="player-{{ player.name }}-status"
     class="player-status
-        {{ player.playing    ? 'playing'    : '' }}
-        {{ player.logging_in ? 'logging_in' : '' }}
+        {{ player.state === conf.PLAYER_STATE.PLAYING ? 'playing'    : '' }}
+        {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'logging_in' : '' }}
     "
     >
     <div class="press-start animate-flicker" data-player="{{ player.name }}">PRESS START</div>
@@ -18,14 +18,15 @@
     </div>
 </div>
 
-<div id="player-{{ player.name }}-login" class="player-login {{ player.logging_in ? 'active' : '' }}">
-    Find your Gamer ID and press <span class="gamepad-button">B</span> to begin!
+<div id="player-{{ player.name }}-login" class="player-login {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'active' : '' }}">
+    <span class="gamepad-button">A</span> Select
+    <span class="gamepad-button">B</span> Back
     <ol>
         <repeat each="{{ sort(keys(player_list_parts)) }}" as="player_list_part">
         <li>{{ player_list_part }}:
             <repeat each="{{ get(player_list_parts, player_list_part) }}" as="player_obj">
             <ol>
-                <li>{{ player_obj.name }}</li>
+                <li class="{{ selected_player === player_obj ? 'highlighted' : '' }}">{{ player_obj.name }}</li>
             </ol>
             </repeat>
         </li>

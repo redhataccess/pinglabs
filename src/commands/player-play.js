@@ -10,6 +10,7 @@ class player_start extends command {
     constructor(player) {
         super('player-start');
         this.player = player;
+        this.prev_state = player.state;
     }
 
     execute() {
@@ -20,7 +21,7 @@ class player_start extends command {
         let score_obj = require('scores')[this.player.name];
         console.log(`JOIN: player ${this.player.name} joined`);
         score_obj.reset();
-        this.player.playing = true;
+        this.player.state = conf.PLAYER_STATE.PLAYING;
     }
 
     undo() {
@@ -31,7 +32,7 @@ class player_start extends command {
         let score_obj = require('scores')[this.player.name];
         console.log(`JOIN: player ${this.player.name} left`);
         score_obj.reset();
-        this.player.playing = false;
+        this.player.state = conf.PLAYER_STATE.INACTIVE;
     }
 
 }

@@ -10,10 +10,21 @@ export let DEBUG = false;
 export const STARTING_LIVES = 4;
 export const STARTING_SCORE = 0;
 
-export let COLOR_PLAYER_N = tinycolor('#5D9BFE');
-export let COLOR_PLAYER_S = tinycolor('#26BF4A');
-export let COLOR_PLAYER_E = tinycolor('#E7E746');
-export let COLOR_PLAYER_W = tinycolor('#F72C2C');
+export const COLOR_PLAYER_N = tinycolor('#5D9BFE');
+export const COLOR_PLAYER_S = tinycolor('#26BF4A');
+export const COLOR_PLAYER_E = tinycolor('#E7E746');
+export const COLOR_PLAYER_W = tinycolor('#F72C2C');
+
+/****************************
+ *  Player state constants  *
+ ****************************/
+
+export const PLAYER_STATE = {
+    LOGIN_CHOOSING_LETTER : 'player-state-login-choosing-letter',
+    LOGIN_CHOOSING_PLAYER : 'player-state-login-choosing-player',
+    PLAYING               : 'player-state-playing',
+    INACTIVE              : 'player-state-inactive'
+};
 
 /******************************
  *  Puck and paddle settings  *

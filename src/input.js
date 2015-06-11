@@ -1,5 +1,5 @@
 import Phaser from 'Phaser';
-import { each } from 'lodash';
+import { each, identity } from 'lodash';
 
 let gamepads = {};
 let cursors;
@@ -48,6 +48,19 @@ function down(pad) {
     return gamepads[pad].axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.0;
 }
 
+function left_once(pad) {
+    return pressed_once(pad, null, 'left', left);
+}
+function right_once(pad) {
+    return pressed_once(pad, null, 'right', right);
+}
+function up_once(pad) {
+    return pressed_once(pad, null, 'up', up);
+}
+function down_once(pad) {
+    return pressed_once(pad, null, 'down', down);
+}
+
 function left_kb() {
     return cursors.left.isDown;
 }
@@ -61,13 +74,20 @@ function up_kb() {
     return cursors.up.isDown;
 }
 
-function pressed_once(pad, button_code, button_name) {
+function pressed_once(pad, button_code, button_name, predicate) {
 
     // was this button already down, last frame?
     let already_pressed   = buttons_pressed[pad][button_name];
 
     // is the button held down this frame?
-    let currently_pressed = gamepads[pad].isDown(Phaser.Gamepad[button_code]);
+    let currently_pressed;
+
+    if (predicate) {
+        currently_pressed = predicate(pad);
+    }
+    else {
+        currently_pressed = gamepads[pad].isDown(Phaser.Gamepad[button_code]);
+    }
 
     // update the button state so next frame we know whether the button was
     // pressed this frame
@@ -94,6 +114,10 @@ export default {
     right,
     up,
     down,
+    left_once,
+    right_once,
+    up_once,
+    down_once,
     left_kb,
     right_kb,
     up_kb,

@@ -24,6 +24,7 @@ class score {
         var event = new CustomEvent('score', {
             'detail': {
                 player: {
+                    // TODO how should we get the gamer id?
                     mwc: {
                         ping: {
                             hiscore: this.score,
@@ -47,7 +48,7 @@ class score {
 
         if (this.dead()) {
             player.reset_default_powerups();
-            player.start.undo();
+            player.play.undo();
             this.reset();
         }
         console.log(`LIVES: ${this.__player_name__} player loses ${amount} lives, now at ${this.lives} lives`);

@@ -1,7 +1,8 @@
 import Phaser from 'Phaser';
 import state from 'states/state';
-import { map, any, invoke } from 'lodash';
+import { map, any, invoke, includes } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
+import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 import input from 'input';
 import players from 'players';
 import * as conf from 'conf';
@@ -45,25 +46,46 @@ function update_bg_color(game) {
 }
 
 function log_in_if_start_pressed(player) {
-    if (!players[player].playing && input.start_pressed(players[player].pad)) {
-        players[player].log_in.execute();
+    if (inactive(players[player]) && input.start_pressed(players[player].pad)) {
+        players[player].choose_letter.execute();
     }
 }
 
 function log_in_if_start_clicked(player) {
-    if (!players[player].playing) {
-        players[player].log_in.execute();
+    if (inactive(players[player])) {
+        players[player].choose_letter.execute();
+    }
+}
+
+function navigate_ui_if_logging_in(player) {
+    if (logging_in(players[player])) {
+        if (input.up_once(players[player].pad)) {
+            // players[player].log_in.execute();
+            console.log(`LOGIN: player ${player} pressed up`);
+        }
+        if (input.down_once(players[player].pad)) {
+            // players[player].log_in.execute();
+            console.log(`LOGIN: player ${player} pressed down`);
+        }
+        if (input.left_once(players[player].pad)) {
+            // players[player].log_in.execute();
+            console.log(`LOGIN: player ${player} pressed left`);
+        }
+        if (input.right_once(players[player].pad)) {
+            // players[player].log_in.execute();
+            console.log(`LOGIN: player ${player} pressed right`);
+        }
     }
 }
 
 function execute_powerup_if_b(player) {
-    if (input.b(players[player].pad)) {
+    if (playing(players[player]) && input.b(players[player].pad)) {
         players[player].execute_powerup();
     }
 }
 
 function rotate_powerup_if_a(player) {
-    if (input.a(players[player].pad)) {
+    if (playing(players[player]) && input.a(players[player].pad)) {
         players[player].rotate_powerups();
     }
 }
@@ -75,7 +97,7 @@ function move_paddle(player) {
     let pl = players[player];
     let pad = paddles[player];
 
-    if (pl.playing) {
+    if (playing(pl)) {
         // handle gamepad controls
         if (input[pl.neg](pl.pad)) {
             move[pl.neg].execute(pl, pad);
@@ -223,6 +245,10 @@ export default class play_state extends state {
         // check for players pressing start to join the game
 
         map(player_codes, log_in_if_start_pressed);
+
+        // check for gamepad input during login
+
+        map(player_codes, navigate_ui_if_logging_in);
 
         // map input to commands
 

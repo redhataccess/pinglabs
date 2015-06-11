@@ -1,7 +1,8 @@
 import Phaser from 'Phaser';
 import { partial, first, pluck, omit, without, sample, keys } from 'lodash';
 import player_play from 'commands/player-play';
-import player_log_in from 'commands/player-login';
+import player_login_choose_letter from 'commands/player-login-choose-letter';
+import player_login_choose_name from 'commands/player-login-choose-name';
 import * as powerups from 'commands/powerups/all';
 import * as conf from 'conf';
 
@@ -14,21 +15,21 @@ let axes = {
 
 class player {
     constructor(name, pad, axis) {
-        let axis_dirs    = axes[axis];
-        this.name        = name;
-        this.id          = '';
-        this.color       = conf[`COLOR_PLAYER_${this.name.toUpperCase()}`].toString();
-        this.pad         = pad;
-        this.playing     = false;
-        this.logging_in  = false;
-        this.play        = new player_play(this);
-        this.log_in      = new player_log_in(this);
-        this.score       = undefined;
-        this.axis        = axis;
-        this.cursed_move = 1; // movement multiplier; can be used for evil
-        this.pos         = axis_dirs.pos;
-        this.neg         = axis_dirs.neg;
-        this.springiness = 1;
+        let axis_dirs      = axes[axis];
+        this.name          = name;
+        this.id            = '';
+        this.color         = conf[`COLOR_PLAYER_${this.name.toUpperCase()}`].toString();
+        this.pad           = pad;
+        this.state         = conf.PLAYER_STATE.INACTIVE;
+        this.play          = new player_play(this);
+        this.choose_letter = new player_login_choose_letter(this);
+        this.choose_name   = new player_login_choose_name(this);
+        this.score         = undefined;
+        this.axis          = axis;
+        this.cursed_move   = 1; // movement multiplier; can be used for evil
+        this.pos           = axis_dirs.pos;
+        this.neg           = axis_dirs.neg;
+        this.springiness   = 1;
         this.reset_default_powerups();
     }
 
