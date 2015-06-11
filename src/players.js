@@ -1,6 +1,7 @@
 import Phaser from 'Phaser';
 import { partial, first, pluck, omit, without, sample, keys } from 'lodash';
-import player_start from 'commands/player-start';
+import player_play from 'commands/player-play';
+import player_log_in from 'commands/player-login';
 import * as powerups from 'commands/powerups/all';
 import * as conf from 'conf';
 
@@ -15,10 +16,13 @@ class player {
     constructor(name, pad, axis) {
         let axis_dirs    = axes[axis];
         this.name        = name;
+        this.id          = '';
         this.color       = conf[`COLOR_PLAYER_${this.name.toUpperCase()}`].toString();
         this.pad         = pad;
         this.playing     = false;
-        this.start       = new player_start(this);
+        this.logging_in  = false;
+        this.play        = new player_play(this);
+        this.log_in      = new player_log_in(this);
         this.score       = undefined;
         this.axis        = axis;
         this.cursed_move = 1; // movement multiplier; can be used for evil

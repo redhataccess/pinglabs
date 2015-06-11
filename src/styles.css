@@ -17,17 +17,11 @@ body {
     height      : 100%;
 }
 canvas {
-    /* border       : 5000px solid rgb(64, 64, 64); */
-    position     : absolute;
-    top          : 50%;
-    left         : 50%;
-    z-index      : 100;
-    transform    : translate(-50%, -50%);
-    /* border-color : */
-    /*     rgba(91, 148, 255, 0.4) */
-    /*     rgba(238, 243, 49, 0.4) */
-    /*     rgba(40, 197, 67, 0.4) */
-    /*     rgba(247, 10, 34, 0.4); */
+    position  : absolute;
+    top       : 50%;
+    left      : 50%;
+    z-index   : 100;
+    transform : translate(-50%, -50%);
 
     box-shadow:
         0 0 2px 0px  black,
@@ -83,7 +77,15 @@ canvas {
 .player-status .lives::before   { content: 'LIVES'; }
 .player-status .powerup::before { content: 'POWER'; }
 
+/* hide press-start while playing and while logging in */
+.player-status.playing .press-start,
+.player-status.logging_in .press-start {
+    display : none !important;
+}
+
+/* show score, powerup, and lives while playing */
 .player-status.playing .score,
+.player-status.playing .powerup,
 .player-status.playing .lives {
     display : block;
 }
@@ -103,6 +105,7 @@ canvas {
     font-size   : 2.9em;
     text-align  : center;
     line-height : 80px;
+    display     : none !important; /* display is block when .player-status.playing */
 }
 /* horizonal scorecards */
 #player-n-status,
@@ -182,3 +185,26 @@ canvas {
         -o-animation : flickerAnimation 2.71828s infinite;
            animation : flickerAnimation 2.71828s infinite;
 }
+
+.player-login {
+    position : absolute;
+    width    : 250px;
+    height   : 280px;
+    display  : none;
+}
+.player-login.active {
+    position : absolute;
+    display  : block;
+}
+.player-login ul    { list-style: none; }
+.player-login ul li { padding: 2px 6px; }
+
+#player-n-login { color : #5D9BFE; top    : 150px; right  : -200px; }
+#player-s-login { color : #26BF4A; bottom : 150px; left   : -200px; }
+#player-e-login { color : #E7E746; bottom : 150px; right  : -200px; }
+#player-w-login { color : #F72C2C; top    : 150px; left   : -200px; }
+
+#player-n-login ul li.highlighted { box-shadow: 0 0 4px 1px #5D9BFE; color: black; background-color: #5D9BFE;}
+#player-s-login ul li.highlighted { box-shadow: 0 0 4px 1px #26BF4A; color: black; background-color: #26BF4A;}
+#player-e-login ul li.highlighted { box-shadow: 0 0 4px 1px #E7E746; color: black; background-color: #E7E746;}
+#player-w-login ul li.highlighted { box-shadow: 0 0 4px 1px #F72C2C; color: black; background-color: #F72C2C;}

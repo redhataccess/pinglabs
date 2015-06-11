@@ -44,15 +44,15 @@ function update_bg_color(game) {
     game.stage.backgroundColor = conf.BG_COLOR_CURRENT.toHexString();
 }
 
-function play_if_start_pressed(player) {
+function log_in_if_start_pressed(player) {
     if (!players[player].playing && input.start_pressed(players[player].pad)) {
-        players[player].start.execute();
+        players[player].log_in.execute();
     }
 }
 
-function play_if_start_clicked(player) {
+function log_in_if_start_clicked(player) {
     if (!players[player].playing) {
-        players[player].start.execute();
+        players[player].log_in.execute();
     }
 }
 
@@ -110,7 +110,7 @@ function move_paddle(player) {
 function press_start_click_handler() {
     if (!any(players, 'playing')) {
         let player = this.getAttribute('data-player');
-        play_if_start_clicked(player);
+        log_in_if_start_clicked(player);
     }
 }
 
@@ -222,7 +222,7 @@ export default class play_state extends state {
 
         // check for players pressing start to join the game
 
-        map(player_codes, play_if_start_pressed);
+        map(player_codes, log_in_if_start_pressed);
 
         // map input to commands
 

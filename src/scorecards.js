@@ -1,12 +1,16 @@
 import * as pc from 'paperclip';
 import * as scorecard_template from 'text!templates/scorecards.html';
+import * as leaderboard from 'leaderboard';
 import { toArray } from 'lodash';
 
 let template = pc.template(scorecard_template);
 let view;
 
 function create(players) {
-    view = template.view({ players: toArray(players) });
+    view = template.view({
+        players     : toArray(players),
+        player_list : leaderboard.player_list
+    });
     document.querySelector('#game-container').appendChild(view.render());
 }
 

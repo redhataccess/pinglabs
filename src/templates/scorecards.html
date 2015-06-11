@@ -2,15 +2,28 @@
 <!-- Create a scorecard for each player -->
 <repeat each="{{ players }}" as="player">
 
-<div id="player-{{ player.name }}-status" class="player-status {{ player.playing ? 'playing' : '' }}">
-    <div class="press-start {{ player.playing ? 'hide' : '' }} animate-flicker" data-player="{{ player.name }}">PRESS START</div>
-    <div class="score {{ player.playing ? '' : 'hide' }}">{{ player.score.score }}</div>
-    <div class="lives {{ player.playing ? '' : 'hide' }}">{{ player.score.lives }}</div>
-    <div class="powerup {{ player.playing ? '' : 'hide' }}">
+<div id="player-{{ player.name }}-status"
+    class="player-status
+        {{ player.playing ? 'playing' : '' }}
+        {{ player.logging_in ? 'logging_in' : '' }}
+    "
+    >
+    <div class="press-start animate-flicker" data-player="{{ player.name }}">PRESS START</div>
+    <div class="score">{{ player.score.score }}</div>
+    <div class="lives">{{ player.score.lives }}</div>
+    <div class="powerup">
         <repeat each="{{ player.powerups }}" as="powerup">
         <span>{{ powerup.shortname }}</span>
         </repeat>
     </div>
+</div>
+
+<div id="player-{{ player.name }}-login" class="player-login {{ player.logging_in ? 'active' : '' }}">
+    <ul>
+        <repeat each="{{ player_list }}" as="player_list_obj">
+        <li>{{ player_list_obj.name }}</li>
+        </repeat>
+    </ul>
 </div>
 
 </repeat>
