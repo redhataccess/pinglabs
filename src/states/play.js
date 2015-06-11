@@ -1,9 +1,10 @@
 import Phaser from 'Phaser';
 import state from 'states/state';
-import { map, any, invoke, includes } from 'lodash';
+import { each, any, invoke, includes } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 import input from 'input';
+import * as leaderboard from 'leaderboard';
 import players from 'players';
 import * as conf from 'conf';
 import * as scores from 'scores';
@@ -61,19 +62,17 @@ function log_in_if_start_clicked(player) {
 function navigate_ui_if_logging_in(player) {
     if (logging_in(players[player])) {
         if (input.up_once(players[player].pad)) {
-            // players[player].log_in.execute();
+            leaderboard.select_prev_player();
             console.log(`LOGIN: player ${player} pressed up`);
         }
         if (input.down_once(players[player].pad)) {
-            // players[player].log_in.execute();
+            leaderboard.select_next_player();
             console.log(`LOGIN: player ${player} pressed down`);
         }
         if (input.left_once(players[player].pad)) {
-            // players[player].log_in.execute();
             console.log(`LOGIN: player ${player} pressed left`);
         }
         if (input.right_once(players[player].pad)) {
-            // players[player].log_in.execute();
             console.log(`LOGIN: player ${player} pressed right`);
         }
     }
@@ -250,17 +249,17 @@ export default class play_state extends state {
 
         // check for players pressing start to join the game
 
-        map(player_codes, log_in_if_start_pressed);
+        each(player_codes, log_in_if_start_pressed);
 
         // check for gamepad input during login
 
-        map(player_codes, navigate_ui_if_logging_in);
+        each(player_codes, navigate_ui_if_logging_in);
 
         // map input to commands
 
-        map(player_codes, move_paddle);
-        map(player_codes, execute_powerup_if_b);
-        map(player_codes, rotate_powerup_if_a);
+        each(player_codes, move_paddle);
+        each(player_codes, execute_powerup_if_b);
+        each(player_codes, rotate_powerup_if_a);
 
         // update the player status scorecards
 

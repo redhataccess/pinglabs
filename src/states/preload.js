@@ -17,9 +17,6 @@ export default class preload_state extends state {
         game.load.audio('puck-hit-paddle', 'assets/sounds/puck-hit-paddle.ogg');
         game.load.audio('puck-oob', 'assets/sounds/puck-oob.mp3');
         game.load.bitmapFont('carrier_command', 'assets/fonts/carrier_command.png', 'assets/fonts/carrier_command.xml');
-
-        game.load.script('filterX', 'https://cdn.rawgit.com/photonstorm/phaser/master/filters/BlurX.js');
-        game.load.script('filterY', 'https://cdn.rawgit.com/photonstorm/phaser/master/filters/BlurY.js');
     }
     create(game) {
 

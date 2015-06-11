@@ -18,7 +18,7 @@ export default class title_state extends state {
             conf.TEXT_SIZE
         );
         let timer = game.time.create(true);
-        timer.add(1000, go_to_play_state, game);
+        timer.add(200, go_to_play_state, game);
         timer.start();
     }
 
