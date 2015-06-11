@@ -102,3 +102,10 @@ export const KICKSTARTER_MULTIPLIER = 1;
 export const CURSED_VALUE           = -1;
 export const UNCURSED_VALUE         = 1;
 export const CURSED_DURATION        = 1000; // ms
+
+/***********
+ *  Login  *
+ ***********/
+
+export const LOGIN_ALPHABET_CHUNK_SIZE = 5; // a-e, f-j, etc
+

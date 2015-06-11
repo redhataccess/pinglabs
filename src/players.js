@@ -34,7 +34,7 @@ class player {
 
     add_powerup(powerup) {
         this.powerups.push(powerup);
-        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
+        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'shortname')}]`);
     }
 
     rotate_powerups() {
@@ -42,7 +42,7 @@ class player {
         if (p) {
             this.powerups.push(p);
         }
-        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
+        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'shortname')}]`);
     }
 
     execute_powerup() {
@@ -50,7 +50,7 @@ class player {
         if (powerup) {
             powerup.execute();
         }
-        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'name')}]`);
+        console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'shortname')}]`);
     }
 
     add_random_powerup() {

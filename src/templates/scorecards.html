@@ -4,7 +4,7 @@
 
 <div id="player-{{ player.name }}-status"
     class="player-status
-        {{ player.playing ? 'playing' : '' }}
+        {{ player.playing    ? 'playing'    : '' }}
         {{ player.logging_in ? 'logging_in' : '' }}
     "
     >
@@ -19,11 +19,18 @@
 </div>
 
 <div id="player-{{ player.name }}-login" class="player-login {{ player.logging_in ? 'active' : '' }}">
-    <ul>
-        <repeat each="{{ player_list }}" as="player_list_obj">
-        <li>{{ player_list_obj.name }}</li>
+    Find your Gamer ID and press <span class="gamepad-button">B</span> to begin!
+    <ol>
+        <repeat each="{{ sort(keys(player_list_parts)) }}" as="player_list_part">
+        <li>{{ player_list_part }}:
+            <repeat each="{{ get(player_list_parts, player_list_part) }}" as="player_obj">
+            <ol>
+                <li>{{ player_obj.name }}</li>
+            </ol>
+            </repeat>
+        </li>
         </repeat>
-    </ul>
+    </ol>
 </div>
 
 </repeat>

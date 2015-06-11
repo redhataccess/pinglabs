@@ -1,7 +1,11 @@
-import { partition } from 'lodash';
+import { chunk, groupBy, first } from 'lodash';
+import * as conf from 'conf';
 
-export let player_list = {};
-export let player_list_paritions = {};
+export let player_list       = {};
+export let player_list_parts = {};
+
+// const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+// const alpha_chunks = chunk(alphabet, conf.LOGIN_ALPHABET_CHUNK_SIZE);
 
 function get_player_list() {
     var request = new XMLHttpRequest();
@@ -9,26 +13,13 @@ function get_player_list() {
 
     request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
-            // Success!
             var data = JSON.parse(this.response);
-            console.log(data);
             player_list = data;
-
-            player_list_paritions = {
-                'a-e': '',
-                'g-j': '',
-                'k-o': '',
-                'p-t': '',
-                'u-z': ''
-            };
+            player_list_parts = groupBy(player_list, n => first(n.name.toLowerCase()));
+            console.log(player_list_parts);
         } else {
             // We reached our target server, but it returned an error
-
         }
-    };
-
-    request.onerror = function() {
-        // There was a connection error of some sort
     };
 
     request.send();
