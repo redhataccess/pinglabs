@@ -156,17 +156,6 @@ canvas {
     display: none !important;
 }
 
-.gamepad-button {
-    background-color : lightgrey;
-    border-radius    : 50%;
-    color            : black;
-    height           : 18px;
-    width            : 18px;
-    vertical-align   : middle;
-    text-align       : center;
-    display          : inline-block;
-}
-
 /* From:
  * http://stackoverflow.com/questions/23985018/simple-css-animation-loop-fading-in-out-loading-text
  */
@@ -207,15 +196,25 @@ canvas {
     position : absolute;
     display  : block;
 }
-.player-login ol    { list-style: none; padding: 0; }
-.player-login ol li { padding: 2px 6px; margin-left: -2px; }
+.player-login ul    { list-style: none; }
+.player-login ul li { padding: 2px 6px; }
 
 #player-n-login { color : #5D9BFE; top    : 150px; right  : -200px; }
 #player-s-login { color : #26BF4A; bottom : 150px; left   : -200px; }
 #player-e-login { color : #E7E746; bottom : 150px; right  : -200px; }
 #player-w-login { color : #F72C2C; top    : 150px; left   : -200px; }
 
-#player-n-login ol li.highlighted { box-shadow: 0 0 4px 1px #5D9BFE; color: black; background-color: #5D9BFE;}
-#player-s-login ol li.highlighted { box-shadow: 0 0 4px 1px #26BF4A; color: black; background-color: #26BF4A;}
-#player-e-login ol li.highlighted { box-shadow: 0 0 4px 1px #E7E746; color: black; background-color: #E7E746;}
-#player-w-login ol li.highlighted { box-shadow: 0 0 4px 1px #F72C2C; color: black; background-color: #F72C2C;}
+#player-n-login ul li.highlighted { box-shadow: 0 0 4px 1px #5D9BFE; color: black; background-color: #5D9BFE;}
+#player-s-login ul li.highlighted { box-shadow: 0 0 4px 1px #26BF4A; color: black; background-color: #26BF4A;}
+#player-e-login ul li.highlighted { box-shadow: 0 0 4px 1px #E7E746; color: black; background-color: #E7E746;}
+#player-w-login ul li.highlighted { box-shadow: 0 0 4px 1px #F72C2C; color: black; background-color: #F72C2C;}
+
+#pause-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0;
+    padding: 20px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+}

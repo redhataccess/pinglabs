@@ -12,6 +12,7 @@ import * as scorecards from 'scorecards';
 let puck;
 let paddles = {};
 let player_codes = ['n', 's', 'e', 'w'];
+let paused = false;
 
 function check_out_of_bounds(game, puck) {
     if (puck.body.position.y < game.world.bounds.top) {
@@ -114,6 +115,17 @@ function press_start_click_handler() {
     }
 }
 
+function pause_click_handler() {
+    paused = !paused;
+
+    if (!paused) {
+        this.style.opacity = 0;
+        reset_puck(puck);
+    } else {
+        this.style.opacity = 1;
+    }
+}
+
 export default class play_state extends state {
     constructor() {
         super('play');
@@ -185,6 +197,9 @@ export default class play_state extends state {
 
         let press_start_elements = document.querySelectorAll('.press-start');
         invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);
+
+        let pause_button = document.querySelector('#pause-btn');
+        pause_button.addEventListener('click', pause_click_handler, false);
     }
     update(game) {
 
@@ -200,6 +215,15 @@ export default class play_state extends state {
         let oob = check_out_of_bounds(game, puck);
         if (oob) {
             hit_world(puck, oob);
+        }
+
+        /*
+         * this is weird, let's not forget about this. this should be
+         * handled in the pause_click_handler but for some reason the puck
+         * is not being placed back in the center of the game
+         */
+        if (paused) {
+            reset_puck(puck, false);
         }
 
         // check for players pressing start to join the game
