@@ -185,24 +185,6 @@ export default class play_state extends state {
 
         let press_start_elements = document.querySelectorAll('.press-start');
         invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);
-
-        document.addEventListener('score', function (event) {
-            var player = event.detail.player;
-            var xhr = new XMLHttpRequest();
-            xhr.open('PUT', '/leaderboard/leaders.json');
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            xhr.responseType = 'json';
-
-            xhr.onload = function () {
-                console.log(xhr.response);
-            };
-
-            xhr.onerror = function () {
-                console.log('error');
-            };
-
-            xhr.send(JSON.stringify(player));
-        });
     }
     update(game) {
 
