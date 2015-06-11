@@ -83,7 +83,7 @@ function hit_world(puck, side) {
         .start();
 }
 
-function reset_puck(puck) {
+function reset_puck(puck, autostart = true) {
 
     // stop the puck from moving completely
     puck.body.velocity.setTo(0, 0);
@@ -92,8 +92,10 @@ function reset_puck(puck) {
     // put it in the center of the screen
     puck.body.position.set(puck.game.world.centerX - puck.body.width/2, puck.game.world.centerY - puck.body.height/2);
 
-    // after a short delay, give it motion again
-    delay(partial(puck_initial_motion, puck), conf.PUCK_RESET_MOVEMENT_DELAY);
+    if (autostart) {
+        // after a short delay, give it motion again
+        delay(partial(puck_initial_motion, puck), conf.PUCK_RESET_MOVEMENT_DELAY);
+    }
 }
 
 function puck_initial_motion(puck) {

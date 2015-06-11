@@ -219,3 +219,13 @@ canvas {
 #player-s-login ol li.highlighted { box-shadow: 0 0 4px 1px #26BF4A; color: black; background-color: #26BF4A;}
 #player-e-login ol li.highlighted { box-shadow: 0 0 4px 1px #E7E746; color: black; background-color: #E7E746;}
 #player-w-login ol li.highlighted { box-shadow: 0 0 4px 1px #F72C2C; color: black; background-color: #F72C2C;}
+
+#pause-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0;
+    padding: 20px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+}
