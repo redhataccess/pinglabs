@@ -4,7 +4,7 @@
  * select their "account".
  */
 
-import { chunk, groupBy, first, sortBy as sort, keys, without, indexOf } from 'lodash';
+import { chunk, groupBy, first, sortBy as sort, keys, without, indexOf, get } from 'lodash';
 import * as conf from 'conf';
 import players from 'players';
 
@@ -75,19 +75,19 @@ function update_current_player() {
 // const alpha_chunks = chunk(alphabet, conf.LOGIN_ALPHABET_CHUNK_SIZE);
 
 function score_handler(event) {
-    var player = event.detail.player,
+    var player = player_list[event.detail.player.id],
         score = event.detail.score,
         xhr = new XMLHttpRequest(),
         updatedPlayer = {};
 
-    if (score < player.ping.hiscore) {
+    if (get(player, 'ping.hiscore') && score <= player.ping.hiscore) {
         return;
     }
 
-    updatedPlayer[player.id] = {
+    updatedPlayer[event.detail.player.id] = {
         ping: {
             hiscore: score,
-            color: player.color
+            color: event.detail.player.color
         }
     };
 

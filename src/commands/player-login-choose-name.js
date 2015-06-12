@@ -1,5 +1,7 @@
 import * as command from 'commands/command';
 import * as conf from 'conf';
+import * as leaderboard from 'leaderboard';
+import { findKey } from 'lodash';
 
 export default class player_login_choose_name extends command {
 
@@ -21,8 +23,8 @@ export default class player_login_choose_name extends command {
 
     done() {
         console.log(`LOGIN: player ${this.player.name} is done choosing name`);
+        this.player.id = findKey(leaderboard.player_list, leaderboard.selected_player);
         this.player.play.execute();
     }
 
 }
-

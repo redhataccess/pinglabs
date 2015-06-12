@@ -1,6 +1,7 @@
 import { invoke } from 'lodash';
 import { STARTING_LIVES, STARTING_SCORE } from 'conf';
 import players from 'players';
+import { playing } from 'player-state-checkers';
 
 class score {
     constructor(starting_score, starting_lives, player_name) {
@@ -21,7 +22,7 @@ class score {
     add_score(amount=1) {
         this.score += amount;
 
-        if (players[this.__player_name__].playing) {
+        if (playing(players[this.__player_name__])) {
             var event = new CustomEvent('score', {
                 'detail': {
                     player: players[this.__player_name__],

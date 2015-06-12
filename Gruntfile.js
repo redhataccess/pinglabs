@@ -164,8 +164,8 @@ module.exports = function(grunt) {
                 }]
             },
             play_url: {
-                src: 'dist/states/play.js',
-                dest: 'dist/states/play.js',
+                src: 'dist/leaderboard.js',
+                dest: 'dist/leaderboard.js',
                 replacements: [{
                     from: '/leaderboard/leaders.json',
                     to: leaderboardProdUrl
