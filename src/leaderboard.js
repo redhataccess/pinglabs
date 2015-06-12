@@ -87,7 +87,7 @@ function update_current_player(playername) {
 // const alpha_chunks = chunk(alphabet, conf.LOGIN_ALPHABET_CHUNK_SIZE);
 
 function score_handler(event) {
-    var player = player_list[event.detail.player.id],
+    var player = board.player_list[event.detail.player.id],
         score = event.detail.score,
         xhr = new XMLHttpRequest(),
         updatedPlayer = {};

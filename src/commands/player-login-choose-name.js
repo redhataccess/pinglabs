@@ -23,7 +23,7 @@ export default class player_login_choose_name extends command {
 
     done() {
         console.log(`LOGIN: player ${this.player.name} is done choosing name`);
-        this.player.id = findKey(leaderboard.player_list, leaderboard.selected_player);
+        this.player.id = findKey(leaderboard.player_list, leaderboard[this.player.name].selected_player);
         this.player.play.execute();
     }
 
