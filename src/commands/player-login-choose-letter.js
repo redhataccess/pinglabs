@@ -10,17 +10,18 @@ export default class player_login_choose_letter extends command {
     }
 
     execute() {
-        this.player.state = conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER;
         console.log(`LOGIN: player ${this.player.name} is choosing letter`);
+        this.player.state = conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER;
     }
 
     undo() {
-        this.player.state = this.prev_state;
-        console.log(`LOGIN: player ${this.player.name} backs out of choosing letter`);
+        console.log(`LOGIN: player ${this.player.name} backs out of choosing letter, now inactive`);
+        this.player.state = conf.PLAYER_STATE.INACTIVE;
     }
 
     done() {
         console.log(`LOGIN: player ${this.player.name} is done choosing letter`);
+        this.player.choose_name.execute();
     }
 
 }

@@ -60,20 +60,36 @@ function log_in_if_start_clicked(player) {
 }
 
 function navigate_ui_if_logging_in(player) {
-    if (logging_in(players[player])) {
+    if (choosing_letter(players[player])) {
+        if (input.up_once(players[player].pad)) {
+            leaderboard.select_prev_letter();
+        }
+        if (input.down_once(players[player].pad)) {
+            leaderboard.select_next_letter();
+        }
+        if (input.left_once(players[player].pad) || input.b(players[player].pad)) {
+            // player presses left or B, go back to inactive
+            players[player].choose_letter.undo();
+        }
+        if (input.right_once(players[player].pad) || input.a(players[player].pad)) {
+            // player presses right or A, choose this letter
+            players[player].choose_letter.done();
+        }
+    }
+    else if (choosing_name(players[player])) {
         if (input.up_once(players[player].pad)) {
             leaderboard.select_prev_player();
-            console.log(`LOGIN: player ${player} pressed up`);
         }
         if (input.down_once(players[player].pad)) {
             leaderboard.select_next_player();
-            console.log(`LOGIN: player ${player} pressed down`);
         }
-        if (input.left_once(players[player].pad)) {
-            console.log(`LOGIN: player ${player} pressed left`);
+        if (input.left_once(players[player].pad) || input.b(players[player].pad)) {
+            // player presses left or B, go back to inactive
+            players[player].choose_name.undo();
         }
-        if (input.right_once(players[player].pad)) {
-            console.log(`LOGIN: player ${player} pressed right`);
+        if (input.right_once(players[player].pad) || input.a(players[player].pad)) {
+            // player presses right or A, choose this player
+            players[player].choose_name.done();
         }
     }
 }
@@ -263,7 +279,7 @@ export default class play_state extends state {
 
         // update the player status scorecards
 
-        scorecards.update();
+        scorecards.update(players);
     }
 
     render(game) {

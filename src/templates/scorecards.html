@@ -1,13 +1,8 @@
 
 <!-- Create a scorecard for each player -->
 <repeat each="{{ players }}" as="player">
-
 <div id="player-{{ player.name }}-status"
-    class="player-status
-        {{ player.state === conf.PLAYER_STATE.PLAYING ? 'playing'    : '' }}
-        {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'logging_in' : '' }}
-    "
-    >
+    class="player-status {{ player.state === conf.PLAYER_STATE.PLAYING ? 'playing'    : '' }} {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'logging_in' : '' }}">
     <div class="press-start animate-flicker" data-player="{{ player.name }}">PRESS START</div>
     <div class="score">{{ player.score.score }}</div>
     <div class="lives">{{ player.score.lives }}</div>
@@ -18,20 +13,19 @@
     </div>
 </div>
 
-<div id="player-{{ player.name }}-login" class="player-login {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'active' : '' }}">
+
+<div 
+    id="player-{{ player.name }}-login"
+    class="player-login {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'active' : '' }}">
+
     <span class="gamepad-button">A</span> Select
     <span class="gamepad-button">B</span> Back
+    <div class="active-player"> {{ leaderboard.selected_player.name }} </div>
+    <div class="active-letter"> {{ leaderboard.current_letter }} </div>
     <ol>
-        <repeat each="{{ sort(keys(player_list_parts)) }}" as="player_list_part">
-        <li>{{ player_list_part }}:
-            <repeat each="{{ get(player_list_parts, player_list_part) }}" as="player_obj">
-            <ol>
-                <li class="{{ selected_player === player_obj ? 'highlighted' : '' }}">{{ player_obj.name }}</li>
-            </ol>
-            </repeat>
-        </li>
+        <repeat each="{{ leaderboard.active_part }}" as="player_obj">
+        <li class="{{ leaderboard.selected_player === player_obj ? 'highlighted' : '' }}">{{ player_obj.name }}</li>
         </repeat>
     </ol>
 </div>
-
 </repeat>

@@ -87,7 +87,7 @@ canvas {
 .player-status.playing .score,
 .player-status.playing .powerup,
 .player-status.playing .lives {
-    display : block;
+    display : block !important;
 }
 
 .player-status .powerup span:first-child {

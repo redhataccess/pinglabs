@@ -15,16 +15,16 @@ export let selected_player      = {};
 export let current_letter;
 
 export function select_next_letter() {
-    select_letter(1);
+    inc_letter(1);
 }
 
 export function select_prev_letter() {
     // add length-1 instead of subtracting to avoid ever having to deal with
     // negative numbers
-    select_letter((player_list_parts[current_letter].length - 1));
+    inc_letter(keys(player_list_parts).length - 1);
 }
 
-function select_letter(inc=0) {
+function inc_letter(inc=0) {
     // get all the letters, sorted
     let letters = sort(keys(player_list_parts));
 
@@ -45,6 +45,8 @@ function select_letter(inc=0) {
 
     // reset current_player_index
     current_player_index = 0;
+
+    console.log(`LOGIN: letter '${current_letter}' selected`);
 }
 
 export function select_next_player() {
@@ -61,6 +63,7 @@ function select_player(inc=0) {
     current_player_index += inc;
     current_player_index %= player_list_parts[current_letter].length;
     update_current_player();
+    console.log(`LOGIN: player '${selected_player.name}' selected`);
 }
 
 function update_current_player() {
