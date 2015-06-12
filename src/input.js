@@ -124,6 +124,7 @@ export default {
     down_kb,
     a,
     b,
+    buttons_pressed,
     start_pressed
 };
 

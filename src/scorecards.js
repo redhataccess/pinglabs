@@ -1,7 +1,8 @@
 import * as pc from 'paperclip';
 import * as scorecard_template from 'text!templates/scorecards.html';
-import * as leaderboard from 'leaderboard';
+import leaderboard from 'leaderboard';
 import * as conf from 'conf';
+import input from 'input';
 import { assign, toArray, range, keys, get, sortBy as sort } from 'lodash';
 import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 
@@ -12,7 +13,7 @@ let data = {};
 function create(players) {
     data = assign(data, {
         players: toArray(players),
-        leaderboard,
+        leaderboard: leaderboard,
         conf,
         range,
         keys,

@@ -4,7 +4,7 @@ import { each, any, invoke, includes } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 import input from 'input';
-import * as leaderboard from 'leaderboard';
+import leaderboard from 'leaderboard';
 import players from 'players';
 import * as conf from 'conf';
 import * as scores from 'scores';
@@ -62,10 +62,10 @@ function log_in_if_start_clicked(player) {
 function navigate_ui_if_logging_in(player) {
     if (choosing_letter(players[player])) {
         if (input.up_once(players[player].pad)) {
-            leaderboard.select_prev_letter();
+            leaderboard.select_prev_letter(player);
         }
         if (input.down_once(players[player].pad)) {
-            leaderboard.select_next_letter();
+            leaderboard.select_next_letter(player);
         }
         if (input.left_once(players[player].pad) || input.b(players[player].pad)) {
             // player presses left or B, go back to inactive
@@ -78,10 +78,10 @@ function navigate_ui_if_logging_in(player) {
     }
     else if (choosing_name(players[player])) {
         if (input.up_once(players[player].pad)) {
-            leaderboard.select_prev_player();
+            leaderboard.select_prev_player(player);
         }
         if (input.down_once(players[player].pad)) {
-            leaderboard.select_next_player();
+            leaderboard.select_next_player(player);
         }
         if (input.left_once(players[player].pad) || input.b(players[player].pad)) {
             // player presses left or B, go back to inactive

@@ -229,3 +229,13 @@ canvas {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.3);
 }
+
+#help {
+    position : absolute;
+    bottom   : 0;
+    left     : 0;
+    padding  : 10px;
+}
+#help ul {
+    list-style: none;
+}

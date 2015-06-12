@@ -4,32 +4,44 @@
  * select their "account".
  */
 
-import { chunk, groupBy, first, sortBy as sort, keys, without, indexOf, get } from 'lodash';
+import { each, chunk, groupBy, first, sortBy as sort, keys, without, indexOf, get } from 'lodash';
 import * as conf from 'conf';
 import players from 'players';
 
-export let player_list          = {};
-export let player_list_parts    = {};
-export let current_player_index = 0;
-export let selected_player      = {};
-export let current_letter;
+let board = {};
 
-export function select_next_letter() {
-    inc_letter(1);
+board.player_list          = {};
+board.player_list_parts    = {};
+
+reset_player_selections('n');
+reset_player_selections('s');
+reset_player_selections('e');
+reset_player_selections('w');
+
+function reset_player_selections(playername) {
+    board[playername] = {
+        selected_player      : {},
+        current_player_index : 0,
+        current_letter       : 'No letter selected'
+    };
 }
 
-export function select_prev_letter() {
+board.select_next_letter = function select_next_letter(playername) {
+    inc_letter(playername, 1);
+};
+
+board.select_prev_letter = function select_prev_letter(playername) {
     // add length-1 instead of subtracting to avoid ever having to deal with
     // negative numbers
-    inc_letter(keys(player_list_parts).length - 1);
-}
+    inc_letter(playername, keys(board.player_list_parts).length - 1);
+};
 
-function inc_letter(inc=0) {
+function inc_letter(playername, inc=0) {
     // get all the letters, sorted
-    let letters = sort(keys(player_list_parts));
+    let letters = sort(keys(board.player_list_parts));
 
     // find the index of the current letter
-    let letter_index = indexOf(letters, current_letter);
+    let letter_index = indexOf(letters, board[playername].current_letter);
 
     // add inc to the index
     letter_index += inc;
@@ -38,36 +50,36 @@ function inc_letter(inc=0) {
     letter_index %= letters.length;
 
     // assign current_letter
-    current_letter = letters[letter_index];
+    board[playername].current_letter = letters[letter_index];
 
     // assign selected_player
-    update_current_player();
+    update_current_player(playername);
 
     // reset current_player_index
-    current_player_index = 0;
+    board[playername].current_player_index = 0;
 
-    console.log(`LOGIN: letter '${current_letter}' selected`);
+    console.log(`LOGIN: letter '${board[playername].current_letter}' selected`);
 }
 
-export function select_next_player() {
-    select_player(1);
-}
+board.select_next_player = function select_next_player(playername) {
+    select_player(playername, 1);
+};
 
-export function select_prev_player() {
+board.select_prev_player = function select_prev_player(playername) {
     // add length-1 instead of subtracting to avoid ever having to deal with
     // negative numbers
-    select_player(player_list_parts[current_letter].length - 1);
+    select_player(playername, board.player_list_parts[board[playername].current_letter].length - 1);
+};
+
+function select_player(playername, inc=0) {
+    board[playername].current_player_index += inc;
+    board[playername].current_player_index %= board.player_list_parts[board[playername].current_letter].length;
+    update_current_player(playername);
+    console.log(`LOGIN: player '${board[playername].selected_player.name}' selected`);
 }
 
-function select_player(inc=0) {
-    current_player_index += inc;
-    current_player_index %= player_list_parts[current_letter].length;
-    update_current_player();
-    console.log(`LOGIN: player '${selected_player.name}' selected`);
-}
-
-function update_current_player() {
-    selected_player = player_list_parts[current_letter][current_player_index];
+function update_current_player(playername) {
+    board[playername].selected_player = board.player_list_parts[board[playername].current_letter][board[playername].current_player_index];
 }
 
 
@@ -113,10 +125,14 @@ function get_player_list() {
     request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
             var data = JSON.parse(this.response);
-            player_list = data;
-            player_list_parts = groupBy(player_list, n => first(n.name.toLowerCase()));
-            current_letter = first(sort(keys(player_list_parts)));
-            selected_player = player_list_parts[current_letter][0];
+            board.player_list = data;
+            board.player_list_parts = groupBy(board.player_list, n => first(n.name.toLowerCase()));
+
+            each(['n', 's', 'e', 'w'], function(p) {
+                board[p].current_letter = first(sort(keys(board.player_list_parts)));
+                board[p].selected_player = board.player_list_parts[board[p].current_letter][0];
+            });
+
         } else {
             // We reached our target server, but it returned an error
         }
@@ -127,3 +143,5 @@ function get_player_list() {
 
 get_player_list();
 document.addEventListener('score', score_handler);
+
+export default board;

@@ -1,6 +1,7 @@
 
 <!-- Create a scorecard for each player -->
 <repeat each="{{ players }}" as="player">
+<div>
 <div id="player-{{ player.name }}-status"
     class="player-status {{ player.state === conf.PLAYER_STATE.PLAYING ? 'playing'    : '' }} {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'logging_in' : '' }}">
     <div class="press-start animate-flicker" data-player="{{ player.name }}">PRESS START</div>
@@ -12,20 +13,41 @@
         </repeat>
     </div>
 </div>
-
-
-<div 
-    id="player-{{ player.name }}-login"
-    class="player-login {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'active' : '' }}">
-
-    <span class="gamepad-button">A</span> Select
-    <span class="gamepad-button">B</span> Back
-    <div class="active-player"> {{ leaderboard.selected_player.name }} </div>
-    <div class="active-letter"> {{ leaderboard.current_letter }} </div>
-    <ol>
-        <repeat each="{{ leaderboard.active_part }}" as="player_obj">
-        <li class="{{ leaderboard.selected_player === player_obj ? 'highlighted' : '' }}">{{ player_obj.name }}</li>
-        </repeat>
-    </ol>
 </div>
 </repeat>
+
+<div id="player-n-login" class="player-login {{ ( players.n.ntate === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.n.ntate === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ) ? 'active' : '' }}">
+<!-- <div id="player-n-login" class="player-login {{ ( players.n.ntate === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.n.ntate === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ) ? 'active' : '' }}"> -->
+letter: {{ leaderboard.n.current_letter }}<br>
+player: {{ leaderboard.n.nelected_player.name }}<br>
+</div>
+
+<div id="player-s-login" class="player-login {{ ( players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ) ? 'active' : '' }}">
+letter: {{ leaderboard.s.current_letter }}<br>
+player: {{ leaderboard.s.selected_player.name }}<br>
+</div>
+
+<div id="player-e-login" class="player-login {{ ( players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ) ? 'active' : '' }}">
+letter: {{ leaderboard.e.current_letter }}<br>
+player: {{ leaderboard.e.selected_player.name }}<br>
+</div>
+
+<div id="player-w-login" class="player-login {{ ( players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ) ? 'active' : '' }}">
+letter: {{ leaderboard.w.current_letter }}<br>
+player: {{ leaderboard.w.selected_player.name }}<br>
+</div>
+
+
+<!-- <div id="player-{{ player.name }}-login" class="player-login {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'active' : '' }}"> -->
+
+<!--     <span class="gamepad-button">B</span> Back -->
+<!--     <span class="gamepad-button">A</span> Select -->
+<!--     <div>{{ buttons }}</div> -->
+<!--     <div class="active-player"> {{ leaderboard.selected_player.name }} </div> -->
+<!--     <div class="active-letter"> {{ leaderboard.current_letter }} </div> -->
+<!--     <ol> -->
+<!--         <repeat each="{{ leaderboard.active_part }}" as="player_obj"> -->
+<!--         <li class="{{ leaderboard.selected_player === player_obj ? 'highlighted' : '' }}">{{ player_obj.name }}</li> -->
+<!--         </repeat> -->
+<!--     </ol> -->
+<!-- </div> -->
