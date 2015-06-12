@@ -9,6 +9,8 @@ export let DEBUG = false;
 
 export const STARTING_LIVES = 4;
 export const STARTING_SCORE = 0;
+export const SCORING_MS_PER_POINT = 3000;
+export const POINTS_PER_GOAL = 2;
 
 export const COLOR_PLAYER_N = tinycolor('#5D9BFE');
 export const COLOR_PLAYER_S = tinycolor('#26BF4A');
@@ -47,7 +49,7 @@ export const PADDLE_PUCK_FRICTION = 0.36;
 // the paddle's sprite has a glow, but the puck shouldn't bounce off the glow.
 // this setting determines the width of the glow, so the actual physical body
 // of the paddle is correct.
-export const PADDLE_SPRITE_BODY_PADDING = 15; 
+export const PADDLE_SPRITE_BODY_PADDING = 15;
 
 /***********************
  *  Background colors  *
@@ -119,4 +121,3 @@ export const CURSED_DURATION        = 1000; // ms
  ***********/
 
 export const LOGIN_ALPHABET_CHUNK_SIZE = 5; // a-e, f-j, etc
-

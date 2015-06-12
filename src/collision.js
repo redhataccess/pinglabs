@@ -62,7 +62,7 @@ function hit_world(puck, side) {
     // of screen) to a goal without any players hitting it, or only glancing
     // off the side of the the scored-on player's paddle.
     if (scoring_player) {
-        scores[scoring_player].add_score(1);
+        scores[scoring_player].add_score(conf.POINTS_PER_GOAL);
         new_bg_color = conf[`BG_COLOR_PLAYER_${scoring_player.toUpperCase()}_SCORE`];
     }
 
