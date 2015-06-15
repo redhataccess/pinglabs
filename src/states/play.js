@@ -163,12 +163,18 @@ function pause_click_handler() {
     }
 }
 
-function tick() {
-    for (var key in players) {
-        if (playing(players[key])) {
-            scores[key].add_score();
+function score_timer() {
+    let updateInterval = conf.SCORING_MS_PER_POINT;
+
+    function tick() {
+        for (var key in players) {
+            if (playing(players[key])) {
+                scores[key].add_score();
+            }
         }
     }
+
+    setInterval(tick, updateInterval);
 }
 
 export default class play_state extends state {
@@ -176,10 +182,6 @@ export default class play_state extends state {
         super('play');
     }
     create(game) {
-
-        this.state.onPausedCallback = function () {
-            console.log('PAUSED!!!!');
-        };
 
         scorecards.create(players);
 
@@ -245,7 +247,7 @@ export default class play_state extends state {
         update_bg_color(game);
 
         // add points to players periodically
-        game.time.events.loop(Phaser.Timer.SECOND * 3, tick, this);
+        score_timer();
 
         let press_start_elements = document.querySelectorAll('.press-start');
         invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);
