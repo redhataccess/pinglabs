@@ -139,7 +139,7 @@ function move_paddle(player) {
         let on_axis        = pl.axis;
         let on_axis_d      = puck.body.center[on_axis]  - pad.body.center[on_axis];
         let motive_surface = Math.max(pad.body.height, pad.body.width) / (1/conf.AI_LAZINESS);
-        let move_speed     = Math.min(1, Math.abs(on_axis_d / motive_surface));
+        let move_speed     = Math.min(conf.AI_UNFAIR_PADDLE_VELOCITY, Math.abs(on_axis_d / motive_surface));
 
         move[on_axis_d > 0 ? pl.pos : pl.neg].execute(pl, pad, move_speed);
     }

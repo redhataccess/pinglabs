@@ -106,6 +106,7 @@ export const SCORE_POSITION = { x: 100, y: 100 };
 
 // from 0 to 1, how lax the AI is in pursuing the puck
 export const AI_LAZINESS = 0.2;
+export const AI_UNFAIR_PADDLE_VELOCITY = 1.1; // AI can move a little faster than players, by this factor
 
 /**************
  *  Powerups  *
