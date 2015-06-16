@@ -108,7 +108,7 @@ function score_handler(event) {
     xhr.responseType = 'json';
 
     xhr.onload = function () {
-        console.log(xhr.response);
+        // console.log(xhr.response);
     };
 
     xhr.onerror = function () {
@@ -120,7 +120,7 @@ function score_handler(event) {
 
 function get_player_list() {
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://summit-games.usersys.redhat.com/users', true);
+    request.open('GET',  '/leaderboard/leaders.json', true);
 
     request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
