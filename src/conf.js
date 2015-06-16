@@ -60,10 +60,10 @@ export let BG_COLOR_PUCK_PADDLE_HIT = tinycolor('#333');
 export let BG_COLOR_PUCK_WORLD_HIT  = tinycolor('#aaa');
 export let BG_COLOR_CURRENT         = tinycolor( BG_COLOR_BASE.toString() );
 
-export let BG_COLOR_PLAYER_N_SCORE = COLOR_PLAYER_N.darken(20);
-export let BG_COLOR_PLAYER_S_SCORE = COLOR_PLAYER_S.darken(20);
-export let BG_COLOR_PLAYER_E_SCORE = COLOR_PLAYER_E.darken(20);
-export let BG_COLOR_PLAYER_W_SCORE = COLOR_PLAYER_W.darken(20);
+export let BG_COLOR_PLAYER_N_SCORE = tinycolor(COLOR_PLAYER_N.toString()).darken(20);
+export let BG_COLOR_PLAYER_S_SCORE = tinycolor(COLOR_PLAYER_S.toString()).darken(20);
+export let BG_COLOR_PLAYER_E_SCORE = tinycolor(COLOR_PLAYER_E.toString()).darken(20);
+export let BG_COLOR_PLAYER_W_SCORE = tinycolor(COLOR_PLAYER_W.toString()).darken(20);
 
 /******************
  *  Title screen  *
