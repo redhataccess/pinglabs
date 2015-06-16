@@ -33,7 +33,8 @@ class player {
         this.reset_default_powerups();
     }
 
-    add_powerup(powerup) {
+    add_powerup(powerup_name) {
+        let powerup = new powerups[powerup_name]( omit(players, this), this);
         this.powerups.push(powerup);
         console.log(`POWERUPS: ${this.name} has [${pluck(this.powerups, 'shortname')}]`);
     }
@@ -57,14 +58,11 @@ class player {
     add_random_powerup() {
         // get a random powerup name from the powerups object (remove babel's __esModule property)
         let pow_name = sample(without(keys(powerups), '__esModule'));
-        this.add_powerup(new powerups[pow_name]( omit(players, this), this));
+        this.add_powerup(pow_name);
     }
 
     reset_default_powerups() {
         this.powerups = [];
-        this.add_random_powerup();
-        this.add_random_powerup();
-        this.add_random_powerup();
     }
 }
 
