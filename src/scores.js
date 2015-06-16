@@ -33,7 +33,7 @@ class score {
             document.dispatchEvent(event);
         }
 
-        console.log(`SCORE: ${this.__player_name__} player gains ${this.amount} points, now at ${this.score}`);
+        console.log(`SCORE: ${this.__player_name__} player gains ${amount} points, now at ${this.score}`);
     }
 
     sub_lives(amount=1) {
