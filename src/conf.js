@@ -40,7 +40,7 @@ export const PUCK_RESET_MOVEMENT_DELAY      = 1000; // ms
 export const INITIAL_PUCK_VELOCITY_MAG      = 160;  // initial magnitude of puck velocity
 export const MAX_PUCK_VELOCITY_MAG          = 2000; // max puck velocity magnitude
 export const PADDLE_PLACEMENT_WORLD_PADDING = 8;    // pixels between paddles and wall
-export const PADDLE_VELOCITY_FROM_KEYPRESS  = 300;  // velocity given to paddle by user's keypress
+export const PADDLE_VELOCITY_FROM_KEYPRESS  = 400;  // velocity given to paddle by user's keypress
 export const PADDLE_SPRINGINESS_DEFAULT     = 1;    // how much to multiply puck velocity on hit
 
 // the percentage of paddle velocity that is added to puck velocity on hit
