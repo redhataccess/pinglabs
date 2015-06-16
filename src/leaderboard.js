@@ -10,8 +10,11 @@ import players from 'players';
 
 let board = {};
 
+// const alpha_chunks = chunk(alphabet, conf.LOGIN_ALPHABET_CHUNK_SIZE);
+
 board.player_list          = {};
 board.player_list_parts    = {};
+board.alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 reset_player_selections('n');
 reset_player_selections('s');
@@ -82,9 +85,6 @@ function update_current_player(playername) {
     board[playername].selected_player = board.player_list_parts[board[playername].current_letter][board[playername].current_player_index];
 }
 
-
-// const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-// const alpha_chunks = chunk(alphabet, conf.LOGIN_ALPHABET_CHUNK_SIZE);
 
 function score_handler(event) {
     var player = board.player_list[event.detail.player.id],

@@ -201,11 +201,6 @@ canvas {
     position : absolute;
     width    : 250px;
     height   : 280px;
-    display  : none;
-}
-.player-login.active {
-    position : absolute;
-    display  : block;
 }
 .player-login ol    { list-style: none; padding: 0; }
 .player-login ol li { padding: 2px 6px; margin-left: -2px; }
