@@ -163,18 +163,14 @@ function pause_click_handler() {
     }
 }
 
-function score_timer() {
-    let updateInterval = conf.SCORING_MS_PER_POINT;
-
-    function tick() {
+function tick() {
+    if (!paused) {
         for (var key in players) {
             if (playing(players[key])) {
                 scores[key].add_score();
             }
         }
     }
-
-    setInterval(tick, updateInterval);
 }
 
 export default class play_state extends state {
@@ -247,7 +243,7 @@ export default class play_state extends state {
         update_bg_color(game);
 
         // add points to players periodically
-        score_timer();
+        game.time.events.loop(Phaser.Timer.SECOND * conf.SCORING_SEC_PER_POINT, tick, this);
 
         let press_start_elements = document.querySelectorAll('.press-start');
         invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);
