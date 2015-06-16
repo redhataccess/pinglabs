@@ -164,9 +164,11 @@ function pause_click_handler() {
 }
 
 function tick() {
-    for (var key in players) {
-        if (playing(players[key])) {
-            scores[key].add_score();
+    if (!paused) {
+        for (var key in players) {
+            if (playing(players[key])) {
+                scores[key].add_score();
+            }
         }
     }
 }
