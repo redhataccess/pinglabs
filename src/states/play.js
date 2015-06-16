@@ -241,7 +241,7 @@ export default class play_state extends state {
         update_bg_color(game);
 
         // add points to players periodically
-        game.time.events.loop(Phaser.Timer.SECOND * 3, tick, this);
+        game.time.events.loop(Phaser.Timer.SECOND * conf.SCORING_SEC_PER_POINT, tick, this);
 
         let press_start_elements = document.querySelectorAll('.press-start');
         invoke(press_start_elements, 'addEventListener', 'click', press_start_click_handler, false);

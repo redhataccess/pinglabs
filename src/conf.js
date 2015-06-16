@@ -9,7 +9,7 @@ export let DEBUG = false;
 
 export const STARTING_LIVES = 4;
 export const STARTING_SCORE = 0;
-export const SCORING_MS_PER_POINT = 3000;
+export const SCORING_SEC_PER_POINT = 3;
 export const POINTS_PER_GOAL = 2;
 
 export const COLOR_PLAYER_N = tinycolor('#5D9BFE');
