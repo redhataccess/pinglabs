@@ -10,9 +10,10 @@ let template = pc.template(scorecard_template, pc);
 let view;
 let data;
 
-// players-leaderboard-merge is a single object with n-s-e-w combined.
-// paperclip seems to have trouble with dirty checking separate objects within
-// the same element/component.
+// players-leaderboard-merge is a single object which combines the n,s,e,w
+// properties of players.js and leaderboard.js. paperclip seems to have trouble
+// with dirty checking separate objects within the same element/component, so
+// they are loosely combined here to make paperclipjs happy.
 let plm = {};
 
 let PlayerUI = pc.Component.extend({
