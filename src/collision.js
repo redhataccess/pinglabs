@@ -16,11 +16,14 @@ function hit_puck(puck, paddle) {
     // save the puck's current velocity magnitude
     let puck_vel_mag = puck.body.velocity.getMagnitude();
 
-    // add a fraction of the paddle's velocity to the puck (for angle shots)
-    puck.body.velocity.add(
-        paddle.body.velocity.x * conf.PADDLE_PUCK_FRICTION,
-        paddle.body.velocity.y * conf.PADDLE_PUCK_FRICTION
-    );
+    // if puck overlaps the paddle when they collide (ie, when the puck hits
+    // the side of the paddle, not the face), do not apply friction.  this
+    // fixes the clinging bug that occurred when the paddle moved much faster
+    // than the puck and could convey friction so many times that it clung to
+    // the side of the paddle and allowed a free goal.
+    if (!overlap(puck, paddle, players[paddle.name].axis)) {
+        apply_friction(puck, paddle);
+    }
 
     let vel_mul = players[paddle.name].springiness;
 
@@ -45,6 +48,22 @@ function hit_puck(puck, paddle) {
         Phaser.Easing.Linear.None
     )
     .start();
+}
+
+function overlap(puck, paddle, axis) {
+    let face = { x: 'height', y: 'width' };
+    let otheraxis = { x: 'y', y: 'x' };
+    let surface = puck.body[face];
+    let side_axis = otheraxis[axis];
+    return Math.abs(puck.body.position[side_axis] - paddle.body.position[side_axis]) < puck.body[face];
+}
+
+function apply_friction(puck, paddle) {
+    // add a fraction of the paddle's velocity to the puck (for angle shots)
+    puck.body.velocity.add(
+        paddle.body.velocity.x * conf.PADDLE_PUCK_FRICTION,
+        paddle.body.velocity.y * conf.PADDLE_PUCK_FRICTION
+    );
 }
 
 function hit_world(puck, side) {

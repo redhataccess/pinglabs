@@ -44,7 +44,7 @@ export const PADDLE_VELOCITY_FROM_KEYPRESS  = 400;  // velocity given to paddle 
 export const PADDLE_SPRINGINESS_DEFAULT     = 1;    // how much to multiply puck velocity on hit
 
 // the percentage of paddle velocity that is added to puck velocity on hit
-export const PADDLE_PUCK_FRICTION = 0.36;
+export const PADDLE_PUCK_FRICTION = 0.30;
 
 // the paddle's sprite has a glow, but the puck shouldn't bounce off the glow.
 // this setting determines the width of the glow, so the actual physical body
