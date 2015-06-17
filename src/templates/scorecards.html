@@ -4,6 +4,9 @@
 <div id="player-{{ player.name }}-status"
     class="player-status {{ player.state === conf.PLAYER_STATE.PLAYING ? 'playing'    : '' }} {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'logging_in' : '' }}">
     <div class="press-start animate-flicker" data-player="{{ player.name }}">PRESS START</div>
+    <show when="{{ player.state === conf.PLAYER_STATE.PLAYING }}">
+        <div>{{ player.id }}</div>
+    </show>
     <div class="score">{{ player.score.score }}</div>
     <div class="lives">{{ player.score.lives }}</div>
     <div class="powerup">
@@ -17,28 +20,36 @@
 <show when="{{ players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-n-login" class="player-login">
 letter: {{ leaderboard.n.current_letter }}<br>
-player: {{ leaderboard.n.nelected_player.name }}<br>
+<show when="{{ players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+    player: {{ leaderboard.n.nelected_player.gamerID }}<br>
+</show>
 </div>
 </show>
 
 <show when="{{ players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-s-login" class="player-login">
 letter: {{ leaderboard.s.current_letter }}<br>
-player: {{ leaderboard.s.selected_player.name }}<br>
+<show when="{{ players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+player: {{ leaderboard.s.selected_player.gamerID }}<br>
+</show>
 </div>
 </show>
 
 <show when="{{ players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-e-login" class="player-login">
 letter: {{ leaderboard.e.current_letter }}<br>
-player: {{ leaderboard.e.selected_player.name }}<br>
+<show when="{{ players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+player: {{ leaderboard.e.selected_player.gamerID }}<br>
+</show>
 </div>
 </show>
 
 <show when="{{ players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-w-login" class="player-login">
 letter: {{ leaderboard.w.current_letter }}<br>
-player: {{ leaderboard.w.selected_player.name }}<br>
+<show when="{{ players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+player: {{ leaderboard.w.selected_player.gamerID }}<br>
+</show>
 </div>
 </show>
 
@@ -55,4 +66,3 @@ player: {{ leaderboard.w.selected_player.name }}<br>
 <!--         </repeat> -->
 <!--     </ol> -->
 <!-- </div> -->
-
