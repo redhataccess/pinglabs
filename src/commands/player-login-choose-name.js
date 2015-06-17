@@ -49,6 +49,8 @@ export default class player_login_choose_name extends command {
          * security = hack (shellshock)
          * samba = flip (puck_reverse)
          */
+        this.player.powerups = [];
+
         if (leaderboard[this.player.name].selected_player.games) {
             for (let key of Object.keys(leaderboard[this.player.name].selected_player.games)) {
                 let number = leaderboard[this.player.name].selected_player.games[key];

@@ -126,7 +126,7 @@ function get_player_list() {
         if (this.status >= 200 && this.status < 400) {
             var data = JSON.parse(this.response);
             board.player_list = data;
-            board.player_list_parts = groupBy(board.player_list, n => first(n.name.toLowerCase()));
+            board.player_list_parts = groupBy(board.player_list, n => first(n.gamerID.toLowerCase()));
 
             each(['n', 's', 'e', 'w'], function(p) {
                 // if the player has not yet selected a player or letter,
