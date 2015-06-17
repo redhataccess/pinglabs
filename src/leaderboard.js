@@ -142,6 +142,13 @@ function get_player_list() {
 }
 
 get_player_list();
+
+/*
+ * get the players list every 30 seconds so we can keep
+ * the powerups current
+ */
+setInterval(get_player_list, conf.GET_PLAYER_LIST_REFRESH_MS);
+
 document.addEventListener('score', score_handler);
 
 export default board;
