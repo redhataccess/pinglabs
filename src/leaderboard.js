@@ -129,8 +129,12 @@ function get_player_list() {
             board.player_list_parts = groupBy(board.player_list, n => first(n.name.toLowerCase()));
 
             each(['n', 's', 'e', 'w'], function(p) {
-                board[p].current_letter = first(sort(keys(board.player_list_parts)));
-                board[p].selected_player = board.player_list_parts[board[p].current_letter][0];
+                // if the player has not yet selected a player or letter,
+                // select the first letter and first player
+                if (!board[p].current_letter || !board[p].selected_player) {
+                    board[p].current_letter = first(sort(keys(board.player_list_parts)));
+                    board[p].selected_player = board.player_list_parts[board[p].current_letter][0];
+                }
             });
 
         } else {
