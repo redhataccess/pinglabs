@@ -121,3 +121,9 @@ export const CURSED_DURATION        = 1000; // ms
  ***********/
 
 export const LOGIN_ALPHABET_CHUNK_SIZE = 5; // a-e, f-j, etc
+
+/*****************
+ *  Leaderboard  *
+ *****************/
+
+export const GET_PLAYER_LIST_REFRESH_MS = 30000; // 30 seconds
