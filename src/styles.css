@@ -262,6 +262,7 @@ canvas {
 }
 
 #help {
+    display: none; /* disabling help display for now */
     position : absolute;
     bottom   : 0;
     left     : 0;
