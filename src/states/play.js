@@ -94,14 +94,14 @@ function navigate_ui_if_logging_in(player) {
     }
 }
 
-function execute_powerup_if_b(player) {
-    if (playing(players[player]) && input.b(players[player].pad)) {
+function execute_powerup_if_a(player) {
+    if (playing(players[player]) && input.a(players[player].pad)) {
         players[player].execute_powerup();
     }
 }
 
-function rotate_powerup_if_a(player) {
-    if (playing(players[player]) && input.a(players[player].pad)) {
+function rotate_powerup_if_b(player) {
+    if (playing(players[player]) && input.b(players[player].pad)) {
         players[player].rotate_powerups();
     }
 }
@@ -287,8 +287,8 @@ export default class play_state extends state {
         // map input to commands
 
         each(player_codes, move_paddle);
-        each(player_codes, execute_powerup_if_b);
-        each(player_codes, rotate_powerup_if_a);
+        each(player_codes, execute_powerup_if_a);
+        each(player_codes, rotate_powerup_if_b);
 
         // update the player status scorecards
 
