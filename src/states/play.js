@@ -67,12 +67,12 @@ function navigate_ui_if_logging_in(player) {
         if (input.down_once(players[player].pad)) {
             leaderboard.select_next_letter(player);
         }
-        if (input.left_once(players[player].pad) || input.b(players[player].pad)) {
-            // player presses left or B, go back to inactive
+        if (input.b(players[player].pad)) {
+            // player presses B, go back to inactive
             players[player].choose_letter.undo();
         }
-        if (input.right_once(players[player].pad) || input.a(players[player].pad)) {
-            // player presses right or A, choose this letter
+        if (input.a(players[player].pad)) {
+            // player presses A, choose this letter
             players[player].choose_letter.done();
         }
     }
@@ -83,12 +83,12 @@ function navigate_ui_if_logging_in(player) {
         if (input.down_once(players[player].pad)) {
             leaderboard.select_next_player(player);
         }
-        if (input.left_once(players[player].pad) || input.b(players[player].pad)) {
-            // player presses left or B, go back to inactive
+        if (input.b(players[player].pad)) {
+            // player presses B, go back to inactive
             players[player].choose_name.undo();
         }
-        if (input.right_once(players[player].pad) || input.a(players[player].pad)) {
-            // player presses right or A, choose this player
+        if (input.a(players[player].pad)) {
+            // player presses A, choose this player
             players[player].choose_name.done();
         }
     }
