@@ -25,7 +25,7 @@ function reset_player_selections(playername) {
     board[playername] = {
         selected_player      : {},
         current_player_index : 0,
-        current_letter       : 'No letter selected'
+        current_letter       : ''
     };
 }
 
