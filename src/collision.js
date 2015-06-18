@@ -51,11 +51,13 @@ function hit_puck(puck, paddle) {
 }
 
 function overlap(puck, paddle, axis) {
-    let face = { x: 'height', y: 'width' };
-    let otheraxis = { x: 'y', y: 'x' };
-    let surface = puck.body[face];
-    let side_axis = otheraxis[axis];
-    return Math.abs(puck.body.position[side_axis] - paddle.body.position[side_axis]) < puck.body[face];
+    // if distance between the puck and paddle's coordinates is less than the
+    // width/height of the puck, they are overlapping (on the given axis)
+    let face           = { x: 'height', y: 'width' }[axis];
+    let otheraxis      = { x: 'y', y: 'x' }[axis];
+    let distance       = Math.abs( puck.body.position[otheraxis] - paddle.body.position[otheraxis] )
+    let is_overlapping = distance < puck.body[face];
+    return is_overlapping;
 }
 
 function apply_friction(puck, paddle) {
