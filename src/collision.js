@@ -55,7 +55,7 @@ function overlap(puck, paddle, axis) {
     // width/height of the puck, they are overlapping (on the given axis)
     let face           = { x: 'height', y: 'width' }[axis];
     let otheraxis      = { x: 'y', y: 'x' }[axis];
-    let distance       = Math.abs( puck.body.position[otheraxis] - paddle.body.position[otheraxis] )
+    let distance       = Math.abs( puck.body.position[otheraxis] - paddle.body.position[otheraxis] );
     let is_overlapping = distance < puck.body[face];
     return is_overlapping;
 }
