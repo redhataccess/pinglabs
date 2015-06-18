@@ -19,50 +19,104 @@
 
 <show when="{{ players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-n-login" class="player-login">
-letter: {{ leaderboard.n.current_letter }}<br>
-<show when="{{ players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
-    player: {{ leaderboard.n.selected_player.gamerID }}<br>
-</show>
+
+    <show when="{{ players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER }}">
+    <div class="choosing-letter">
+        First letter of Gamer ID?
+        <span class="selection-large">{{ leaderboard.n.current_letter }}</span>
+    </div>
+    </show>
+
+    <show when="{{ players.n.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+    <div class="select-gamerid">
+        Gamer IDs under '{{ leaderboard.n.current_letter }}':
+        <span class="selection-large">{{ leaderboard.n.selected_player.gamerID }}</span>
+    </div>
+    </show>
+
+    <div class="login-controls">
+        <span class="gamepad-button">&varr;</span> Up/Down
+        <span class="gamepad-button">B</span> Back
+        <span class="gamepad-button">A</span> Select
+    </div>
+
 </div>
 </show>
 
 <show when="{{ players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-s-login" class="player-login">
-letter: {{ leaderboard.s.current_letter }}<br>
-<show when="{{ players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
-player: {{ leaderboard.s.selected_player.gamerID }}<br>
-</show>
+
+    <show when="{{ players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER }}">
+    <div class="choosing-letter">
+        First letter of Gamer ID?
+        <span class="selection-large">{{ leaderboard.s.current_letter }}</span>
+    </div>
+    </show>
+
+    <show when="{{ players.s.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+    <div class="select-gamerid">
+        Gamer IDs under '{{ leaderboard.s.current_letter }}':
+        <span class="selection-large">{{ leaderboard.s.selected_player.gamerID }}</span>
+    </div>
+    </show>
+
+    <div class="login-controls">
+        <span class="gamepad-button">&varr;</span> Up/Down
+        <span class="gamepad-button">B</span> Back
+        <span class="gamepad-button">A</span> Select
+    </div>
+
 </div>
 </show>
 
 <show when="{{ players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-e-login" class="player-login">
-letter: {{ leaderboard.e.current_letter }}<br>
-<show when="{{ players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
-player: {{ leaderboard.e.selected_player.gamerID }}<br>
-</show>
+
+    <show when="{{ players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER }}">
+    <div class="choosing-letter">
+        First letter of Gamer ID?
+        <span class="selection-large">{{ leaderboard.e.current_letter }}</span>
+    </div>
+    </show>
+
+    <show when="{{ players.e.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+    <div class="select-gamerid">
+        Gamer IDs under '{{ leaderboard.e.current_letter }}':
+        <span class="selection-large">{{ leaderboard.e.selected_player.gamerID }}</span>
+    </div>
+    </show>
+
+    <div class="login-controls">
+        <span class="gamepad-button">&varr;</span> Up/Down
+        <span class="gamepad-button">B</span> Back
+        <span class="gamepad-button">A</span> Select
+    </div>
+
 </div>
 </show>
 
 <show when="{{ players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
 <div id="player-w-login" class="player-login">
-letter: {{ leaderboard.w.current_letter }}<br>
-<show when="{{ players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
-player: {{ leaderboard.w.selected_player.gamerID }}<br>
-</show>
+
+    <show when="{{ players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER }}">
+    <div class="choosing-letter">
+        First letter of Gamer ID?
+        <span class="selection-large">{{ leaderboard.w.current_letter }}</span>
+    </div>
+    </show>
+
+    <show when="{{ players.w.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME }}">
+    <div class="select-gamerid">
+        Gamer IDs under '{{ leaderboard.w.current_letter }}':
+        <span class="selection-large">{{ leaderboard.w.selected_player.gamerID }}</span>
+    </div>
+    </show>
+
+    <div class="login-controls">
+        <span class="gamepad-button">&varr;</span> Up/Down
+        <span class="gamepad-button">B</span> Back
+        <span class="gamepad-button">A</span> Select
+    </div>
+
 </div>
 </show>
-
-<!-- <div id="player-{{ player.name }}-login" class="player-login {{ player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_LETTER || player.state === conf.PLAYER_STATE.LOGIN_CHOOSING_NAME ? 'active' : '' }}"> -->
-
-<!--     <span class="gamepad-button">B</span> Back -->
-<!--     <span class="gamepad-button">A</span> Select -->
-<!--     <div>{{ buttons }}</div> -->
-<!--     <div class="active-player"> {{ leaderboard.selected_player.name }} </div> -->
-<!--     <div class="active-letter"> {{ leaderboard.current_letter }} </div> -->
-<!--     <ol> -->
-<!--         <repeat each="{{ leaderboard.active_part }}" as="player_obj"> -->
-<!--         <li class="{{ leaderboard.selected_player === player_obj ? 'highlighted' : '' }}">{{ player_obj.name }}</li> -->
-<!--         </repeat> -->
-<!--     </ol> -->
-<!-- </div> -->

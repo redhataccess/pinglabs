@@ -194,28 +194,62 @@ canvas {
 }
 .animate-flicker {
    -webkit-animation : flickerAnimation 2.71828s infinite;
-      -moz-animation : flickerAnimation 2.71828s infinite;
-        -o-animation : flickerAnimation 2.71828s infinite;
-           animation : flickerAnimation 2.71828s infinite;
+  -moz-animation : flickerAnimation 2.71828s infinite;
+    -o-animation : flickerAnimation 2.71828s infinite;
+       animation : flickerAnimation 2.71828s infinite;
 }
 
 .player-login {
-    position : absolute;
-    width    : 250px;
-    height   : 280px;
+    position   : absolute;
+    width      : 250px;
+    height     : 275px;
+    text-align : center;
 }
 .player-login ol    { list-style: none; padding: 0; }
 .player-login ol li { padding: 2px 6px; margin-left: -2px; }
 
-#player-n-login { color : #5D9BFE; top    : 150px; right  : -200px; }
-#player-s-login { color : #26BF4A; bottom : 150px; left   : -200px; }
-#player-e-login { color : #E7E746; bottom : 150px; right  : -200px; }
-#player-w-login { color : #F72C2C; top    : 150px; left   : -200px; }
+#player-n-login { color : #5D9BFE; top    : 150px; right  : -200px; text-shadow: 0 0 3px #5D9BFE; background-color: rgba(93, 155, 254, 0.15); padding: 10px; }
+#player-s-login { color : #26BF4A; bottom : 150px; left   : -200px; text-shadow: 0 0 3px #26BF4A; background-color: rgba(38, 191, 74, 0.13); padding: 10px; }
+#player-e-login { color : #E7E746; bottom : 150px; right  : -200px; text-shadow: 0 0 3px #E7E746; background-color: rgba(231, 231, 70, 0.1); padding: 10px; }
+#player-w-login { color : #F72C2C; top    : 150px; left   : -200px; text-shadow: 0 0 3px #F72C2C; background-color: rgba(247, 44, 44, 0.15); padding: 10px; }
 
 #player-n-login ol li.highlighted { box-shadow: 0 0 4px 1px #5D9BFE; color: black; background-color: #5D9BFE;}
 #player-s-login ol li.highlighted { box-shadow: 0 0 4px 1px #26BF4A; color: black; background-color: #26BF4A;}
 #player-e-login ol li.highlighted { box-shadow: 0 0 4px 1px #E7E746; color: black; background-color: #E7E746;}
 #player-w-login ol li.highlighted { box-shadow: 0 0 4px 1px #F72C2C; color: black; background-color: #F72C2C;}
+
+#player-n-login .gamepad-button { background-color: #5D9BFE; }
+#player-s-login .gamepad-button { background-color: #26BF4A; }
+#player-e-login .gamepad-button { background-color: #E7E746; }
+#player-w-login .gamepad-button { background-color: #F72C2C; }
+
+/* .selection-large .login-controls .selection-small .select-gamerid */
+
+.player-login .selection-small { color: black; text-shadow: 0 0 3px rgba(0,0,0,0.2); }
+
+#player-n-login .selection-small { background-color: #5D9BFE; }
+#player-s-login .selection-small { background-color: #26BF4A; }
+#player-e-login .selection-small { background-color: #E7E746; }
+#player-w-login .selection-small { background-color: #F72C2C; }
+
+.player-login .selection-large {
+    font-size   : 1.7em;
+    text-shadow : 0 0 3px rgba(0,0,0,0.2);
+    text-align  : center;
+    color       : black;
+    display     : block;
+    margin      : 10px 0;
+}
+
+#player-n-login .selection-large { background-color: #5D9BFE; box-shadow: 0 0 3px 0px #5D9BFE;}
+#player-s-login .selection-large { background-color: #26BF4A; box-shadow: 0 0 3px 0px #26BF4A;}
+#player-e-login .selection-large { background-color: #E7E746; box-shadow: 0 0 3px 0px #E7E746;}
+#player-w-login .selection-large { background-color: #F72C2C; box-shadow: 0 0 3px 0px #F72C2C;}
+
+.player-login .login-controls {
+    text-align : center;
+    font-size  : 0.8rem;
+}
 
 #pause-btn {
     position: absolute;
