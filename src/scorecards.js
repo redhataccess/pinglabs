@@ -3,7 +3,7 @@ import * as scorecard_template from 'text!templates/scorecards.html';
 import leaderboard from 'leaderboard';
 import * as conf from 'conf';
 import input from 'input';
-import { each, assign, toArray, range, keys, get, sortBy as sort } from 'lodash';
+import { each, range } from 'lodash';
 import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 
 let template = pc.template(scorecard_template, pc);
@@ -26,10 +26,7 @@ function create(players) {
         players: players,
         leaderboard: leaderboard,
         conf,
-        range,
-        keys,
-        'get': get,
-        sort
+        range
     };
     view = template.view(data);
     document.querySelector('#game-container').appendChild(view.render());

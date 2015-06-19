@@ -1,4 +1,4 @@
-import { invoke } from 'lodash';
+import { range, invoke } from 'lodash';
 import { STARTING_LIVES, STARTING_SCORE } from 'conf';
 import players from 'players';
 import { playing } from 'player-state-checkers';
@@ -12,15 +12,23 @@ class score {
 
         this.__starting_lives__ = starting_lives;
         this.lives              = starting_lives;
+
+        this.update_lives_array();
     }
 
     reset() {
         this.score = this.__starting_score__;
         this.lives = this.__starting_lives__;
+        this.update_lives_array();
+    }
+
+    update_lives_array() {
+        this.lives_arr = range(this.lives);
     }
 
     add_score(amount=1) {
         this.score += amount;
+        this.update_lives_array();
 
         if (playing(players[this.__player_name__])) {
             var event = new CustomEvent('score', {
@@ -40,12 +48,15 @@ class score {
         let player = players[this.__player_name__];
 
         this.lives -= amount;
-        player.add_random_powerup();
 
         if (this.dead()) {
             player.reset_default_powerups();
             player.play.undo();
             this.reset();
+        }
+        else {
+            this.update_lives_array();
+            player.add_random_powerup();
         }
         console.log(`LIVES: ${this.__player_name__} player loses ${amount} lives, now at ${this.lives} lives`);
     }
