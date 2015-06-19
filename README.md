@@ -1,9 +1,21 @@
 Ping Access Labs Challenge
 ==========================
 
+PAL Challenge is a 4 player game for the Labs booth at Red Hat Summit.
+
 ![screenshot](https://raw.githubusercontent.com/redhataccess/pinglabs/master/src/assets/icons/readme-screenshot.png)
 
-A 0-4 player game for the Labs booth at Red Hat Summit.
+FEATURES
+--------
+
+ - web-based (JavaScript, WebGL, Web Gamepad API, etc)
+ - gamepad input
+ - three powerups
+   - HACK: reverse opponents controls for 1 second
+   - KICK: double puck velocity on your next bounce
+   - FLIP: make puck go the other way
+ - basic AI
+ - live leaderboard
 
 INSTALL
 -------
