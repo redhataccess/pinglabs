@@ -3,6 +3,8 @@ import { each, identity } from 'lodash';
 
 let gamepads = {};
 let cursors;
+let a_kb;
+let b_kb;
 let buttons_pressed = {
     pad1: { a: false, b: false, start: false },
     pad2: { a: false, b: false, start: false },
@@ -21,6 +23,8 @@ function init(game) {
 
         each(gamepads, set_connect_callback);
     }
+    a_kb = game.input.keyboard.addKey(Phaser.Keyboard.A);
+    b_kb = game.input.keyboard.addKey(Phaser.Keyboard.B);
 }
 
 function set_connect_callback(gamepad) {

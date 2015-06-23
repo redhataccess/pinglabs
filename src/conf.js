@@ -115,7 +115,9 @@ export const AI_UNFAIR_PADDLE_VELOCITY = 1.1; // AI can move a little faster tha
 export const KICKSTARTER_MULTIPLIER = 1;
 export const CURSED_VALUE           = -1;
 export const UNCURSED_VALUE         = 1;
-export const CURSED_DURATION        = 1000; // ms
+export const CURSED_DURATION_MS     = 1000; // ms
+export const CURSED_DELAY_MS        = 250; // ms
+export const CURSED_COLOR           = tinycolor('#800');
 
 /***********
  *  Login  *

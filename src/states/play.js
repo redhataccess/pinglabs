@@ -1,6 +1,6 @@
 import Phaser from 'Phaser';
 import state from 'states/state';
-import { each, any, invoke, includes } from 'lodash';
+import { partial, each, any, invoke, includes } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 import input from 'input';
@@ -94,9 +94,9 @@ function navigate_ui_if_logging_in(player) {
     }
 }
 
-function execute_powerup_if_a(player) {
+function execute_powerup_if_a(player, game) {
     if (playing(players[player]) && input.a(players[player].pad)) {
-        players[player].execute_powerup();
+        players[player].execute_powerup(game);
     }
 }
 
@@ -287,7 +287,7 @@ export default class play_state extends state {
         // map input to commands
 
         each(player_codes, move_paddle);
-        each(player_codes, execute_powerup_if_a);
+        each(player_codes, partial(execute_powerup_if_a, partial.placeholder, game));
         each(player_codes, rotate_powerup_if_b);
 
         // update the player status scorecards

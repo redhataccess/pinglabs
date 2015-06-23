@@ -35,7 +35,7 @@ board.select_next_letter = function select_next_letter(playername) {
 
 board.select_prev_letter = function select_prev_letter(playername) {
     // add length-1 instead of subtracting to avoid ever having to deal with
-    // negative numbers
+    // negative numbers (it gets modulo'd)
     inc_letter(playername, keys(board.player_list_parts).length - 1);
 };
 
