@@ -10,25 +10,29 @@
 
         <div id="game-container">
             <div id="phaser-canvas-wrapper"></div>
+
+            <div id="help">
+                <ul>
+                    <li>
+                        &nbsp;<span class="gamepad-button">&harr;</span> or <span class="gamepad-button">&varr;</span> Move paddle
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;<span class="gamepad-button">B</span> Select powerup
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;&nbsp;<span class="gamepad-button">A</span> Use powerup
+                    </li>
+                </ul>
+                <p class="help-desc">
+                    Earn points for scoring goals, plus points points just for staying alive.  When someone scores on you, you lose a life.  Don't let that happen.  Move while hitting the puck to angle your shots.
+                </p>
+            </div>
         </div>
 
-        <div id="help">
-            <ul>
-                <li>
-                    <span class="gamepad-button">&harr;</span> or <span class="gamepad-button">&varr;</span> Move paddle
-                </li>
-                <li>
-                    <span class="gamepad-button">B</span> Select powerup
-                </li>
-                <li>
-                    <span class="gamepad-button">A</span> Use powerup
-                </li>
-            </ul>
-            Earn points for scoring goals, plus points points just for staying alive.  When someone scores on you, you lose a life.  Don't let that happen.  Move while hitting the puck to angle your shots.
-        </div>
 
         <div id="pause-btn">Puck paused</div>
 
         <script src="lib/requirejs/require.js" data-main="require.config.js"></script>
     </body>
 </html>
+
