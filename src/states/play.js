@@ -48,12 +48,14 @@ function update_bg_color(game) {
 
 function log_in_if_start_pressed(player) {
     if (inactive(players[player]) && input.start_pressed(players[player].pad)) {
+        players[player].reset_default_powerups();
         players[player].play.execute();
     }
 }
 
 function log_in_if_start_clicked(player) {
     if (inactive(players[player])) {
+        players[player].reset_default_powerups();
         players[player].play.execute();
     }
 }
