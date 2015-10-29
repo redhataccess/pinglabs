@@ -19,7 +19,7 @@
     </show>
 
     <show when="{{ player.state === conf.PLAYER_STATE.INACTIVE }}">
-    <div class="press-start animate-flicker" data-player="{{ player.name }}">CLICK ME TO START</div>
+    <div class="press-start animate-flicker" data-player="{{ player.name }}">CLICK HERE TO BE {{ player.color_name }}</div>
     </show>
 
     <show when="{{ player.state === conf.PLAYER_STATE.PLAYING }}">

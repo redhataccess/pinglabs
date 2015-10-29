@@ -13,12 +13,20 @@ let axes = {
     'y': { pos: 'down', neg: 'up' },
 };
 
+let color_names = {
+    n: 'blue',
+    s: 'green',
+    e: 'yellow',
+    w: 'red',
+};
+
 class player {
     constructor(name, pad, axis) {
         let axis_dirs                   = axes[axis];
         this.name                       = name;
         this.id                         = '';
         this.color                      = conf[`COLOR_PLAYER_${this.name.toUpperCase()}`].toString();
+        this.color_name                 = color_names[this.name];
         this.pad                        = pad;
         this.state                      = conf.PLAYER_STATE.INACTIVE;
         this.play                       = new player_play(this);
