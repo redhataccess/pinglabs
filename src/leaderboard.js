@@ -89,7 +89,7 @@ function update_current_player(playername) {
 function score_handler(event) {
     var player = board.player_list[event.detail.player.id],
         score = event.detail.score,
-        xhr = new XMLHttpRequest(),
+        // xhr = new XMLHttpRequest(),
         updatedPlayer = {};
 
     if (get(player, 'ping.hiscore') && score <= player.ping.hiscore) {
@@ -103,55 +103,25 @@ function score_handler(event) {
         }
     };
 
-    xhr.open('PUT', '/leaderboard/leaders.json');
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.responseType = 'json';
+    // xhr.open('PUT', '/leaderboard/leaders.json');
+    // xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    // xhr.responseType = 'json';
 
-    xhr.onload = function () {
-        // console.log(xhr.response);
-    };
+    // xhr.onload = function () {
+    //     // console.log(xhr.response);
+    // };
 
-    xhr.onerror = function () {
-        console.log('error');
-    };
+    // xhr.onerror = function () {
+    //     console.log('error');
+    // };
 
-    xhr.send(JSON.stringify(updatedPlayer));
+    // xhr.send(JSON.stringify(updatedPlayer));
 }
-
-function get_player_list() {
-    var request = new XMLHttpRequest();
-    request.open('GET',  '/leaderboard/leaders.json', true);
-
-    request.onload = function() {
-        if (this.status >= 200 && this.status < 400) {
-            var data = JSON.parse(this.response);
-            board.player_list = data;
-            board.player_list_parts = groupBy(board.player_list, n => first(n.gamerID.toLowerCase()));
-
-            each(['n', 's', 'e', 'w'], function(p) {
-                // if the player has not yet selected a player or letter,
-                // select the first letter and first player
-                if (!board[p].current_letter || !board[p].selected_player) {
-                    board[p].current_letter = first(sort(keys(board.player_list_parts)));
-                    board[p].selected_player = board.player_list_parts[board[p].current_letter][0];
-                }
-            });
-
-        } else {
-            // We reached our target server, but it returned an error
-        }
-    };
-
-    request.send();
-}
-
-get_player_list();
 
 /*
  * get the players list every 30 seconds so we can keep
  * the powerups current
  */
-setInterval(get_player_list, conf.GET_PLAYER_LIST_REFRESH_MS);
 
 document.addEventListener('score', score_handler);
 
