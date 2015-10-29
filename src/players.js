@@ -85,6 +85,14 @@ class player {
 
     reset_default_powerups() {
         this.powerups = [];
+
+        this.add_random_powerup();
+        this.add_random_powerup();
+        this.add_random_powerup();
+        this.add_random_powerup();
+        this.add_random_powerup();
+        this.add_random_powerup();
+        this.add_random_powerup();
     }
 }
 

@@ -3,15 +3,27 @@ import { each, identity } from 'lodash';
 
 let gamepads = {};
 let cursors;
+let kb = {};
 let buttons_pressed = {
     pad1: { a: false, b: false, start: false },
     pad2: { a: false, b: false, start: false },
     pad3: { a: false, b: false, start: false },
-    pad4: { a: false, b: false, start: false }
+    pad4: { a: false, b: false, start: false },
 };
 
 function init(game) {
     cursors = game.input.keyboard.createCursorKeys();
+
+    kb.z = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+    kb.x = game.input.keyboard.addKey(Phaser.Keyboard.X);
+    kb.space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+    game.input.keyboard.addKeyCapture([
+        Phaser.Keyboard.Z,
+        Phaser.Keyboard.X,
+        Phaser.Keyboard.SPACEBAR,
+    ]);
+
     if (!game.input.gamepad.active) {
         game.input.gamepad.start();
         gamepads.pad1 = game.input.gamepad.pad1;
@@ -74,6 +86,13 @@ function up_kb() {
     return cursors.up.isDown;
 }
 
+function z_kb_once() {
+    return kb.z.isDown && kb.z.repeats === 0;
+}
+function x_kb_once() {
+    return kb.x.isDown && kb.x.repeats === 0;
+}
+
 function pressed_once(pad, button_code, button_name, predicate) {
 
     // was this button already down, last frame?
@@ -125,7 +144,9 @@ export default {
     a,
     b,
     buttons_pressed,
-    start_pressed
+    start_pressed,
+    z_kb_once,
+    x_kb_once,
 };
 
 

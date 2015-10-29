@@ -4,7 +4,6 @@ import { each, any, invoke, includes } from 'lodash';
 import { hit_world, hit_puck, reset_puck } from 'collision';
 import { inactive, playing, choosing_letter, choosing_name, logging_in } from 'player-state-checkers';
 import input from 'input';
-import leaderboard from 'leaderboard';
 import players from 'players';
 import * as conf from 'conf';
 import * as scores from 'scores';
@@ -49,59 +48,24 @@ function update_bg_color(game) {
 
 function log_in_if_start_pressed(player) {
     if (inactive(players[player]) && input.start_pressed(players[player].pad)) {
-        players[player].choose_letter.execute();
+        players[player].play.execute();
     }
 }
 
 function log_in_if_start_clicked(player) {
     if (inactive(players[player])) {
-        players[player].choose_letter.execute();
-    }
-}
-
-function navigate_ui_if_logging_in(player) {
-    if (choosing_letter(players[player])) {
-        if (input.up_once(players[player].pad)) {
-            leaderboard.select_prev_letter(player);
-        }
-        if (input.down_once(players[player].pad)) {
-            leaderboard.select_next_letter(player);
-        }
-        if (input.b(players[player].pad)) {
-            // player presses B, go back to inactive
-            players[player].choose_letter.undo();
-        }
-        if (input.a(players[player].pad)) {
-            // player presses A, choose this letter
-            players[player].choose_letter.done();
-        }
-    }
-    else if (choosing_name(players[player])) {
-        if (input.up_once(players[player].pad)) {
-            leaderboard.select_prev_player(player);
-        }
-        if (input.down_once(players[player].pad)) {
-            leaderboard.select_next_player(player);
-        }
-        if (input.b(players[player].pad)) {
-            // player presses B, go back to inactive
-            players[player].choose_name.undo();
-        }
-        if (input.a(players[player].pad)) {
-            // player presses A, choose this player
-            players[player].choose_name.done();
-        }
+        players[player].play.execute();
     }
 }
 
 function execute_powerup_if_a(player) {
-    if (playing(players[player]) && input.a(players[player].pad)) {
+    if ( playing(players[player]) && ( input.a(players[player].pad) || input.x_kb_once() ) ) {
         players[player].execute_powerup();
     }
 }
 
 function rotate_powerup_if_b(player) {
-    if (playing(players[player]) && input.b(players[player].pad)) {
+    if ( playing(players[player]) && ( input.b(players[player].pad) || input.z_kb_once() ) ) {
         players[player].rotate_powerups();
     }
 }
@@ -279,10 +243,6 @@ export default class play_state extends state {
         // check for players pressing start to join the game
 
         each(player_codes, log_in_if_start_pressed);
-
-        // check for gamepad input during login
-
-        each(player_codes, navigate_ui_if_logging_in);
 
         // map input to commands
 
